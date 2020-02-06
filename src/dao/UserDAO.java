@@ -62,10 +62,10 @@ public class UserDAO {
 			// set params
 			myStmt.setString(1, theUser.getFirstName());
 			myStmt.setString(2, theUser.getLastName());
-			myStmt.setString(3, theUser.getEmail());
-			myStmt.setString(4, theUser.getMajor());
-			myStmt.setString(5, theUser.getUsername());
-			myStmt.setString(6, theUser.getPassword());
+			myStmt.setString(3, theUser.getMajor());
+			myStmt.setString(4, theUser.getUsername());
+			myStmt.setString(5, theUser.getPassword());
+			
 			
 			// execute SQL
 			myStmt.executeUpdate();			
@@ -80,12 +80,12 @@ public class UserDAO {
 		int id = myRs.getInt("id");
 		String firstName = myRs.getString("first_name");
 		String lastName = myRs.getString("last_name");		
-		String email = myRs.getString("email");
+	//	String email = myRs.getString("email");
 		String major = myRs.getString("major");
 		String username = myRs.getString("username");		
 		String password = myRs.getString("password");	
 				
-		User tempUser = new User(id, firstName, lastName, email, major, username, password);
+		User tempUser = new User(id, firstName, lastName, major, username, password);
 		
 		return tempUser;
 	}	
