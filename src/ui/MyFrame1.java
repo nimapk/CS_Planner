@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -25,13 +26,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import java.awt.Color;
-import java.awt.Point;
-import java.awt.Dimension;
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
-import javax.swing.JScrollPane;
 
 public class MyFrame1 extends JFrame {	
 	private JTextField usernameTextField;
@@ -41,6 +35,7 @@ public class MyFrame1 extends JFrame {
 	private JTextField txtFirstNameReg;	
 	private JTextField txtLastNameReg;
 	private JTextField txtMajorReg;
+	private JTextField txtEmailReg;
 	private JTextField txtUsernameReg;
 	private JTextField txtPasswordReg;
 	private JTextField txtConfirmPasswordReg;
@@ -66,7 +61,6 @@ public class MyFrame1 extends JFrame {
 	 * Create the frame.
 	 */
 	public MyFrame1() {
-		setSize(new Dimension(1000, 800));
 		setTitle("Class Schedule App");
 				
 		
@@ -92,7 +86,7 @@ public class MyFrame1 extends JFrame {
 		JButton btnGoToLogin = new JButton("Login");
 		btnGoToLogin.setBackground(new Color(0, 204, 0));
 		btnGoToLogin.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnGoToLogin.setBounds(220, 275, 135, 43);
+		btnGoToLogin.setBounds(195, 275, 135, 43);
 		panel_1.add(btnGoToLogin);
 		
 		JButton btnGoToRegister = new JButton("Register");
@@ -102,7 +96,7 @@ public class MyFrame1 extends JFrame {
 		panel_1.add(btnGoToRegister);
 		
 		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(Color.LIGHT_GRAY);
+		panel_7.setBackground(new Color(255, 204, 0));
 		panel_7.setBounds(0, 0, 734, 152);
 		panel_1.add(panel_7);
 		panel_7.setLayout(new BorderLayout(0, 0));
@@ -112,6 +106,11 @@ public class MyFrame1 extends JFrame {
 		lblNewLabel_3.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_7.add(lblNewLabel_3, BorderLayout.CENTER);
+		
+		JLabel lblNewLabel_5 = new JLabel("\u00A9 powered by Pretty People");
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_5.setBounds(561, 514, 163, 14);
+		panel_1.add(lblNewLabel_5);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.WHITE);
@@ -168,34 +167,44 @@ public class MyFrame1 extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("First Name:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_2.setBounds(152, 193, 80, 26);
+		lblNewLabel_2.setBounds(152, 173, 80, 26);
 		panel_3.add(lblNewLabel_2);
 		
 		txtFirstNameReg = new JTextField();
-		txtFirstNameReg.setBounds(273, 196, 278, 20);
+		txtFirstNameReg.setBounds(273, 176, 278, 20);
 		panel_3.add(txtFirstNameReg);
 		txtFirstNameReg.setColumns(10);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
 		lblLastName.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblLastName.setBounds(152, 228, 64, 26);
+		lblLastName.setBounds(152, 204, 64, 26);
 		panel_3.add(lblLastName);
 		
 		txtLastNameReg = new JTextField();
 		txtLastNameReg.setColumns(10);
-		txtLastNameReg.setBounds(273, 231, 278, 20);
+		txtLastNameReg.setBounds(273, 207, 278, 20);
 		panel_3.add(txtLastNameReg);
 		
 		JLabel lblMajor = new JLabel("Major:");
 		lblMajor.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblMajor.setBounds(152, 268, 64, 26);
+		lblMajor.setBounds(152, 235, 64, 26);
 		panel_3.add(lblMajor);
 		
 		txtMajorReg = new JTextField();
 		txtMajorReg.setColumns(10);
-		txtMajorReg.setBounds(273, 271, 278, 20);
+		txtMajorReg.setBounds(273, 238, 278, 20);
 		panel_3.add(txtMajorReg);
+//////////////////		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEmail.setBounds(152, 266, 64, 26);
+		panel_3.add(lblEmail);
 		
+		txtEmailReg = new JTextField();
+		txtEmailReg.setColumns(10);
+		txtEmailReg.setBounds(273, 269, 278, 20);
+		panel_3.add(txtEmailReg);
+////////		
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblUsername.setBounds(152, 299, 64, 26);
@@ -303,7 +312,7 @@ public class MyFrame1 extends JFrame {
 				String firstname = txtFirstNameReg.getText();
 				String lastname = txtLastNameReg.getText();
 				String major = txtMajorReg.getText();
-			//	String email = txtEmailReg.getText();	
+				String email = txtEmailReg.getText();	
 				String username = txtUsernameReg.getText();
 				String password = txtPasswordReg.getText();
 				String repassword = txtConfirmPasswordReg.getText();
@@ -335,7 +344,7 @@ public class MyFrame1 extends JFrame {
 					JOptionPane.showMessageDialog(MyFrame1.this, "The two passwords didn't match or empty", "Error", JOptionPane.ERROR_MESSAGE);					
 				}
 				else {					
-					User tempUser = new User(firstname, lastname, major, username, password);
+					User tempUser = new User(firstname, lastname, major, email, username, password);
 					
 					try {
 						// save to the database
@@ -350,7 +359,7 @@ public class MyFrame1 extends JFrame {
 						txtFirstNameReg.setText("");
 						txtLastNameReg.setText("");
 						txtMajorReg.setText("");
-					//	txtEmailReg.setText("");	
+						txtEmailReg.setText("");	
 						txtUsernameReg.setText("");
 						txtPasswordReg.setText("");
 						txtConfirmPasswordReg.setText("");						
