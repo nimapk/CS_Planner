@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JComboBox;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 public class MyFrame1 extends JFrame {	
 	private JTextField usernameTextField;
@@ -263,11 +265,23 @@ public class MyFrame1 extends JFrame {
 		lblWelcome.setBounds(220, 58, 378, 26);
 		panel_4.add(lblWelcome);
 		
-		JPanel panel_5 = new JPanel();
-		getContentPane().add(panel_5, "name_441901303100400");
+		JButton btnClassPlanner = new JButton("Class Planner");
+		btnClassPlanner.setBounds(80, 108, 134, 23);
+		panel_4.add(btnClassPlanner);
 		
-		JPanel panel_6 = new JPanel();
-		getContentPane().add(panel_6, "name_441913834792900");
+		JPanel panel_9 = new JPanel();
+		panel.add(panel_9, "name_4791728452251");
+		panel_9.setLayout(null);
+		
+		String[] listCourses = {"CPSC 120 - Introduction to Programming","CPSC 121 - Object-Oriented Programming", "CPSC 131 - Data Structures"};
+		JComboBox comboBoxCourses = new JComboBox(listCourses);
+		AutoCompleteDecorator.decorate(comboBoxCourses);
+		comboBoxCourses.setBounds(72, 47, 185, 20);
+		panel_9.add(comboBoxCourses);
+		
+		JLabel lblCourseWarning = new JLabel("");
+		lblCourseWarning.setBounds(72, 103, 199, 14);
+		panel_9.add(lblCourseWarning);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -276,6 +290,34 @@ public class MyFrame1 extends JFrame {
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setHorizontalAlignment(SwingConstants.LEFT);
+		mnFile.add(mntmExit);
+		
+		JMenu mnSelect = new JMenu("Select");
+		menuBar.add(mnSelect);
+		
+		JMenuItem mntmHome = new JMenuItem("Home");
+		mntmHome.setHorizontalAlignment(SwingConstants.LEFT);
+		mnSelect.add(mntmHome);
+		
+		//===============actionPerformed=============each panel has 1 Action performed=====================	
+		
+		comboBoxCourses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblCourseWarning.setText("You chose index: " + comboBoxCourses.getSelectedIndex());
+				//lblCourseWarning.setText("You chose item: " + comboBoxCourses.getSelectedItem());
+			}
+		});		
+		
+		btnClassPlanner.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel.removeAll();
+				panel.add(panel_9);
+				panel.repaint();
+				panel.revalidate();
+			}
+		});		
+
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object source = e.getSource();
@@ -284,14 +326,8 @@ public class MyFrame1 extends JFrame {
 					System.exit(0);
 				}
 			}
-		});
-		mntmExit.setHorizontalAlignment(SwingConstants.LEFT);
-		mnFile.add(mntmExit);
+		});		
 		
-		JMenu mnSelect = new JMenu("Select");
-		menuBar.add(mnSelect);
-		
-		JMenuItem mntmHome = new JMenuItem("Home");
 		mntmHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object source = e.getSource();
@@ -303,10 +339,8 @@ public class MyFrame1 extends JFrame {
 					panel.revalidate();
 				}
 			}
-		});
-		mntmHome.setHorizontalAlignment(SwingConstants.LEFT);
-		mnSelect.add(mntmHome);
-		//===============actionPerformed=============each panel has 1 Actionperformed=====================	
+		});		
+		
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String firstname = txtFirstNameReg.getText();
@@ -344,7 +378,7 @@ public class MyFrame1 extends JFrame {
 					JOptionPane.showMessageDialog(MyFrame1.this, "The two passwords didn't match or empty", "Error", JOptionPane.ERROR_MESSAGE);					
 				}
 				else {					
-					User tempUser = new User(firstname, lastname, major, email, username, password);
+					User tempUser = new User(firstname, lastname, email, major, username, password);
 					
 					try {
 						// save to the database
@@ -381,7 +415,7 @@ public class MyFrame1 extends JFrame {
 		});		
 		
 	
-	btnGoToLogin.addActionListener(new ActionListener() {
+		btnGoToLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				panel.removeAll();
 				panel.add(panel_2);
@@ -416,14 +450,19 @@ public class MyFrame1 extends JFrame {
 							JOptionPane.showMessageDialog(MyFrame1.this, "Wrong username or password.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 						else {
+							// empty all textbox in register panel
+							usernameTextField.setText("");
+							passwordTextField.setText("");	
+							
+							// go to pane_4
 							panel.removeAll();
 							panel.add(panel_4);
-							lblWelcome.setText("Welcome " + users.get(0).getFirstName() + "!");
-// ADD YOUR NEW CODE HERE (panel_4)							
-							
+							lblWelcome.setText("Welcome " + users.get(0).getFirstName() + "!");																				
+
+// ADD YOUR NEW CODE HERE (panel_4)								
 							
 							panel.repaint();
-							panel.revalidate();								
+							panel.revalidate();												
 						}
 						
 					} catch (Exception e1) {

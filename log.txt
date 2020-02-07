@@ -1,0 +1,4 @@
+2020-02-06
+Fix the reversing order of email and major on database (old users must fix manually)
+Fix error when Home menu is selected, username and password still exist in the textbox)
+Add JCombobox (draft) to test
