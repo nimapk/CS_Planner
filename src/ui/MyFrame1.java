@@ -494,43 +494,49 @@ public class MyFrame1 extends JFrame {
 				String[] aCnum = sCurrentItem.split(" - ");
 				int currentIndex = comboBoxCourses.getSelectedIndex();
 				//lblCourseWarning.setText("You chose course: " + aCnum[0]);	
-				try {
-					userDAO.addCourseToUser(userId, aCnum[0], comboBoxGrade.getSelectedItem().toString());					
-					// show success message
-					JOptionPane.showMessageDialog(MyFrame1.this,
-							"Course added succesfully.",
-							"Course Added",
-							JOptionPane.INFORMATION_MESSAGE);
-					
-					//Refresh courses
-					comboBoxCourses.removeAllItems();
-					//List<Course> courses = null;
-					//courses = aCourseDAO.getAllCourses();
-					List<String> passedCourses = null;
-					passedCourses = userDAO.searchCoursesUserPassed(userId);					
-					comboBoxCourses.addItem("");
-					for (Course tempCourse : courses) {
-						if (passedCourses.contains(tempCourse.getCno())) {
-							comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");
-							
-						}
-						else
-						{
-							comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle());
-						}
-					}
-					comboBoxGrade.setSelectedIndex(0);
-					JComboBoxDecorator.decorate(comboBoxCourses, true); //update list 
-					//comboBoxCourses.removeItemAt(currentIndex);
-					//comboBoxCourses.insertItemAt(sCurrentItem + " >> (Passed)", currentIndex);
-					//comboBoxCourses.setSelectedIndex(0);
-					
-					
-					
-					
+				if (aCnum[0] == "" || comboBoxGrade.getSelectedItem().toString() == "") {
+					JOptionPane.showMessageDialog(MyFrame1.this,  "Course or Grade cannot be blank!", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				catch (Exception exc) {
-					JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+				else {					
+					try {
+						
+						userDAO.addCourseToUser(userId, aCnum[0], comboBoxGrade.getSelectedItem().toString());					
+						// show success message
+						JOptionPane.showMessageDialog(MyFrame1.this,
+								"Course added succesfully.",
+								"Course Added",
+								JOptionPane.INFORMATION_MESSAGE);
+						
+						//Refresh courses
+						comboBoxCourses.removeAllItems();
+						//List<Course> courses = null;
+						//courses = aCourseDAO.getAllCourses();
+						List<String> passedCourses = null;
+						passedCourses = userDAO.searchCoursesUserPassed(userId);					
+						comboBoxCourses.addItem("");
+						for (Course tempCourse : courses) {
+							if (passedCourses.contains(tempCourse.getCno())) {
+								comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");
+								
+							}
+							else
+							{
+								comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle());
+							}
+						}
+						comboBoxGrade.setSelectedIndex(0);
+						JComboBoxDecorator.decorate(comboBoxCourses, true); //update list 
+						//comboBoxCourses.removeItemAt(currentIndex);
+						//comboBoxCourses.insertItemAt(sCurrentItem + " >> (Passed)", currentIndex);
+						//comboBoxCourses.setSelectedIndex(0);
+						
+						
+						
+						
+					}
+					catch (Exception exc) {
+						JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				
 			}
