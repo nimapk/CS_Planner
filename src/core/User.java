@@ -19,7 +19,7 @@ public class User {
 	
 	public User(int id, String firstName, String lastName, String email,
 			String major, String username, String password) {
-		super();
+		//super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;		
@@ -27,6 +27,9 @@ public class User {
 		this.major = major;
 		this.username = username;		
 		this.password = password;
+	}
+	public int getID() {
+		return id;
 	}
 	public String getFirstName() {
 		return firstName;
