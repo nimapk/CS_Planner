@@ -10,11 +10,14 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
 import core.User;
 import dao.UserDAO;
-
+import core.Course;
+import dao.CourseDAO;
+import core.JComboBoxDecorator;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,14 +29,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JComboBox;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.JTextPane;
+import javax.swing.border.LineBorder;
 
 public class MyFrame1 extends JFrame {	
 	private JTextField usernameTextField;
 	private JTextField passwordTextField;
-	
-	private UserDAO userDAO;
+		
 	private JTextField txtFirstNameReg;	
 	private JTextField txtLastNameReg;
 	private JTextField txtMajorReg;
@@ -42,6 +46,10 @@ public class MyFrame1 extends JFrame {
 	private JTextField txtPasswordReg;
 	private JTextField txtConfirmPasswordReg;
 		
+	private UserDAO userDAO;	
+	private int userId;
+	private CourseDAO aCourseDAO = null;
+	private List<Course> courses = null;
 
 	/**
 	 * Launch the application.
@@ -51,6 +59,7 @@ public class MyFrame1 extends JFrame {
 			public void run() {
 				try {
 					MyFrame1 frame = new MyFrame1();
+				//	frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +72,7 @@ public class MyFrame1 extends JFrame {
 	 * Create the frame.
 	 */
 	public MyFrame1() {
-		setTitle("Class Schedule App");
+		setTitle("Student Tool App");
 				
 		
 		// create the DAO
@@ -103,7 +112,7 @@ public class MyFrame1 extends JFrame {
 		panel_1.add(panel_7);
 		panel_7.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_3 = new JLabel("Welcome to Class Planner");
+		JLabel lblNewLabel_3 = new JLabel("Welcome to Student Tool");
 		lblNewLabel_3.setForeground(new Color(204, 0, 0));
 		lblNewLabel_3.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -159,6 +168,7 @@ public class MyFrame1 extends JFrame {
 		login_panel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_4 = new JLabel("Login");
+		lblNewLabel_4.setForeground(new Color(204, 0, 0));
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 52));
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		login_panel.add(lblNewLabel_4, BorderLayout.CENTER);
@@ -251,6 +261,7 @@ public class MyFrame1 extends JFrame {
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblRegister = new JLabel("Register");
+		lblRegister.setForeground(new Color(204, 0, 0));
 		lblRegister.setFont(new Font("Tahoma", Font.BOLD, 52));
 		lblRegister.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_8.add(lblRegister, BorderLayout.CENTER);
@@ -260,28 +271,170 @@ public class MyFrame1 extends JFrame {
 		panel.add(panel_4, "name_26037072067628");
 		panel_4.setLayout(null);
 		
-		JLabel lblWelcome = new JLabel("Welcome, name of the user");
-		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcome.setBounds(220, 58, 378, 26);
-		panel_4.add(lblWelcome);
-		
-		JButton btnClassPlanner = new JButton("Class Planner");
-		btnClassPlanner.setBounds(80, 108, 134, 23);
-		panel_4.add(btnClassPlanner);
-		
 		JPanel panel_9 = new JPanel();
-		panel.add(panel_9, "name_4791728452251");
-		panel_9.setLayout(null);
+		panel_9.setBackground(new Color(255, 204, 0));
+		panel_9.setBounds(0, 0, 734, 131);
+		panel_4.add(panel_9);
+		panel_9.setLayout(new BorderLayout(0, 0));
 		
-		String[] listCourses = {"CPSC 120 - Introduction to Programming","CPSC 121 - Object-Oriented Programming", "CPSC 131 - Data Structures"};
-		JComboBox comboBoxCourses = new JComboBox(listCourses);
-		AutoCompleteDecorator.decorate(comboBoxCourses);
-		comboBoxCourses.setBounds(72, 47, 185, 20);
-		panel_9.add(comboBoxCourses);
+		JLabel lblWelcome = new JLabel("Welcome, name of the user");
+		lblWelcome.setForeground(new Color(204, 0, 0));
+		lblWelcome.setFont(new Font("Tahoma", Font.BOLD, 30));
+		panel_9.add(lblWelcome, BorderLayout.CENTER);
+		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblCourseWarning = new JLabel("");
+		JPanel panel_10 = new JPanel();
+		panel_10.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_10.setBounds(126, 160, 484, 57);
+		panel_4.add(panel_10);
+		panel_10.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblClassPlanner = new JLabel(" \u2666 Class Planner");
+		lblClassPlanner.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_10.add(lblClassPlanner, BorderLayout.WEST);
+		
+		JButton btnGo = new JButton("Go");
+		btnGo.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_10.add(btnGo, BorderLayout.EAST);
+		
+		JPanel panel_11 = new JPanel();
+		panel_11.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_11.setBounds(126, 217, 484, 57);
+		panel_4.add(panel_11);
+		panel_11.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblGpaCalculator = new JLabel(" \u2666 GPA Calculator");
+		lblGpaCalculator.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_11.add(lblGpaCalculator, BorderLayout.WEST);
+		
+		//=========================go to the GPA Calculator panel,
+	
+		JButton btnGo_1 = new JButton("Go");
+		btnGo_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+	
+		panel_11.add(btnGo_1, BorderLayout.EAST);
+		
+		JPanel panel_12 = new JPanel();
+		panel_12.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_12.setBounds(126, 274, 484, 57);
+		panel_4.add(panel_12);
+		panel_12.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblGraduationDate = new JLabel(" \u2666 Graduation Date");
+		lblGraduationDate.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_12.add(lblGraduationDate, BorderLayout.WEST);
+		
+		JButton btnGo_2 = new JButton("Go");
+		btnGo_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_12.add(btnGo_2, BorderLayout.EAST);
+		
+		JPanel panel_13 = new JPanel();
+		panel_13.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_13.setBounds(126, 331, 484, 57);
+		panel_4.add(panel_13);
+		panel_13.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblTotalUnits = new JLabel(" \u2666 Total Units");
+		lblTotalUnits.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_13.add(lblTotalUnits, BorderLayout.WEST);
+		
+		JButton btnGo_3 = new JButton("Go");
+		btnGo_3.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_13.add(btnGo_3, BorderLayout.EAST);
+		
+		JPanel panel_14 = new JPanel();
+		panel_14.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_14.setBounds(126, 389, 484, 96);
+		panel_4.add(panel_14);
+		panel_14.setLayout(new BorderLayout(0, 0));
+		
+		JTextPane txtpnKeepUpWith = new JTextPane();
+		txtpnKeepUpWith.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtpnKeepUpWith.setText("Keep up with your plan. Your school classes have not changed. ");
+		panel_14.add(txtpnKeepUpWith, BorderLayout.CENTER);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setForeground(new Color(204, 0, 0));
+		panel.add(panel_5, "name_615154751431400");
+		panel_5.setLayout(null);
+		
+		JPanel panel_15 = new JPanel();
+		panel_15.setBackground(new Color(255, 204, 0));
+		panel_15.setBounds(0, 0, 734, 133);
+		panel_5.add(panel_15);
+		panel_15.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblGpaCalculator_1 = new JLabel("GPA Calculator");
+		lblGpaCalculator_1.setForeground(new Color(204, 0, 0));
+		lblGpaCalculator_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGpaCalculator_1.setFont(new Font("Tahoma", Font.BOLD, 35));
+		panel_15.add(lblGpaCalculator_1, BorderLayout.CENTER);
+		
+		JPanel panel_16 = new JPanel();
+		panel_16.setBackground(new Color(204, 204, 255));
+		panel_16.setBorder(new LineBorder(new Color(0, 102, 0)));
+		panel_16.setBounds(273, 312, 197, 50);
+		panel_5.add(panel_16);
+		panel_16.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblYourGpa = new JLabel("   Your GPA:");
+		panel_16.add(lblYourGpa, BorderLayout.CENTER);
+		lblYourGpa.setFont(new Font("Tahoma", Font.BOLD, 20));
+		
+		JLabel label = new JLabel(" 0.0   ");
+		panel_16.add(label, BorderLayout.EAST);
+		label.setFont(new Font("Tahoma", Font.BOLD, 20));
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object source = e.getSource();
+				if(source == btnBack)
+				{
+					panel.removeAll();
+					panel.add(panel_4);
+					panel.repaint();
+					panel.revalidate();
+				}
+			}
+		});
+		btnBack.setBorder(new LineBorder(new Color(0, 102, 0)));
+		btnBack.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnBack.setBounds(273, 414, 197, 50);
+		panel_5.add(btnBack);
+		
+		JButton btnCalculate = new JButton("Calculate");
+		btnCalculate.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnCalculate.setBorder(new LineBorder(new Color(0, 102, 0)));
+		btnCalculate.setBounds(273, 203, 197, 50);
+		panel_5.add(btnCalculate);
+		
+		JPanel panel_6 = new JPanel();
+		panel.add(panel_6, "name_615163967191000");
+		panel_6.setLayout(null);
+		
+		JComboBox comboBoxCourses = new JComboBox();		
+		//AutoCompleteDecorator.decorate(comboBoxCourses);
+		comboBoxCourses.setBounds(72, 47, 400, 20);
+		panel_6.add(comboBoxCourses);
+		
+		JLabel lblCourseWarning = new JLabel("Put information here");
 		lblCourseWarning.setBounds(72, 103, 199, 14);
-		panel_9.add(lblCourseWarning);
+		panel_6.add(lblCourseWarning);		
+		
+		JButton btnCourseAdd = new JButton("Add");
+		btnCourseAdd.setBounds(612, 46, 89, 23);
+		panel_6.add(btnCourseAdd);
+		
+		JLabel lblCourseAdd = new JLabel("Grade");
+		lblCourseAdd.setBounds(505, 23, 46, 14);
+		panel_6.add(lblCourseAdd);
+		
+		String[] listGrades = {"","A+","A","A-","B+","B","B-","C+","C","C-","D","F"};
+		JComboBox comboBoxGrade = new JComboBox(listGrades);
+		comboBoxGrade.setBounds(503, 47, 48, 20);
+		JComboBoxDecorator.decorate(comboBoxGrade, true); 
+		panel_6.add(comboBoxGrade);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -290,34 +443,6 @@ public class MyFrame1 extends JFrame {
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
-		mntmExit.setHorizontalAlignment(SwingConstants.LEFT);
-		mnFile.add(mntmExit);
-		
-		JMenu mnSelect = new JMenu("Select");
-		menuBar.add(mnSelect);
-		
-		JMenuItem mntmHome = new JMenuItem("Home");
-		mntmHome.setHorizontalAlignment(SwingConstants.LEFT);
-		mnSelect.add(mntmHome);
-		
-		//===============actionPerformed=============each panel has 1 Action performed=====================	
-		
-		comboBoxCourses.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				lblCourseWarning.setText("You chose index: " + comboBoxCourses.getSelectedIndex());
-				//lblCourseWarning.setText("You chose item: " + comboBoxCourses.getSelectedItem());
-			}
-		});		
-		
-		btnClassPlanner.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				panel.removeAll();
-				panel.add(panel_9);
-				panel.repaint();
-				panel.revalidate();
-			}
-		});		
-
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object source = e.getSource();
@@ -326,8 +451,14 @@ public class MyFrame1 extends JFrame {
 					System.exit(0);
 				}
 			}
-		});		
+		});
+		mntmExit.setHorizontalAlignment(SwingConstants.LEFT);
+		mnFile.add(mntmExit);
 		
+		JMenu mnSelect = new JMenu("Select");
+		menuBar.add(mnSelect);
+		
+		JMenuItem mntmHome = new JMenuItem("Home");
 		mntmHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object source = e.getSource();
@@ -339,7 +470,132 @@ public class MyFrame1 extends JFrame {
 					panel.revalidate();
 				}
 			}
+		});
+		btnGo_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object source = e.getSource();
+				if(source == btnGo_1)
+				{
+					panel.removeAll();
+					panel.add(panel_5);
+					panel.repaint();
+					panel.revalidate();
+				}
+				
+			}
+		});
+		mntmHome.setHorizontalAlignment(SwingConstants.LEFT);
+		mnSelect.add(mntmHome);
+		//===============actionPerformed=============each panel has 1 Actionperformed=====================	
+		btnCourseAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//abc3
+				String sCurrentItem = comboBoxCourses.getSelectedItem().toString();
+				String[] aCnum = sCurrentItem.split(" - ");
+				int currentIndex = comboBoxCourses.getSelectedIndex();
+				//lblCourseWarning.setText("You chose course: " + aCnum[0]);	
+				if (aCnum[0] == "" || comboBoxGrade.getSelectedItem().toString() == "") {
+					JOptionPane.showMessageDialog(MyFrame1.this,  "Course or Grade cannot be blank!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {					
+					try {
+						
+						userDAO.addCourseToUser(userId, aCnum[0], comboBoxGrade.getSelectedItem().toString());					
+						// show success message
+						JOptionPane.showMessageDialog(MyFrame1.this,
+								"Course added succesfully.",
+								"Course Added",
+								JOptionPane.INFORMATION_MESSAGE);
+						
+						//Refresh courses
+						comboBoxCourses.removeAllItems();
+						//List<Course> courses = null;
+						//courses = aCourseDAO.getAllCourses();
+						List<String> passedCourses = null;
+						passedCourses = userDAO.searchCoursesUserPassed(userId);					
+						comboBoxCourses.addItem("");
+						for (Course tempCourse : courses) {
+							if (passedCourses.contains(tempCourse.getCno())) {
+								comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");
+								
+							}
+							else
+							{
+								comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle());
+							}
+						}
+						comboBoxGrade.setSelectedIndex(0);
+						JComboBoxDecorator.decorate(comboBoxCourses, true); //update list 
+						//comboBoxCourses.removeItemAt(currentIndex);
+						//comboBoxCourses.insertItemAt(sCurrentItem + " >> (Passed)", currentIndex);
+						//comboBoxCourses.setSelectedIndex(0);
+						
+						
+						
+						
+					}
+					catch (Exception exc) {
+						JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				
+			}
+		});
+		
+		comboBoxCourses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//abc2
+				//Do it later ?? disable add button if no course is selected or selected course is passed
+				//String[] aCnum = comboBoxCourses.getSelectedItem().toString().split(" - ");
+				if (comboBoxCourses.getSelectedIndex() == 0 ) {
+					
+					
+				}
+					
+				lblCourseWarning.setText("You chose index: " + comboBoxCourses.getSelectedIndex());
+				
+				
+			}
 		});		
+		
+		btnGo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel.removeAll();
+				panel.add(panel_6);
+//abc4								
+				//CourseDAO aCourseDAO = null;
+				// create the DAO
+				try {
+					aCourseDAO = new CourseDAO();
+				} catch (Exception exc) {					
+					JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				try {				
+					//List<Course> courses = null;
+					courses = aCourseDAO.getAllCourses();
+					List<String> passedCourses = null;
+					passedCourses = userDAO.searchCoursesUserPassed(userId);
+					comboBoxCourses.addItem("");
+					for (Course tempCourse : courses) {
+						if (passedCourses.contains(tempCourse.getCno())) {
+							comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");
+							
+						}
+						else
+						{
+							comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle());
+						}
+					}
+					
+				}
+				catch (Exception exc) {
+					JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+				}				
+				JComboBoxDecorator.decorate(comboBoxCourses, true); 
+				panel.repaint();
+				panel.revalidate();				
+			}
+		});
 		
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -378,7 +634,7 @@ public class MyFrame1 extends JFrame {
 					JOptionPane.showMessageDialog(MyFrame1.this, "The two passwords didn't match or empty", "Error", JOptionPane.ERROR_MESSAGE);					
 				}
 				else {					
-					User tempUser = new User(firstname, lastname, email, major, username, password);
+					User tempUser = new User(firstname, lastname, major, email, username, password);
 					
 					try {
 						// save to the database
@@ -415,7 +671,7 @@ public class MyFrame1 extends JFrame {
 		});		
 		
 	
-		btnGoToLogin.addActionListener(new ActionListener() {
+	btnGoToLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				panel.removeAll();
 				panel.add(panel_2);
@@ -450,19 +706,15 @@ public class MyFrame1 extends JFrame {
 							JOptionPane.showMessageDialog(MyFrame1.this, "Wrong username or password.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 						else {
-							// empty all textbox in register panel
-							usernameTextField.setText("");
-							passwordTextField.setText("");	
-							
-							// go to pane_4
 							panel.removeAll();
 							panel.add(panel_4);
-							lblWelcome.setText("Welcome " + users.get(0).getFirstName() + "!");																				
-
-// ADD YOUR NEW CODE HERE (panel_4)								
+							lblWelcome.setText("Welcome " + users.get(0).getFirstName() + "!");
+							userId = users.get(0).getID();
+// ADD YOUR NEW CODE HERE (panel_4)							
+							
 							
 							panel.repaint();
-							panel.revalidate();												
+							panel.revalidate();								
 						}
 						
 					} catch (Exception e1) {

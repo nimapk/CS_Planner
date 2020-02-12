@@ -74,7 +74,57 @@ public class UserDAO {
 			close(myStmt);
 		}
 		
-	}	
+	}
+	
+	// add to ENROLLMENT table, not USER table
+	public void addCourseToUser(int userid, String cnum, String grade) throws Exception {
+		PreparedStatement myStmt = null;
+
+		try {
+			// prepare statement			
+			myStmt = myConn.prepareStatement("insert into ENROLLMENT"
+					+ " (userID, C_num, Grade)"
+					+ " values (?, ?, ?)");;
+			
+			// set params		
+			
+			myStmt.setInt(1, userid);
+			myStmt.setString(2, cnum);
+			myStmt.setString(3, grade);
+
+			
+			// execute SQL
+			myStmt.executeUpdate();			
+		}
+		finally {
+			close(myStmt);
+		}				
+	}
+	// find a list of courses a user passed
+	public List<String> searchCoursesUserPassed(int userid) throws Exception{
+		List<String> list = new ArrayList<>();		
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		
+		try {
+			//prepare statement
+			myStmt = myConn.prepareStatement("select C_num from ENROLLMENT where userID like ?");
+			myStmt.setString(1, Integer.toString(userid));
+			myRs = myStmt.executeQuery();
+			while (myRs.next()) {
+				list.add(myRs.getString("C_num"));
+			}	
+			
+			return list;
+		}
+		finally {			
+			close(myStmt);
+		}
+		
+	}
+	
+	
+	
 	private User convertRowToUser(ResultSet myRs) throws SQLException {
 		
 		int id = myRs.getInt("id");
