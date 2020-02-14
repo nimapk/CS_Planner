@@ -33,6 +33,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
+import javax.swing.JScrollPane;
 
 public class MyFrame1 extends JFrame {	
 	private JTextField usernameTextField;
@@ -50,6 +51,7 @@ public class MyFrame1 extends JFrame {
 	private int userId;
 	private CourseDAO aCourseDAO = null;
 	private List<Course> courses = null;
+	private JTextField txtThisTabBy;
 
 	/**
 	 * Launch the application.
@@ -415,26 +417,158 @@ public class MyFrame1 extends JFrame {
 		
 		JComboBox comboBoxCourses = new JComboBox();		
 		//AutoCompleteDecorator.decorate(comboBoxCourses);
-		comboBoxCourses.setBounds(72, 47, 400, 20);
+		comboBoxCourses.setBounds(68, 206, 400, 20);
 		panel_6.add(comboBoxCourses);
 		
-		JLabel lblCourseWarning = new JLabel("Put information here");
-		lblCourseWarning.setBounds(72, 103, 199, 14);
+		JLabel lblCourseWarning = new JLabel("Choose the classes that you have taken");
+		lblCourseWarning.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCourseWarning.setBounds(68, 168, 398, 14);
 		panel_6.add(lblCourseWarning);		
 		
 		JButton btnCourseAdd = new JButton("Add");
-		btnCourseAdd.setBounds(612, 46, 89, 23);
+		btnCourseAdd.setBounds(596, 205, 89, 23);
 		panel_6.add(btnCourseAdd);
 		
 		JLabel lblCourseAdd = new JLabel("Grade");
-		lblCourseAdd.setBounds(505, 23, 46, 14);
+		lblCourseAdd.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCourseAdd.setBounds(502, 168, 62, 14);
 		panel_6.add(lblCourseAdd);
 		
 		String[] listGrades = {"","A+","A","A-","B+","B","B-","C+","C","C-","D","F"};
 		JComboBox comboBoxGrade = new JComboBox(listGrades);
-		comboBoxGrade.setBounds(503, 47, 48, 20);
+		comboBoxGrade.setBounds(502, 206, 62, 20);
 		JComboBoxDecorator.decorate(comboBoxGrade, true); 
 		panel_6.add(comboBoxGrade);
+		
+		JPanel panel_18 = new JPanel();
+		panel_18.setBackground(new Color(255, 204, 0));
+		panel_18.setBounds(0, 0, 734, 135);
+		panel_6.add(panel_18);
+		panel_18.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblClassPlanner_1 = new JLabel("Class Planner");
+		lblClassPlanner_1.setFont(new Font("Tahoma", Font.BOLD, 45));
+		lblClassPlanner_1.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_18.add(lblClassPlanner_1, BorderLayout.CENTER);
+		
+		JLabel lblAddClass = new JLabel("Add Class");
+		lblAddClass.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAddClass.setBounds(596, 168, 89, 14);
+		panel_6.add(lblAddClass);
+		
+		JLabel lblChooseTheClasses = new JLabel("Choose the classes that you would like to take");
+		lblChooseTheClasses.setHorizontalAlignment(SwingConstants.CENTER);
+		lblChooseTheClasses.setBounds(70, 285, 398, 14);
+		panel_6.add(lblChooseTheClasses);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(68, 320, 400, 20);
+		panel_6.add(comboBox);
+		
+		JLabel label_1 = new JLabel("Add Class");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setBounds(596, 285, 89, 14);
+		panel_6.add(label_1);
+		
+		JButton button = new JButton("Add");
+		button.setBounds(596, 319, 89, 23);
+		panel_6.add(button);
+	
+		JButton btnNewButton = new JButton("Here Your Plan");
+		
+		btnNewButton.setBounds(187, 427, 147, 23);
+		panel_6.add(btnNewButton);
+		//==========================================================================Here Plan			
+		JButton btnBack_2 = new JButton("Back");
+		btnBack_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					panel.removeAll();
+					panel.add(panel_4);
+					panel.repaint();
+					panel.revalidate();					
+			}
+		});
+		btnBack_2.setBounds(502, 427, 89, 23);
+		panel_6.add(btnBack_2);
+		
+		JPanel panel_20 = new JPanel();
+		panel.add(panel_20, "name_3158997082800");
+		panel_20.setLayout(null);
+		
+		JPanel panel_21 = new JPanel();
+		panel_21.setBackground(new Color(255, 204, 0));
+		panel_21.setBounds(0, 0, 734, 135);
+		panel_20.add(panel_21);
+		panel_21.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblYourPlan = new JLabel("Your Plan");
+		lblYourPlan.setFont(new Font("Tahoma", Font.BOLD, 45));
+		lblYourPlan.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_21.add(lblYourPlan, BorderLayout.CENTER);
+		
+		JPanel panel_22 = new JPanel();
+		panel_22.setBounds(0, 136, 734, 168);
+		panel_20.add(panel_22);
+		
+		JLabel lblRemainingClasses = new JLabel("Remaining classes");
+		panel_22.add(lblRemainingClasses);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_22.add(scrollPane);
+		
+		JButton btnBack_3 = new JButton("Back");
+		btnBack_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					panel.removeAll();
+					panel.add(panel_4);
+					panel.repaint();
+					panel.revalidate();			
+			}
+		});
+		btnBack_3.setBounds(509, 451, 89, 23);
+		panel_20.add(btnBack_3);
+		
+		JPanel panel_17 = new JPanel();
+		panel.add(panel_17, "name_1830898570700");
+		panel_17.setLayout(null);
+		
+		JPanel panel_19 = new JPanel();
+		panel_19.setBackground(new Color(255, 204, 0));
+		panel_19.setBounds(0, 0, 734, 135);
+		panel_17.add(panel_19);
+		panel_19.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_6 = new JLabel("Total Units");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 45));
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_19.add(lblNewLabel_6, BorderLayout.CENTER);
+		
+		txtThisTabBy = new JTextField();
+		txtThisTabBy.setHorizontalAlignment(SwingConstants.CENTER);
+		txtThisTabBy.setText("This tab, by clicking the button it will tell you how any unit that you have taken");
+		txtThisTabBy.setBounds(59, 171, 607, 192);
+		panel_17.add(txtThisTabBy);
+		txtThisTabBy.setColumns(10);
+		
+		JButton btnGetTotalUnits = new JButton("Get Total Units");
+		btnGetTotalUnits.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnGetTotalUnits.setBounds(164, 387, 124, 23);
+		panel_17.add(btnGetTotalUnits);
+		
+		JButton btnBack_1 = new JButton("Back");
+		btnBack_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					panel.removeAll();
+					panel.add(panel_4);
+					panel.repaint();
+					panel.revalidate();				
+			}
+		});
+		btnBack_1.setBounds(498, 387, 89, 23);
+		panel_17.add(btnBack_1);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -482,6 +616,18 @@ public class MyFrame1 extends JFrame {
 					panel.revalidate();
 				}
 				
+			}
+		});
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object source = e.getSource();
+				if(source == btnNewButton)
+				{
+					panel.removeAll();
+					panel.add(panel_20);
+					panel.repaint();
+					panel.revalidate();
+				}
 			}
 		});
 		mntmHome.setHorizontalAlignment(SwingConstants.LEFT);
@@ -572,9 +718,11 @@ public class MyFrame1 extends JFrame {
 				}
 				try {				
 					//List<Course> courses = null;
-					courses = aCourseDAO.getAllCourses();
+					if (courses == null)
+						courses = aCourseDAO.getAllCourses();					
 					List<String> passedCourses = null;
 					passedCourses = userDAO.searchCoursesUserPassed(userId);
+					comboBoxCourses.removeAllItems();
 					comboBoxCourses.addItem("");
 					for (Course tempCourse : courses) {
 						if (passedCourses.contains(tempCourse.getCno())) {
