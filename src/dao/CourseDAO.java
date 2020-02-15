@@ -47,6 +47,28 @@ public class CourseDAO {
 			close(myStmt, myRs);
 		}
 	}	
+
+	public Map<String, Course> getAllCoursesAsMap() throws Exception {
+        Map<String, Course> list = new HashMap<String, Course>();
+
+        Statement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            myStmt = myConn.createStatement();
+            myRs = myStmt.executeQuery("select * from COURSES");
+
+            while (myRs.next()) {
+                Course tempCourse = convertRowToCourse(myRs);
+                list.put(tempCourse.getCno(), tempCourse);
+            }
+
+            return list;
+        } finally {
+            close(myStmt, myRs);
+        }
+    }
+    
 	private Course convertRowToCourse(ResultSet myRs) throws SQLException {		
 		String cno = myRs.getString("cno");
 		String ctitle = myRs.getString("ctitle");		

@@ -123,7 +123,76 @@ public class UserDAO {
 		
 	}
 	
-	
+	public List<String> searchGradeUserPassed(int userid) throws Exception {
+        List<String> list = new ArrayList<>();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            //prepare statement
+            myStmt = myConn.prepareStatement("select Grade from ENROLLMENT where userID like ?");
+            myStmt.setString(1, Integer.toString(userid));
+            myRs = myStmt.executeQuery();
+            while (myRs.next()) {
+                list.add(myRs.getString("Grade"));
+            }
+
+            return list;
+        } finally {
+            close(myStmt);
+        }
+
+    }
+
+    public double getScoreFromGrade(String grade) {
+        double scale = 0.0;
+        switch (grade) {
+            case "A+":
+                scale = 4.3;
+                break;
+            case "A":
+                scale = 4.0;
+                break;
+            case "A-":
+                scale = 3.7;
+                break;
+            case "B+":
+                scale = 3.3;
+                break;
+            case "B":
+                scale = 3.0;
+                break;
+            case "B-":
+                scale = 2.7;
+                break;
+            case "C+":
+                scale = 2.3;
+                break;
+            case "C":
+                scale = 2.0;
+                break;
+            case "C-":
+                scale = 1.7;
+                break;
+            case "D+":
+                scale = 1.3;
+                break;
+            case "D":
+                scale = 1.0;
+                break;
+            case "D-":
+                scale = 0.7;
+                break;
+            case "F":
+                scale = 0.0;
+                break;
+            default:
+                scale = 4.0;
+                break;
+        }
+        return scale;
+    }
+
 	
 	private User convertRowToUser(ResultSet myRs) throws SQLException {
 		

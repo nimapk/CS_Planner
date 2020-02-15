@@ -23,9 +23,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Label;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.util.Map;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -53,6 +55,7 @@ public class MyFrame1 extends JFrame {
 	private List<Course> courses = null;
 	private JTextField txtThisTabBy;
 
+    private Map<String, Course> courses_map = null;
 	/**
 	 * Launch the application.
 	 */
@@ -618,17 +621,48 @@ public class MyFrame1 extends JFrame {
 				
 			}
 		});
-		btnNewButton.addActionListener(new ActionListener() {
+		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Object source = e.getSource();
-				if(source == btnNewButton)
-				{
-					panel.removeAll();
-					panel.add(panel_20);
-					panel.repaint();
-					panel.revalidate();
-				}
-			}
+                Object source = e.getSource();
+                if (source == btnCalculate) {
+                    try {
+                        aCourseDAO = new CourseDAO();
+                    } catch (Exception exc) {
+                        JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    try {
+                        courses_map = aCourseDAO.getAllCoursesAsMap();
+                        List<String> passedCourses = null;
+                        List<String> passedGrades = null;
+                        passedCourses = userDAO.searchCoursesUserPassed(userId);
+                        passedGrades  = userDAO.searchGradeUserPassed(userId);
+                        
+                        double total_units = 0;
+                        double total_score = 0;
+                        
+                        for(int i = 0; i < passedCourses.size(); i++){
+                            String course = passedCourses.get(i);
+                            String grade = passedGrades.get(i);
+                            Course course_item = courses_map.get(course);
+                            if(course_item == null) continue;
+                            int units = course_item.getUnits();
+                            total_units += units;
+                            total_score += units * userDAO.getScoreFromGrade(grade);
+                        }
+                        double GPA = 0.0;
+                        if(total_units == 0 || total_score == 0){
+                            GPA = 0;
+                        }else{
+                            GPA = total_score / total_units;
+                        }
+                        
+                        label.setText(String.format("  " + "%.1f", GPA) + "   ");
+                    } catch (Exception exc) {
+                        JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+            }
 		});
 		mntmHome.setHorizontalAlignment(SwingConstants.LEFT);
 		mnSelect.add(mntmHome);
