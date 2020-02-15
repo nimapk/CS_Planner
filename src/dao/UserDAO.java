@@ -100,6 +100,31 @@ public class UserDAO {
 			close(myStmt);
 		}				
 	}
+	// calculate total units for a user
+	
+	public int calculateTotalUnits(int user_id) throws Exception {
+		int total_units = 0;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		
+		try {
+			myStmt = myConn.prepareStatement("SELECT SUM(Units) as userTotalUnits FROM ENROLLMENT, COURSES, user WHERE C_num = CNO AND userID = id AND id = ?");
+			myStmt.setString(1, Integer.toString(user_id));
+			myRs = myStmt.executeQuery();
+			
+			while (myRs.next() ) {
+				total_units = myRs.getInt("userTotalUnits");
+			}
+			return total_units;
+		}
+		
+		finally {
+			close(myStmt);
+		}
+	}
+	
+	
+	
 	// find a list of courses a user passed
 	public List<String> searchCoursesUserPassed(int userid) throws Exception{
 		List<String> list = new ArrayList<>();		

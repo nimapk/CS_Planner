@@ -553,9 +553,36 @@ public class MyFrame1 extends JFrame {
 		panel_17.add(txtThisTabBy);
 		txtThisTabBy.setColumns(10);
 		
+		btnGo_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object source = e.getSource();
+				if(source == btnGo_3)
+				{
+					panel.removeAll();
+					panel.add(panel_17);
+					panel.repaint();
+					panel.revalidate();
+				}
+				
+			}
+		});
+		
 		JButton btnGetTotalUnits = new JButton("Get Total Units");
 		btnGetTotalUnits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					int aTotalUnits;
+					
+					aTotalUnits = userDAO.calculateTotalUnits(userId);
+					
+					txtThisTabBy.setText(Integer.toString(aTotalUnits));
+					
+					txtThisTabBy.setFont(new Font("Tahoma", Font.BOLD, 45));
+					
+				}
+				catch (Exception exc) {
+                    JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+                }
 			}
 		});
 		btnGetTotalUnits.setBounds(164, 387, 124, 23);
