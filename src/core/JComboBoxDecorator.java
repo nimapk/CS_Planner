@@ -1,17 +1,15 @@
 //Reference link : https://stackoverflow.com/questions/27753375/jcombobox-search-list
 package core;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.DefaultComboBoxModel;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 /**
  * Makes given combobox editable and filterable.
