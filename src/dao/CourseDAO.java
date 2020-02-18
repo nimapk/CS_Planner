@@ -1,8 +1,16 @@
 package dao;
 
-import java.util.*;
-import java.sql.*;
-import java.io.*;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 import core.Course;
 
@@ -15,7 +23,8 @@ public class CourseDAO {
 		
 		// get db properties
 		Properties props = new Properties();
-		props.load(new FileInputStream("anydb.properties"));
+		props.load(getClass()
+				.getClassLoader().getResourceAsStream("anydb.properties"));
 		
 		String user = props.getProperty("user");
 		String password = props.getProperty("password");
