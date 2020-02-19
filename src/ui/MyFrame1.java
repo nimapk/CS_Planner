@@ -36,18 +36,19 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
 import javax.swing.JScrollPane;
+import javax.swing.JPasswordField;
 
 public class MyFrame1 extends JFrame {	
 	private JTextField usernameTextField;
-	private JTextField passwordTextField;
+	private JPasswordField passwordTextField;
 		
 	private JTextField txtFirstNameReg;	
 	private JTextField txtLastNameReg;
 	private JTextField txtMajorReg;
 	private JTextField txtEmailReg;
 	private JTextField txtUsernameReg;
-	private JTextField txtPasswordReg;
-	private JTextField txtConfirmPasswordReg;
+	private JPasswordField txtPasswordReg;
+	private JPasswordField txtConfirmPasswordReg;
 		
 	private UserDAO userDAO;	
 	private int userId;
@@ -96,6 +97,7 @@ public class MyFrame1 extends JFrame {
 		panel.setLayout(new CardLayout(0, 0));
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel.add(panel_1, "name_24492968287013");
 		panel_1.setLayout(null);
 		
@@ -112,6 +114,7 @@ public class MyFrame1 extends JFrame {
 		panel_1.add(btnGoToRegister);
 		
 		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_7.setBackground(new Color(255, 204, 0));
 		panel_7.setBounds(0, 0, 734, 152);
 		panel_1.add(panel_7);
@@ -129,6 +132,7 @@ public class MyFrame1 extends JFrame {
 		panel_1.add(lblNewLabel_5);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_2.setBackground(Color.WHITE);
 		panel.add(panel_2, "name_24495828510910");
 		panel_2.setLayout(null);
@@ -149,7 +153,7 @@ public class MyFrame1 extends JFrame {
 		panel_2.add(usernameTextField);
 		usernameTextField.setColumns(10);
 		
-		passwordTextField = new JTextField();
+		passwordTextField = new JPasswordField();
 		passwordTextField.setBounds(263, 270, 261, 20);
 		panel_2.add(passwordTextField);
 		passwordTextField.setColumns(10);
@@ -167,6 +171,7 @@ public class MyFrame1 extends JFrame {
 		panel_2.add(btnForgotPassword);
 		
 		JPanel login_panel = new JPanel();
+		login_panel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		login_panel.setBackground(new Color(255, 204, 0));
 		login_panel.setBounds(0, 0, 734, 146);
 		panel_2.add(login_panel);
@@ -174,11 +179,12 @@ public class MyFrame1 extends JFrame {
 		
 		JLabel lblNewLabel_4 = new JLabel("Login");
 		lblNewLabel_4.setForeground(new Color(204, 0, 0));
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 52));
+		lblNewLabel_4.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		login_panel.add(lblNewLabel_4, BorderLayout.CENTER);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel.add(panel_3, "name_25078018479884");
 		panel_3.setLayout(null);
 		
@@ -237,12 +243,12 @@ public class MyFrame1 extends JFrame {
 		lblPassword.setBounds(152, 330, 64, 26);
 		panel_3.add(lblPassword);
 		
-		txtPasswordReg = new JTextField();
+		txtPasswordReg = new JPasswordField();
 		txtPasswordReg.setColumns(10);
 		txtPasswordReg.setBounds(273, 333, 278, 20);
 		panel_3.add(txtPasswordReg);
 		
-		txtConfirmPasswordReg = new JTextField();
+		txtConfirmPasswordReg = new JPasswordField();
 		txtConfirmPasswordReg.setColumns(10);
 		txtConfirmPasswordReg.setBounds(273, 364, 278, 20);
 		panel_3.add(txtConfirmPasswordReg);
@@ -259,6 +265,7 @@ public class MyFrame1 extends JFrame {
 		panel_3.add(btnRegister);
 		
 		JPanel panel_8 = new JPanel();
+		panel_8.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_8.setBackground(new Color(255, 204, 0));
 		panel_8.setForeground(Color.WHITE);
 		panel_8.setBounds(0, 0, 734, 151);
@@ -267,16 +274,18 @@ public class MyFrame1 extends JFrame {
 		
 		JLabel lblRegister = new JLabel("Register");
 		lblRegister.setForeground(new Color(204, 0, 0));
-		lblRegister.setFont(new Font("Tahoma", Font.BOLD, 52));
+		lblRegister.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		lblRegister.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_8.add(lblRegister, BorderLayout.CENTER);
 	
 		//panel 4 properties
 		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel.add(panel_4, "name_26037072067628");
 		panel_4.setLayout(null);
 		
 		JPanel panel_9 = new JPanel();
+		panel_9.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_9.setBackground(new Color(255, 204, 0));
 		panel_9.setBounds(0, 0, 734, 131);
 		panel_4.add(panel_9);
@@ -284,12 +293,12 @@ public class MyFrame1 extends JFrame {
 		
 		JLabel lblWelcome = new JLabel("Welcome, name of the user");
 		lblWelcome.setForeground(new Color(204, 0, 0));
-		lblWelcome.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblWelcome.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		panel_9.add(lblWelcome, BorderLayout.CENTER);
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JPanel panel_10 = new JPanel();
-		panel_10.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_10.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_10.setBounds(126, 160, 484, 57);
 		panel_4.add(panel_10);
 		panel_10.setLayout(new BorderLayout(0, 0));
@@ -303,7 +312,7 @@ public class MyFrame1 extends JFrame {
 		panel_10.add(btnGo, BorderLayout.EAST);
 		
 		JPanel panel_11 = new JPanel();
-		panel_11.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_11.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_11.setBounds(126, 217, 484, 57);
 		panel_4.add(panel_11);
 		panel_11.setLayout(new BorderLayout(0, 0));
@@ -320,7 +329,7 @@ public class MyFrame1 extends JFrame {
 		panel_11.add(btnGo_1, BorderLayout.EAST);
 		
 		JPanel panel_12 = new JPanel();
-		panel_12.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_12.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_12.setBounds(126, 274, 484, 57);
 		panel_4.add(panel_12);
 		panel_12.setLayout(new BorderLayout(0, 0));
@@ -334,7 +343,7 @@ public class MyFrame1 extends JFrame {
 		panel_12.add(btnGo_2, BorderLayout.EAST);
 		
 		JPanel panel_13 = new JPanel();
-		panel_13.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_13.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_13.setBounds(126, 331, 484, 57);
 		panel_4.add(panel_13);
 		panel_13.setLayout(new BorderLayout(0, 0));
@@ -348,7 +357,7 @@ public class MyFrame1 extends JFrame {
 		panel_13.add(btnGo_3, BorderLayout.EAST);
 		
 		JPanel panel_14 = new JPanel();
-		panel_14.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(0, 0, 255), null));
+		panel_14.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_14.setBounds(126, 389, 484, 96);
 		panel_4.add(panel_14);
 		panel_14.setLayout(new BorderLayout(0, 0));
@@ -359,11 +368,13 @@ public class MyFrame1 extends JFrame {
 		panel_14.add(txtpnKeepUpWith, BorderLayout.CENTER);
 		
 		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_5.setForeground(new Color(204, 0, 0));
 		panel.add(panel_5, "name_615154751431400");
 		panel_5.setLayout(null);
 		
 		JPanel panel_15 = new JPanel();
+		panel_15.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_15.setBackground(new Color(255, 204, 0));
 		panel_15.setBounds(0, 0, 734, 133);
 		panel_5.add(panel_15);
@@ -372,7 +383,7 @@ public class MyFrame1 extends JFrame {
 		JLabel lblGpaCalculator_1 = new JLabel("GPA Calculator");
 		lblGpaCalculator_1.setForeground(new Color(204, 0, 0));
 		lblGpaCalculator_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGpaCalculator_1.setFont(new Font("Tahoma", Font.BOLD, 35));
+		lblGpaCalculator_1.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		panel_15.add(lblGpaCalculator_1, BorderLayout.CENTER);
 		
 		JPanel panel_16 = new JPanel();
@@ -415,6 +426,7 @@ public class MyFrame1 extends JFrame {
 		panel_5.add(btnCalculate);
 		
 		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel.add(panel_6, "name_615163967191000");
 		panel_6.setLayout(null);
 		
@@ -444,13 +456,15 @@ public class MyFrame1 extends JFrame {
 		panel_6.add(comboBoxGrade);
 		
 		JPanel panel_18 = new JPanel();
+		panel_18.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_18.setBackground(new Color(255, 204, 0));
 		panel_18.setBounds(0, 0, 734, 135);
 		panel_6.add(panel_18);
 		panel_18.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblClassPlanner_1 = new JLabel("Class Planner");
-		lblClassPlanner_1.setFont(new Font("Tahoma", Font.BOLD, 45));
+		lblClassPlanner_1.setForeground(new Color(204, 0, 0));
+		lblClassPlanner_1.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		lblClassPlanner_1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_18.add(lblClassPlanner_1, BorderLayout.CENTER);
 		
@@ -495,22 +509,25 @@ public class MyFrame1 extends JFrame {
 		panel_6.add(btnBack_2);
 		
 		JPanel panel_20 = new JPanel();
+		panel_20.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel.add(panel_20, "name_3158997082800");
 		panel_20.setLayout(null);
 		
 		JPanel panel_21 = new JPanel();
+		panel_21.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_21.setBackground(new Color(255, 204, 0));
 		panel_21.setBounds(0, 0, 734, 135);
 		panel_20.add(panel_21);
 		panel_21.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblYourPlan = new JLabel("Your Plan");
-		lblYourPlan.setFont(new Font("Tahoma", Font.BOLD, 45));
+		lblYourPlan.setForeground(new Color(204, 0, 0));
+		lblYourPlan.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		lblYourPlan.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_21.add(lblYourPlan, BorderLayout.CENTER);
 		
 		JPanel panel_22 = new JPanel();
-		panel_22.setBounds(0, 136, 734, 168);
+		panel_22.setBounds(70, 169, 602, 135);
 		panel_20.add(panel_22);
 		
 		JLabel lblRemainingClasses = new JLabel("Remaining classes");
@@ -532,17 +549,20 @@ public class MyFrame1 extends JFrame {
 		panel_20.add(btnBack_3);
 		
 		JPanel panel_17 = new JPanel();
+		panel_17.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel.add(panel_17, "name_1830898570700");
 		panel_17.setLayout(null);
 		
 		JPanel panel_19 = new JPanel();
+		panel_19.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_19.setBackground(new Color(255, 204, 0));
 		panel_19.setBounds(0, 0, 734, 135);
 		panel_17.add(panel_19);
 		panel_19.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_6 = new JLabel("Total Units");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 45));
+		lblNewLabel_6.setForeground(new Color(204, 0, 0));
+		lblNewLabel_6.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_19.add(lblNewLabel_6, BorderLayout.CENTER);
 		
