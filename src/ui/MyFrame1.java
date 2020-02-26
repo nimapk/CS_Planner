@@ -37,6 +37,10 @@ import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JPasswordField;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.GridLayout;
+import javax.swing.JList;
 
 public class MyFrame1 extends JFrame {	
 	private JTextField usernameTextField;
@@ -65,7 +69,8 @@ public class MyFrame1 extends JFrame {
 			public void run() {
 				try {
 					MyFrame1 frame = new MyFrame1();
-				//	frame.setResizable(false);
+					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);		//Center the Frame
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -298,12 +303,14 @@ public class MyFrame1 extends JFrame {
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JPanel panel_10 = new JPanel();
+		panel_10.setToolTipText("Input all the classes that you have taken. ");
 		panel_10.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
-		panel_10.setBounds(126, 160, 484, 57);
+		panel_10.setBounds(126, 160, 484, 37);
 		panel_4.add(panel_10);
 		panel_10.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblClassPlanner = new JLabel(" \u2666 Class Planner");
+		JLabel lblClassPlanner = new JLabel(" \u2666 Input Your Classes");
+		lblClassPlanner.setToolTipText("");
 		lblClassPlanner.setFont(new Font("Tahoma", Font.BOLD, 20));
 		panel_10.add(lblClassPlanner, BorderLayout.WEST);
 		
@@ -313,7 +320,7 @@ public class MyFrame1 extends JFrame {
 		
 		JPanel panel_11 = new JPanel();
 		panel_11.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
-		panel_11.setBounds(126, 217, 484, 57);
+		panel_11.setBounds(126, 217, 484, 37);
 		panel_4.add(panel_11);
 		panel_11.setLayout(new BorderLayout(0, 0));
 		
@@ -330,7 +337,7 @@ public class MyFrame1 extends JFrame {
 		
 		JPanel panel_12 = new JPanel();
 		panel_12.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
-		panel_12.setBounds(126, 274, 484, 57);
+		panel_12.setBounds(126, 274, 484, 37);
 		panel_4.add(panel_12);
 		panel_12.setLayout(new BorderLayout(0, 0));
 		
@@ -344,7 +351,7 @@ public class MyFrame1 extends JFrame {
 		
 		JPanel panel_13 = new JPanel();
 		panel_13.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
-		panel_13.setBounds(126, 331, 484, 57);
+		panel_13.setBounds(126, 331, 484, 37);
 		panel_4.add(panel_13);
 		panel_13.setLayout(new BorderLayout(0, 0));
 		
@@ -358,7 +365,7 @@ public class MyFrame1 extends JFrame {
 		
 		JPanel panel_14 = new JPanel();
 		panel_14.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
-		panel_14.setBounds(126, 389, 484, 96);
+		panel_14.setBounds(126, 456, 484, 60);
 		panel_4.add(panel_14);
 		panel_14.setLayout(new BorderLayout(0, 0));
 		
@@ -366,6 +373,22 @@ public class MyFrame1 extends JFrame {
 		txtpnKeepUpWith.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtpnKeepUpWith.setText("Keep up with your plan. Your school classes have not changed. ");
 		panel_14.add(txtpnKeepUpWith, BorderLayout.CENTER);
+		
+		JPanel panel_23 = new JPanel();
+		panel_23.setToolTipText("Make plan for your upcoming semesters");
+		panel_23.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
+		panel_23.setBounds(126, 391, 484, 37);
+		panel_4.add(panel_23);
+		panel_23.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblGraduationDate_1 = new JLabel(" \u2666 Class Planner");
+		lblGraduationDate_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_23.add(lblGraduationDate_1, BorderLayout.WEST);
+		
+		JButton btnGo_4 = new JButton("Go");
+		
+		btnGo_4.setFont(new Font("Tahoma", Font.BOLD, 20));
+		panel_23.add(btnGo_4, BorderLayout.EAST);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new LineBorder(new Color(0, 102, 0), 2));
@@ -414,6 +437,7 @@ public class MyFrame1 extends JFrame {
 				}
 			}
 		});
+		
 		btnBack.setBorder(new LineBorder(new Color(0, 102, 0)));
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnBack.setBounds(273, 414, 197, 50);
@@ -432,26 +456,28 @@ public class MyFrame1 extends JFrame {
 		
 		JComboBox comboBoxCourses = new JComboBox();		
 		//AutoCompleteDecorator.decorate(comboBoxCourses);
-		comboBoxCourses.setBounds(68, 206, 400, 20);
+		comboBoxCourses.setBounds(66, 298, 400, 20);
 		panel_6.add(comboBoxCourses);
 		
-		JLabel lblCourseWarning = new JLabel("Choose the classes that you have taken");
+		JLabel lblCourseWarning = new JLabel("Choose the classes which you have taken");
 		lblCourseWarning.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCourseWarning.setBounds(68, 168, 398, 14);
+		lblCourseWarning.setBounds(66, 258, 398, 14);
 		panel_6.add(lblCourseWarning);		
 		
 		JButton btnCourseAdd = new JButton("Add");
-		btnCourseAdd.setBounds(596, 205, 89, 23);
+		btnCourseAdd.setToolTipText("Add your taken classes to database");
+		btnCourseAdd.setBounds(596, 297, 89, 23);
 		panel_6.add(btnCourseAdd);
 		
 		JLabel lblCourseAdd = new JLabel("Grade");
 		lblCourseAdd.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCourseAdd.setBounds(502, 168, 62, 14);
+		lblCourseAdd.setBounds(502, 258, 62, 14);
 		panel_6.add(lblCourseAdd);
 		
 		String[] listGrades = {"","A+","A","A-","B+","B","B-","C+","C","C-","D","F"};
 		JComboBox comboBoxGrade = new JComboBox(listGrades);
-		comboBoxGrade.setBounds(502, 206, 62, 20);
+		comboBoxGrade.setToolTipText("Input the grade that you got for the selected class");
+		comboBoxGrade.setBounds(502, 298, 62, 20);
 		JComboBoxDecorator.decorate(comboBoxGrade, true); 
 		panel_6.add(comboBoxGrade);
 		
@@ -462,7 +488,7 @@ public class MyFrame1 extends JFrame {
 		panel_6.add(panel_18);
 		panel_18.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblClassPlanner_1 = new JLabel("Class Planner");
+		JLabel lblClassPlanner_1 = new JLabel("Input Your Classes");
 		lblClassPlanner_1.setForeground(new Color(204, 0, 0));
 		lblClassPlanner_1.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		lblClassPlanner_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -470,31 +496,8 @@ public class MyFrame1 extends JFrame {
 		
 		JLabel lblAddClass = new JLabel("Add Class");
 		lblAddClass.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAddClass.setBounds(596, 168, 89, 14);
+		lblAddClass.setBounds(596, 258, 89, 14);
 		panel_6.add(lblAddClass);
-		
-		JLabel lblChooseTheClasses = new JLabel("Choose the classes that you would like to take");
-		lblChooseTheClasses.setHorizontalAlignment(SwingConstants.CENTER);
-		lblChooseTheClasses.setBounds(70, 285, 398, 14);
-		panel_6.add(lblChooseTheClasses);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(68, 320, 400, 20);
-		panel_6.add(comboBox);
-		
-		JLabel label_1 = new JLabel("Add Class");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setBounds(596, 285, 89, 14);
-		panel_6.add(label_1);
-		
-		JButton button = new JButton("Add");
-		button.setBounds(596, 319, 89, 23);
-		panel_6.add(button);
-	
-		JButton btnNewButton = new JButton("Here Your Plan");
-		
-		btnNewButton.setBounds(187, 427, 147, 23);
-		panel_6.add(btnNewButton);
 		//==========================================================================Here Plan			
 		JButton btnBack_2 = new JButton("Back");
 		btnBack_2.addActionListener(new ActionListener() {
@@ -505,48 +508,8 @@ public class MyFrame1 extends JFrame {
 					panel.revalidate();					
 			}
 		});
-		btnBack_2.setBounds(502, 427, 89, 23);
+		btnBack_2.setBounds(596, 382, 89, 23);
 		panel_6.add(btnBack_2);
-		
-		JPanel panel_20 = new JPanel();
-		panel_20.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel.add(panel_20, "name_3158997082800");
-		panel_20.setLayout(null);
-		
-		JPanel panel_21 = new JPanel();
-		panel_21.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel_21.setBackground(new Color(255, 204, 0));
-		panel_21.setBounds(0, 0, 734, 135);
-		panel_20.add(panel_21);
-		panel_21.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblYourPlan = new JLabel("Your Plan");
-		lblYourPlan.setForeground(new Color(204, 0, 0));
-		lblYourPlan.setFont(new Font("Vivaldi", Font.BOLD, 52));
-		lblYourPlan.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_21.add(lblYourPlan, BorderLayout.CENTER);
-		
-		JPanel panel_22 = new JPanel();
-		panel_22.setBounds(70, 169, 602, 135);
-		panel_20.add(panel_22);
-		
-		JLabel lblRemainingClasses = new JLabel("Remaining classes");
-		panel_22.add(lblRemainingClasses);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		panel_22.add(scrollPane);
-		
-		JButton btnBack_3 = new JButton("Back");
-		btnBack_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					panel.removeAll();
-					panel.add(panel_4);
-					panel.repaint();
-					panel.revalidate();			
-			}
-		});
-		btnBack_3.setBounds(509, 451, 89, 23);
-		panel_20.add(btnBack_3);
 		
 		JPanel panel_17 = new JPanel();
 		panel_17.setBorder(new LineBorder(new Color(0, 102, 0), 2));
@@ -565,6 +528,11 @@ public class MyFrame1 extends JFrame {
 		lblNewLabel_6.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_19.add(lblNewLabel_6, BorderLayout.CENTER);
+		
+		JPanel panel_24 = new JPanel();
+		panel_24.setLayout(null);
+		panel_24.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel.add(panel_24, "name_274757212246000");
 		
 		txtThisTabBy = new JTextField();
 		txtThisTabBy.setHorizontalAlignment(SwingConstants.CENTER);
@@ -588,6 +556,7 @@ public class MyFrame1 extends JFrame {
 		});
 		
 		JButton btnGetTotalUnits = new JButton("Get Total Units");
+		btnGetTotalUnits.setToolTipText("Get your total units that you earned so far.");
 		btnGetTotalUnits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -617,8 +586,143 @@ public class MyFrame1 extends JFrame {
 					panel.revalidate();				
 			}
 		});
+		btnGo_4.addActionListener(new ActionListener() {		/////////////////////////////=======================
+			public void actionPerformed(ActionEvent e) {
+				Object source = e.getSource();
+				if(source == btnGo_4)
+				{
+					panel.removeAll();
+					panel.add(panel_24);
+					panel.repaint();
+					panel.revalidate();
+				}
+			}
+		});
 		btnBack_1.setBounds(498, 387, 89, 23);
 		panel_17.add(btnBack_1);
+		
+		JPanel panel_20 = new JPanel();
+		panel_20.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel.add(panel_20, "name_3158997082800");
+		panel_20.setLayout(null);
+		
+		JPanel panel_21 = new JPanel();
+		panel_21.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel_21.setBackground(new Color(255, 204, 0));
+		panel_21.setBounds(0, 0, 734, 135);
+		panel_20.add(panel_21);
+		panel_21.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblYourPlan = new JLabel("Your Plan");
+		lblYourPlan.setForeground(new Color(204, 0, 0));
+		lblYourPlan.setFont(new Font("Vivaldi", Font.BOLD, 52));
+		lblYourPlan.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_21.add(lblYourPlan, BorderLayout.CENTER);
+		
+		JPanel panel_22 = new JPanel();
+		
+		panel_22.setBounds(33, 157, 665, 306);
+		panel_20.add(panel_22);
+		panel_22.setLayout(null);
+		
+		JButton btnBack_3 = new JButton("Back");
+		btnBack_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					panel.removeAll();
+					panel.add(panel_4);
+					panel.repaint();
+					panel.revalidate();			
+			}
+		});
+		btnBack_3.setBounds(597, 486, 89, 23);
+		panel_20.add(btnBack_3);
+		
+		JButton btnForward = new JButton("Forward");
+		btnForward.setBounds(361, 486, 89, 23);
+		panel_20.add(btnForward);
+		
+		JButton btnBackward = new JButton("Backward");
+		btnBackward.setBounds(270, 486, 89, 23);
+		panel_20.add(btnBackward);
+		
+	
+		
+		JLabel lblSemester = new JLabel("Semester");
+		lblSemester.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSemester.setBounds(470, 158, 89, 23);
+		panel_24.add(lblSemester);
+		
+		JPanel panel_25 = new JPanel();
+		panel_25.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel_25.setBackground(new Color(255, 204, 0));
+		panel_25.setBounds(0, 0, 734, 135);
+		panel_24.add(panel_25);
+		panel_25.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblClassPlanner_2 = new JLabel("Class Planner");
+		lblClassPlanner_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblClassPlanner_2.setForeground(new Color(204, 0, 0));
+		lblClassPlanner_2.setFont(new Font("Vivaldi", Font.BOLD, 52));
+		panel_25.add(lblClassPlanner_2, BorderLayout.CENTER);
+		
+		JButton button_2 = new JButton("Add");
+		button_2.setToolTipText("Add your untaken class to database.");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_2.setBounds(585, 481, 89, 23);
+		panel_24.add(button_2);
+		
+		JButton button_4 = new JButton("Back");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {								
+					panel.removeAll();
+					panel.add(panel_4);
+					panel.repaint();
+					panel.revalidate();								
+			}
+		});
+		button_4.setBounds(470, 481, 89, 23);
+		panel_24.add(button_4);
+		
+		JButton button_5 = new JButton("Here Your Plan");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				panel.add(panel_20);
+				panel.repaint();
+				panel.revalidate();	
+				
+			}
+		});
+		button_5.setBounds(171, 481, 147, 23);
+		panel_24.add(button_5);
+		
+		JLabel lblYear = new JLabel("Year");
+		lblYear.setHorizontalAlignment(SwingConstants.CENTER);
+		lblYear.setBounds(585, 158, 89, 23);
+		panel_24.add(lblYear);
+		
+		java.awt.List list = new java.awt.List();
+		list.setMultipleSelections(true);
+		list.setBounds(63, 208, 373, 242);
+		panel_24.add(list);
+		
+		java.awt.List list_1 = new java.awt.List();
+		list_1.setMultipleSelections(false);
+		list_1.setBounds(470, 209, 89, 241);
+		panel_24.add(list_1);
+		
+		java.awt.List list_2 = new java.awt.List();
+		list_2.setMultipleSelections(false);
+		list_2.setBounds(584, 207, 90, 243);
+		panel_24.add(list_2);
+		
+		JLabel lblClassesThatYou = new JLabel("Classes that you want to take");
+		lblClassesThatYou.setHorizontalAlignment(SwingConstants.CENTER);
+		lblClassesThatYou.setBounds(63, 162, 373, 23);
+		panel_24.add(lblClassesThatYou);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -642,7 +746,7 @@ public class MyFrame1 extends JFrame {
 		JMenu mnSelect = new JMenu("Select");
 		menuBar.add(mnSelect);
 		
-		JMenuItem mntmHome = new JMenuItem("Home");
+		JMenuItem mntmHome = new JMenuItem("LogOut");
 		mntmHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object source = e.getSource();
