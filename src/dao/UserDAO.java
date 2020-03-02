@@ -17,7 +17,9 @@ public class UserDAO {
 	private Connection myConn;
 	
 	public UserDAO() throws Exception {
-		
+		ConnectionDB();
+	}	
+	public void ConnectionDB() throws Exception{
 		// get db properties
 		Properties props = new Properties();
 		props.load(getClass()
@@ -31,6 +33,19 @@ public class UserDAO {
 		myConn = DriverManager.getConnection(dburl, user, password);
 		
 		//System.out.println("DB connection successful to: " + dburl);
+	}
+	public boolean CheckConnection() throws Exception{
+		try
+		{
+			Statement myStmt = myConn.createStatement();
+			myStmt.executeQuery("select 1 from user");
+			close(myStmt);
+			return true;
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
 	}
 	public List<User> searchUsers(String username) throws Exception {
 		List<User> list = new ArrayList<>();
@@ -85,6 +100,10 @@ public class UserDAO {
 	
 	// add to ENROLLMENT table, not USER table
 	public void addCourseToUser(int userid, String cnum, String grade) throws Exception {
+		if (!CheckConnection())
+		{
+			ConnectionDB();
+		}
 		PreparedStatement myStmt = null;
 
 		try {
@@ -126,7 +145,7 @@ public class UserDAO {
 		}
 		
 		finally {
-			close(myStmt);
+			close(myStmt, myRs);
 		}
 	}
 	
@@ -150,7 +169,7 @@ public class UserDAO {
 			return list;
 		}
 		finally {			
-			close(myStmt);
+			close(myStmt, myRs);
 		}
 		
 	}
@@ -171,7 +190,7 @@ public class UserDAO {
 
             return list;
         } finally {
-            close(myStmt);
+            close(myStmt, myRs);
         }
 
     }
@@ -180,7 +199,7 @@ public class UserDAO {
         double scale = 0.0;
         switch (grade) {
             case "A+":
-                scale = 4.3;
+                scale = 4.0;
                 break;
             case "A":
                 scale = 4.0;
@@ -248,7 +267,7 @@ public class UserDAO {
 		}
 
 		if (myStmt != null) {
-			
+			myStmt.close();
 		}
 		
 		if (myConn != null) {

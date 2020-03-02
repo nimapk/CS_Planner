@@ -41,6 +41,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.GridLayout;
 import javax.swing.JList;
+import javax.swing.JTable;
 
 public class MyFrame1 extends JFrame {	
 	private JTextField usernameTextField;
@@ -57,10 +58,11 @@ public class MyFrame1 extends JFrame {
 	private UserDAO userDAO;	
 	private int userId;
 	private CourseDAO aCourseDAO = null;
-	private List<Course> courses = null;
+	private List<Course> courses = null;		
 	private JTextField txtThisTabBy;
 
     private Map<String, Course> courses_map = null;
+    private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -454,8 +456,7 @@ public class MyFrame1 extends JFrame {
 		panel.add(panel_6, "name_615163967191000");
 		panel_6.setLayout(null);
 		
-		JComboBox comboBoxCourses = new JComboBox();		
-		//AutoCompleteDecorator.decorate(comboBoxCourses);
+		JComboBox comboBoxCourses = new JComboBox();				
 		comboBoxCourses.setBounds(66, 298, 400, 20);
 		panel_6.add(comboBoxCourses);
 		
@@ -478,7 +479,7 @@ public class MyFrame1 extends JFrame {
 		JComboBox comboBoxGrade = new JComboBox(listGrades);
 		comboBoxGrade.setToolTipText("Input the grade that you got for the selected class");
 		comboBoxGrade.setBounds(502, 298, 62, 20);
-		JComboBoxDecorator.decorate(comboBoxGrade, true); 
+		//JComboBoxDecorator.decorate(comboBoxGrade, true); 
 		panel_6.add(comboBoxGrade);
 		
 		JPanel panel_18 = new JPanel();
@@ -586,18 +587,7 @@ public class MyFrame1 extends JFrame {
 					panel.revalidate();				
 			}
 		});
-		btnGo_4.addActionListener(new ActionListener() {		/////////////////////////////=======================
-			public void actionPerformed(ActionEvent e) {
-				Object source = e.getSource();
-				if(source == btnGo_4)
-				{
-					panel.removeAll();
-					panel.add(panel_24);
-					panel.repaint();
-					panel.revalidate();
-				}
-			}
-		});
+
 		btnBack_1.setBounds(498, 387, 89, 23);
 		panel_17.add(btnBack_1);
 		
@@ -659,6 +649,8 @@ public class MyFrame1 extends JFrame {
 		panel_24.add(panel_25);
 		panel_25.setLayout(new BorderLayout(0, 0));
 		
+				
+		
 		JLabel lblClassPlanner_2 = new JLabel("Class Planner");
 		lblClassPlanner_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClassPlanner_2.setForeground(new Color(204, 0, 0));
@@ -671,7 +663,7 @@ public class MyFrame1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		button_2.setBounds(585, 481, 89, 23);
+		button_2.setBounds(585, 239, 89, 23);
 		panel_24.add(button_2);
 		
 		JButton button_4 = new JButton("Back");
@@ -683,7 +675,7 @@ public class MyFrame1 extends JFrame {
 					panel.revalidate();								
 			}
 		});
-		button_4.setBounds(470, 481, 89, 23);
+		button_4.setBounds(470, 493, 89, 23);
 		panel_24.add(button_4);
 		
 		JButton button_5 = new JButton("Here Your Plan");
@@ -696,7 +688,7 @@ public class MyFrame1 extends JFrame {
 				
 			}
 		});
-		button_5.setBounds(171, 481, 147, 23);
+		button_5.setBounds(172, 493, 147, 23);
 		panel_24.add(button_5);
 		
 		JLabel lblYear = new JLabel("Year");
@@ -704,25 +696,41 @@ public class MyFrame1 extends JFrame {
 		lblYear.setBounds(585, 158, 89, 23);
 		panel_24.add(lblYear);
 		
-		java.awt.List list = new java.awt.List();
-		list.setMultipleSelections(true);
-		list.setBounds(63, 208, 373, 242);
-		panel_24.add(list);
+		JComboBox comboBoxNewCourses = new JComboBox();				
+		comboBoxNewCourses.setBounds(63, 209, 373, 20);
+		panel_24.add(comboBoxNewCourses);
 		
-		java.awt.List list_1 = new java.awt.List();
-		list_1.setMultipleSelections(false);
-		list_1.setBounds(470, 209, 89, 241);
-		panel_24.add(list_1);
+
+		String[] listSemesters = {"","Spring","Summer","Fall","Winter"};
+		JComboBox comboBoxSemester = new JComboBox(listSemesters);		
+		comboBoxSemester.setBounds(470, 209, 89, 20);
+		//JComboBoxDecorator.decorate(comboBoxSemester, true); 
+		panel_24.add(comboBoxSemester);		
 		
-		java.awt.List list_2 = new java.awt.List();
-		list_2.setMultipleSelections(false);
-		list_2.setBounds(584, 207, 90, 243);
-		panel_24.add(list_2);
+		String[] listYears = {"","2020","2021","2022","2023","2024"};
+		JComboBox comboBoxYear = new JComboBox(listYears);		
+		comboBoxYear.setBounds(584, 209, 90, 20);
+		//JComboBoxDecorator.decorate(comboBoxYear, true); 
+		panel_24.add(comboBoxYear);			
+		
+	
+		JLabel lblPrerequisiteCourses = new JLabel("This course has no prerequisites!");
+		//lblPrerequisiteCourses.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrerequisiteCourses.setBounds(63, 240, 373, 20);
+		panel_24.add(lblPrerequisiteCourses);		
+		
 		
 		JLabel lblClassesThatYou = new JLabel("Classes that you want to take");
 		lblClassesThatYou.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClassesThatYou.setBounds(63, 162, 373, 23);
 		panel_24.add(lblClassesThatYou);
+		
+		JScrollPane scrollPanelNewCourses = new JScrollPane();
+		scrollPanelNewCourses.setBounds(63, 273, 611, 216);
+		panel_24.add(scrollPanelNewCourses);
+		
+		table = new JTable();
+		scrollPanelNewCourses.setViewportView(table);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -817,7 +825,58 @@ public class MyFrame1 extends JFrame {
 		});
 		mntmHome.setHorizontalAlignment(SwingConstants.LEFT);
 		mnSelect.add(mntmHome);
-		//===============actionPerformed=============each panel has 1 Actionperformed=====================	
+		
+		//===============actionPerformed=============each panel has 1 Actionperformed=====================
+		
+		btnGo_4.addActionListener(new ActionListener() {		/////////////////////////////=======================
+			public void actionPerformed(ActionEvent e) {//abc2
+				Object source = e.getSource();
+				if(source == btnGo_4)
+				{
+					panel.removeAll();
+					panel.add(panel_24);
+					
+					// create the DAO
+					try {
+						aCourseDAO = new CourseDAO();
+					} catch (Exception exc) {					
+						JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					try {				
+						//List<Course> courses = null; //already declared public
+						if (courses == null)	//Don't load any course into the list so far
+							courses = aCourseDAO.getAllCourses();					
+						List<String> passedCourses = null;
+						passedCourses = userDAO.searchCoursesUserPassed(userId);
+						comboBoxNewCourses.removeAllItems();
+						comboBoxNewCourses.addItem("");
+						for (Course tempCourse : courses) {
+							if (passedCourses.contains(tempCourse.getCno())) {
+								// dont' do any thing or add with notice "passed"
+								//comboBoxNewCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");								
+							}
+							else
+							{
+								comboBoxNewCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle());
+							}
+						}
+						
+					}
+					catch (Exception exc) {
+						JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+					}				
+					//JComboBoxDecorator.decorate(comboBoxNewCourses, true); 					
+						
+					//create the model and update the "table" => change to NewCourses table later
+					NewCoursesTableModel model = new NewCoursesTableModel(courses);
+					table.setModel(model);
+					
+					panel.repaint();
+					panel.revalidate();
+				}
+			}
+		});
+		
 		btnCourseAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//abc3
@@ -856,11 +915,13 @@ public class MyFrame1 extends JFrame {
 							}
 						}
 						comboBoxGrade.setSelectedIndex(0);
-						JComboBoxDecorator.decorate(comboBoxCourses, true); //update list 
+						//JComboBoxDecorator.decorate(comboBoxCourses, true); //update list 
+						
+						
+						
 						//comboBoxCourses.removeItemAt(currentIndex);
 						//comboBoxCourses.insertItemAt(sCurrentItem + " >> (Passed)", currentIndex);
-						//comboBoxCourses.setSelectedIndex(0);
-						
+
 						
 						
 						
@@ -875,15 +936,11 @@ public class MyFrame1 extends JFrame {
 		
 		comboBoxCourses.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//abc2
-				//Do it later ?? disable add button if no course is selected or selected course is passed
-				//String[] aCnum = comboBoxCourses.getSelectedItem().toString().split(" - ");
-				if (comboBoxCourses.getSelectedIndex() == 0 ) {
-					
-					
-				}
-					
-				lblCourseWarning.setText("You chose index: " + comboBoxCourses.getSelectedIndex());
+				
+				//Do it later ?? disable add button if no course is selected or selected course is passed				
+//				if (comboBoxCourses.getSelectedIndex() == 0 ) {									
+//				}					
+//				lblCourseWarning.setText("You chose index: " + comboBoxCourses.getSelectedIndex());
 				
 				
 			}
@@ -893,7 +950,7 @@ public class MyFrame1 extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				panel.removeAll();
 				panel.add(panel_6);
-//abc4								
+//abc1							
 				//CourseDAO aCourseDAO = null;
 				// create the DAO
 				try {
@@ -924,7 +981,7 @@ public class MyFrame1 extends JFrame {
 				catch (Exception exc) {
 					JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
 				}				
-				JComboBoxDecorator.decorate(comboBoxCourses, true); 
+				//JComboBoxDecorator.decorate(comboBoxCourses, true); 
 				panel.repaint();
 				panel.revalidate();				
 			}
