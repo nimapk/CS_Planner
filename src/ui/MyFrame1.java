@@ -28,6 +28,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.util.Map;
+import java.util.Vector;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -63,6 +65,12 @@ public class MyFrame1 extends JFrame {
 
     private Map<String, Course> courses_map = null;
     private JTable table;
+<<<<<<< HEAD
+=======
+    /////////////////////////////////====================================================================For the Display class plan===========
+    int number_of_years = 3;			// this should be store the number of years 
+    private Vector<JScrollPane>scrollpanelVec = new Vector<JScrollPane>();		//this vector size == number of years , each element will display all planing classes for each year	
+>>>>>>> hoanh_gui
 	/**
 	 * Launch the application.
 	 */
@@ -609,12 +617,6 @@ public class MyFrame1 extends JFrame {
 		lblYourPlan.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_21.add(lblYourPlan, BorderLayout.CENTER);
 		
-		JPanel panel_22 = new JPanel();
-		
-		panel_22.setBounds(33, 157, 665, 306);
-		panel_20.add(panel_22);
-		panel_22.setLayout(null);
-		
 		JButton btnBack_3 = new JButton("Back");
 		btnBack_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -624,22 +626,38 @@ public class MyFrame1 extends JFrame {
 					panel.revalidate();			
 			}
 		});
-		btnBack_3.setBounds(597, 486, 89, 23);
+		btnBack_3.setBounds(595, 505, 89, 23);
 		panel_20.add(btnBack_3);
 		
 		JButton btnForward = new JButton("Forward");
-		btnForward.setBounds(361, 486, 89, 23);
+		btnForward.setBounds(366, 505, 89, 23);
 		panel_20.add(btnForward);
 		
 		JButton btnBackward = new JButton("Backward");
-		btnBackward.setBounds(270, 486, 89, 23);
+		btnBackward.setBounds(262, 505, 89, 23);
 		panel_20.add(btnBackward);
 		
-	
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(30, 158, 672, 336);
+		panel_20.add(scrollPane);
+///////////////////////////////////////////////////////////////////		/////////////////
+/*
+		for(int i = 0; i < number_of_years; i++)
+		{
+			JScrollPane scrollPane = new JScrollPane();	//create jscroll for each year
+			scrollPane.setBounds(32, 158, 671, 317);
+			scrollpanelVec.add(i, scrollPane);			//add to the vector in order to access easily 
+		}
 		
+	
+*/		
+	//	panel_20.add(scrollpanelVec.elementAt(0));	//add the year jscroll to the result panel
+		
+	
+////////////////////////////////////////////////////////////////////////////////////////		
 		JLabel lblSemester = new JLabel("Semester");
 		lblSemester.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSemester.setBounds(470, 158, 89, 23);
+		lblSemester.setBounds(456, 391, 89, 23);
 		panel_24.add(lblSemester);
 		
 		JPanel panel_25 = new JPanel();
@@ -663,7 +681,11 @@ public class MyFrame1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+<<<<<<< HEAD
 		button_2.setBounds(585, 239, 89, 23);
+=======
+		button_2.setBounds(307, 493, 89, 23);
+>>>>>>> hoanh_gui
 		panel_24.add(button_2);
 		
 		JButton button_4 = new JButton("Back");
@@ -675,7 +697,11 @@ public class MyFrame1 extends JFrame {
 					panel.revalidate();								
 			}
 		});
+<<<<<<< HEAD
 		button_4.setBounds(470, 493, 89, 23);
+=======
+		button_4.setBounds(63, 493, 89, 23);
+>>>>>>> hoanh_gui
 		panel_24.add(button_4);
 		
 		JButton button_5 = new JButton("Here Your Plan");
@@ -688,45 +714,69 @@ public class MyFrame1 extends JFrame {
 				
 			}
 		});
+<<<<<<< HEAD
 		button_5.setBounds(172, 493, 147, 23);
+=======
+		button_5.setBounds(527, 493, 147, 23);
+>>>>>>> hoanh_gui
 		panel_24.add(button_5);
 		
 		JLabel lblYear = new JLabel("Year");
 		lblYear.setHorizontalAlignment(SwingConstants.CENTER);
-		lblYear.setBounds(585, 158, 89, 23);
+		lblYear.setBounds(585, 391, 89, 23);
 		panel_24.add(lblYear);
 		
 		JComboBox comboBoxNewCourses = new JComboBox();				
+<<<<<<< HEAD
 		comboBoxNewCourses.setBounds(63, 209, 373, 20);
+=======
+		comboBoxNewCourses.setBounds(63, 425, 373, 20);
+>>>>>>> hoanh_gui
 		panel_24.add(comboBoxNewCourses);
 		
 
 		String[] listSemesters = {"","Spring","Summer","Fall","Winter"};
 		JComboBox comboBoxSemester = new JComboBox(listSemesters);		
+<<<<<<< HEAD
 		comboBoxSemester.setBounds(470, 209, 89, 20);
+=======
+		comboBoxSemester.setBounds(456, 425, 89, 20);
+>>>>>>> hoanh_gui
 		//JComboBoxDecorator.decorate(comboBoxSemester, true); 
 		panel_24.add(comboBoxSemester);		
 		
 		String[] listYears = {"","2020","2021","2022","2023","2024"};
 		JComboBox comboBoxYear = new JComboBox(listYears);		
+<<<<<<< HEAD
 		comboBoxYear.setBounds(584, 209, 90, 20);
+=======
+		comboBoxYear.setBounds(585, 425, 90, 20);
+>>>>>>> hoanh_gui
 		//JComboBoxDecorator.decorate(comboBoxYear, true); 
 		panel_24.add(comboBoxYear);			
 		
 	
 		JLabel lblPrerequisiteCourses = new JLabel("This course has no prerequisites!");
 		//lblPrerequisiteCourses.setHorizontalAlignment(SwingConstants.CENTER);
+<<<<<<< HEAD
 		lblPrerequisiteCourses.setBounds(63, 240, 373, 20);
+=======
+		lblPrerequisiteCourses.setBounds(63, 456, 373, 20);
+>>>>>>> hoanh_gui
 		panel_24.add(lblPrerequisiteCourses);		
 		
 		
 		JLabel lblClassesThatYou = new JLabel("Classes that you want to take");
 		lblClassesThatYou.setHorizontalAlignment(SwingConstants.CENTER);
-		lblClassesThatYou.setBounds(63, 162, 373, 23);
+		lblClassesThatYou.setBounds(63, 391, 373, 23);
 		panel_24.add(lblClassesThatYou);
 		
 		JScrollPane scrollPanelNewCourses = new JScrollPane();
+<<<<<<< HEAD
 		scrollPanelNewCourses.setBounds(63, 273, 611, 216);
+=======
+		scrollPanelNewCourses.setBounds(63, 157, 611, 223);
+>>>>>>> hoanh_gui
 		panel_24.add(scrollPanelNewCourses);
 		
 		table = new JTable();
