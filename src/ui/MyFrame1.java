@@ -9,6 +9,9 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
@@ -40,6 +43,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.event.MouseWheelEvent;
 import java.awt.GridLayout;
 import javax.swing.JList;
@@ -70,8 +75,28 @@ public class MyFrame1 extends JFrame {
     /////////////////////////////////====================================================================For the Display class plan===========
     int number_of_years = 3;			// this should be store the number of years 
     private Vector<JScrollPane>scrollpanelVec = new Vector<JScrollPane>();		//this vector size == number of years , each element will display all planing classes for each year	
+<<<<<<< HEAD
 >>>>>>> hoanh_gui
 	/**
+=======
+
+    //============================Images============================
+    private BufferedImage topCover;     
+    private ImageIcon backward_icon = new ImageIcon("images/leftbutton.png");
+    private ImageIcon forward_icon = new ImageIcon("images/rightbutton.png");
+    
+    private JTextField textField;
+    private JTextField textField_1;
+    private JTextField textField_2;
+    private JTextField textField_3;
+    private JTextField textField_4;
+    private JPasswordField passwordField;
+    private JPasswordField passwordField_1;
+    private JTextField txtThisWillDisplay;
+    
+    
+    /**
+>>>>>>> hoanh_gui
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -95,7 +120,13 @@ public class MyFrame1 extends JFrame {
 	public MyFrame1() {
 		setTitle("Student Tool App");
 				
-		
+		 //==================set images for covers ===========
+        try{
+        	topCover = ImageIO.read(new File("images/p1cover.jpg"));
+
+        }catch(Exception e)
+        {}
+        
 		// create the DAO
 		try {
 			userDAO = new UserDAO();
@@ -116,18 +147,6 @@ public class MyFrame1 extends JFrame {
 		panel.add(panel_1, "name_24492968287013");
 		panel_1.setLayout(null);
 		
-		JButton btnGoToLogin = new JButton("Login");
-		btnGoToLogin.setBackground(new Color(0, 204, 0));
-		btnGoToLogin.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnGoToLogin.setBounds(195, 275, 135, 43);
-		panel_1.add(btnGoToLogin);
-		
-		JButton btnGoToRegister = new JButton("Register");
-		btnGoToRegister.setBackground(new Color(0, 204, 0));
-		btnGoToRegister.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnGoToRegister.setBounds(401, 275, 135, 43);
-		panel_1.add(btnGoToRegister);
-		
 		JPanel panel_7 = new JPanel();
 		panel_7.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_7.setBackground(new Color(255, 204, 0));
@@ -141,55 +160,81 @@ public class MyFrame1 extends JFrame {
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_7.add(lblNewLabel_3, BorderLayout.CENTER);
 		
-		JLabel lblNewLabel_5 = new JLabel("\u00A9 powered by Pretty People");
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_5.setBounds(561, 514, 163, 14);
-		panel_1.add(lblNewLabel_5);
+		JButton btnGoToRegister = new JButton("Register");
+		btnGoToRegister.setBounds(394, 295, 190, 57);
+		panel_1.add(btnGoToRegister);
+		btnGoToRegister.setBackground(new Color(0, 204, 0));
+		btnGoToRegister.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel_2.setBackground(Color.WHITE);
-		panel.add(panel_2, "name_24495828510910");
-		panel_2.setLayout(null);
+		
+		JButton btnGoToLogin = new JButton("Login");
+		btnGoToLogin.setBounds(147, 294, 190, 57);
+		panel_1.add(btnGoToLogin);
+		btnGoToLogin.setBackground(new Color(0, 204, 0));
+		btnGoToLogin.setFont(new Font("Tahoma", Font.BOLD, 20));
+		
+	
+	
+		JLabel lblNewLabel_5 = new JLabel("\u00A9 powered by Pretty People");
+		lblNewLabel_5.setBounds(523, 519, 201, 20);
+		panel_1.add(lblNewLabel_5);
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		JLabel lblNewLabel_7 = new JLabel(new ImageIcon(topCover));
+		lblNewLabel_7.setBounds(10, 160, 714, 368);
+		panel_1.add(lblNewLabel_7);
+	
+		
+		JPanel login_jpanel = new JPanel();
+		login_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		login_jpanel.setBackground(Color.WHITE);
+		panel.add(login_jpanel, "name_24495828510910");
+		login_jpanel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Username:");
 		lblNewLabel.setBackground(new Color(0, 0, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel.setBounds(143, 222, 82, 25);
-		panel_2.add(lblNewLabel);
+		login_jpanel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Password:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel_1.setBounds(143, 267, 82, 25);
-		panel_2.add(lblNewLabel_1);
+		login_jpanel.add(lblNewLabel_1);
 		
 		usernameTextField = new JTextField();
 		usernameTextField.setBounds(263, 222, 261, 20);
-		panel_2.add(usernameTextField);
+		login_jpanel.add(usernameTextField);
 		usernameTextField.setColumns(10);
 		
 		passwordTextField = new JPasswordField();
 		passwordTextField.setBounds(263, 270, 261, 20);
-		panel_2.add(passwordTextField);
+		login_jpanel.add(passwordTextField);
 		passwordTextField.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnLogin.setBackground(new Color(0, 204, 0));
 		btnLogin.setBounds(237, 318, 89, 23);
-		panel_2.add(btnLogin);
+		login_jpanel.add(btnLogin);
 		
 		JButton btnForgotPassword = new JButton("Forgot password?");
+		btnForgotPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
 		btnForgotPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnForgotPassword.setBackground(new Color(0, 204, 0));
 		btnForgotPassword.setBounds(363, 318, 161, 23);
-		panel_2.add(btnForgotPassword);
+		login_jpanel.add(btnForgotPassword);
 		
 		JPanel login_panel = new JPanel();
 		login_panel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		login_panel.setBackground(new Color(255, 204, 0));
 		login_panel.setBounds(0, 0, 734, 146);
-		panel_2.add(login_panel);
+		login_jpanel.add(login_panel);
 		login_panel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_4 = new JLabel("Login");
@@ -198,93 +243,188 @@ public class MyFrame1 extends JFrame {
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		login_panel.add(lblNewLabel_4, BorderLayout.CENTER);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel.add(panel_3, "name_25078018479884");
-		panel_3.setLayout(null);
+		JPanel reset_password_jpanel = new JPanel();
+		panel.add(reset_password_jpanel, "name_3377635213700");
+		reset_password_jpanel.setLayout(null);
+		reset_password_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		
+		JLabel label_1 = new JLabel("First Name:");
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_1.setBounds(152, 173, 80, 26);
+		reset_password_jpanel.add(label_1);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(273, 176, 278, 20);
+		reset_password_jpanel.add(textField);
+		
+		JLabel label_2 = new JLabel("Last Name:");
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_2.setBounds(152, 204, 64, 26);
+		reset_password_jpanel.add(label_2);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(273, 207, 278, 20);
+		reset_password_jpanel.add(textField_1);
+		
+		JLabel label_3 = new JLabel("Major:");
+		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_3.setBounds(152, 235, 64, 26);
+		reset_password_jpanel.add(label_3);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(273, 238, 278, 20);
+		reset_password_jpanel.add(textField_2);
+		
+		JLabel label_4 = new JLabel("Email");
+		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_4.setBounds(152, 266, 64, 26);
+		reset_password_jpanel.add(label_4);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(273, 269, 278, 20);
+		reset_password_jpanel.add(textField_3);
+		
+		JLabel label_5 = new JLabel("Username:");
+		label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_5.setBounds(152, 299, 64, 26);
+		reset_password_jpanel.add(label_5);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(273, 302, 278, 20);
+		reset_password_jpanel.add(textField_4);
+		
+		JLabel label_6 = new JLabel("Password:");
+		label_6.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_6.setBounds(152, 330, 64, 26);
+		reset_password_jpanel.add(label_6);
+		
+		passwordField = new JPasswordField();
+		passwordField.setColumns(10);
+		passwordField.setBounds(273, 333, 278, 20);
+		reset_password_jpanel.add(passwordField);
+		
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setColumns(10);
+		passwordField_1.setBounds(273, 364, 278, 20);
+		reset_password_jpanel.add(passwordField_1);
+		
+		JLabel label_7 = new JLabel("Confirm Password:");
+		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_7.setBounds(152, 361, 111, 26);
+		reset_password_jpanel.add(label_7);
+		
+		JButton btnReset = new JButton("Reset");
+		btnReset.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnReset.setBackground(new Color(0, 204, 0));
+		btnReset.setBounds(462, 395, 89, 23);
+		reset_password_jpanel.add(btnReset);
+		
+		JPanel panel_26 = new JPanel();
+		panel_26.setForeground(Color.WHITE);
+		panel_26.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel_26.setBackground(new Color(255, 204, 0));
+		panel_26.setBounds(0, 0, 734, 151);
+		reset_password_jpanel.add(panel_26);
+		panel_26.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblResetPassword = new JLabel("Reset Password");
+		lblResetPassword.setForeground(new Color(204, 0, 0));
+		lblResetPassword.setFont(new Font("Vivaldi", Font.BOLD, 52));
+		lblResetPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_26.add(lblResetPassword, BorderLayout.CENTER);
+		
+		JPanel register_jpanel = new JPanel();
+		register_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel.add(register_jpanel, "name_25078018479884");
+		register_jpanel.setLayout(null);
 		
 		JLabel lblNewLabel_2 = new JLabel("First Name:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_2.setBounds(152, 173, 80, 26);
-		panel_3.add(lblNewLabel_2);
+		register_jpanel.add(lblNewLabel_2);
 		
 		txtFirstNameReg = new JTextField();
 		txtFirstNameReg.setBounds(273, 176, 278, 20);
-		panel_3.add(txtFirstNameReg);
+		register_jpanel.add(txtFirstNameReg);
 		txtFirstNameReg.setColumns(10);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
 		lblLastName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblLastName.setBounds(152, 204, 64, 26);
-		panel_3.add(lblLastName);
+		register_jpanel.add(lblLastName);
 		
 		txtLastNameReg = new JTextField();
 		txtLastNameReg.setColumns(10);
 		txtLastNameReg.setBounds(273, 207, 278, 20);
-		panel_3.add(txtLastNameReg);
+		register_jpanel.add(txtLastNameReg);
 		
 		JLabel lblMajor = new JLabel("Major:");
 		lblMajor.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMajor.setBounds(152, 235, 64, 26);
-		panel_3.add(lblMajor);
+		register_jpanel.add(lblMajor);
 		
 		txtMajorReg = new JTextField();
 		txtMajorReg.setColumns(10);
 		txtMajorReg.setBounds(273, 238, 278, 20);
-		panel_3.add(txtMajorReg);
+		register_jpanel.add(txtMajorReg);
 //////////////////		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblEmail.setBounds(152, 266, 64, 26);
-		panel_3.add(lblEmail);
+		register_jpanel.add(lblEmail);
 		
 		txtEmailReg = new JTextField();
 		txtEmailReg.setColumns(10);
 		txtEmailReg.setBounds(273, 269, 278, 20);
-		panel_3.add(txtEmailReg);
+		register_jpanel.add(txtEmailReg);
 ////////		
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblUsername.setBounds(152, 299, 64, 26);
-		panel_3.add(lblUsername);
+		register_jpanel.add(lblUsername);
 		
 		txtUsernameReg = new JTextField();
 		txtUsernameReg.setColumns(10);
 		txtUsernameReg.setBounds(273, 302, 278, 20);
-		panel_3.add(txtUsernameReg);
+		register_jpanel.add(txtUsernameReg);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblPassword.setBounds(152, 330, 64, 26);
-		panel_3.add(lblPassword);
+		register_jpanel.add(lblPassword);
 		
 		txtPasswordReg = new JPasswordField();
 		txtPasswordReg.setColumns(10);
 		txtPasswordReg.setBounds(273, 333, 278, 20);
-		panel_3.add(txtPasswordReg);
+		register_jpanel.add(txtPasswordReg);
 		
 		txtConfirmPasswordReg = new JPasswordField();
 		txtConfirmPasswordReg.setColumns(10);
 		txtConfirmPasswordReg.setBounds(273, 364, 278, 20);
-		panel_3.add(txtConfirmPasswordReg);
+		register_jpanel.add(txtConfirmPasswordReg);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password:");
 		lblConfirmPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblConfirmPassword.setBounds(152, 361, 111, 26);
-		panel_3.add(lblConfirmPassword);
+		register_jpanel.add(lblConfirmPassword);
 		
 		JButton btnRegister = new JButton("Register");
 		btnRegister.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnRegister.setBackground(new Color(0, 204, 0));
 		btnRegister.setBounds(462, 395, 89, 23);
-		panel_3.add(btnRegister);
+		register_jpanel.add(btnRegister);
 		
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_8.setBackground(new Color(255, 204, 0));
 		panel_8.setForeground(Color.WHITE);
 		panel_8.setBounds(0, 0, 734, 151);
-		panel_3.add(panel_8);
+		register_jpanel.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblRegister = new JLabel("Register");
@@ -294,16 +434,16 @@ public class MyFrame1 extends JFrame {
 		panel_8.add(lblRegister, BorderLayout.CENTER);
 	
 		//panel 4 properties
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel.add(panel_4, "name_26037072067628");
-		panel_4.setLayout(null);
+		JPanel main_jpanel = new JPanel();
+		main_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel.add(main_jpanel, "name_26037072067628");
+		main_jpanel.setLayout(null);
 		
 		JPanel panel_9 = new JPanel();
 		panel_9.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_9.setBackground(new Color(255, 204, 0));
 		panel_9.setBounds(0, 0, 734, 131);
-		panel_4.add(panel_9);
+		main_jpanel.add(panel_9);
 		panel_9.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblWelcome = new JLabel("Welcome, name of the user");
@@ -316,7 +456,7 @@ public class MyFrame1 extends JFrame {
 		panel_10.setToolTipText("Input all the classes that you have taken. ");
 		panel_10.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_10.setBounds(126, 160, 484, 37);
-		panel_4.add(panel_10);
+		main_jpanel.add(panel_10);
 		panel_10.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblClassPlanner = new JLabel(" \u2666 Input Your Classes");
@@ -331,7 +471,7 @@ public class MyFrame1 extends JFrame {
 		JPanel panel_11 = new JPanel();
 		panel_11.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_11.setBounds(126, 217, 484, 37);
-		panel_4.add(panel_11);
+		main_jpanel.add(panel_11);
 		panel_11.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblGpaCalculator = new JLabel(" \u2666 GPA Calculator");
@@ -348,7 +488,7 @@ public class MyFrame1 extends JFrame {
 		JPanel panel_12 = new JPanel();
 		panel_12.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_12.setBounds(126, 274, 484, 37);
-		panel_4.add(panel_12);
+		main_jpanel.add(panel_12);
 		panel_12.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblGraduationDate = new JLabel(" \u2666 Graduation Date");
@@ -356,13 +496,14 @@ public class MyFrame1 extends JFrame {
 		panel_12.add(lblGraduationDate, BorderLayout.WEST);
 		
 		JButton btnGo_2 = new JButton("Go");
+		
 		btnGo_2.setFont(new Font("Tahoma", Font.BOLD, 20));
 		panel_12.add(btnGo_2, BorderLayout.EAST);
 		
 		JPanel panel_13 = new JPanel();
 		panel_13.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_13.setBounds(126, 331, 484, 37);
-		panel_4.add(panel_13);
+		main_jpanel.add(panel_13);
 		panel_13.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblTotalUnits = new JLabel(" \u2666 Total Units");
@@ -376,7 +517,7 @@ public class MyFrame1 extends JFrame {
 		JPanel panel_14 = new JPanel();
 		panel_14.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_14.setBounds(126, 456, 484, 60);
-		panel_4.add(panel_14);
+		main_jpanel.add(panel_14);
 		panel_14.setLayout(new BorderLayout(0, 0));
 		
 		JTextPane txtpnKeepUpWith = new JTextPane();
@@ -388,7 +529,7 @@ public class MyFrame1 extends JFrame {
 		panel_23.setToolTipText("Make plan for your upcoming semesters");
 		panel_23.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(51, 102, 0), null));
 		panel_23.setBounds(126, 391, 484, 37);
-		panel_4.add(panel_23);
+		main_jpanel.add(panel_23);
 		panel_23.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblGraduationDate_1 = new JLabel(" \u2666 Class Planner");
@@ -400,17 +541,17 @@ public class MyFrame1 extends JFrame {
 		btnGo_4.setFont(new Font("Tahoma", Font.BOLD, 20));
 		panel_23.add(btnGo_4, BorderLayout.EAST);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel_5.setForeground(new Color(204, 0, 0));
-		panel.add(panel_5, "name_615154751431400");
-		panel_5.setLayout(null);
+		JPanel gpa_jpanel = new JPanel();
+		gpa_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		gpa_jpanel.setForeground(new Color(204, 0, 0));
+		panel.add(gpa_jpanel, "name_615154751431400");
+		gpa_jpanel.setLayout(null);
 		
 		JPanel panel_15 = new JPanel();
 		panel_15.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_15.setBackground(new Color(255, 204, 0));
 		panel_15.setBounds(0, 0, 734, 133);
-		panel_5.add(panel_15);
+		gpa_jpanel.add(panel_15);
 		panel_15.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblGpaCalculator_1 = new JLabel("GPA Calculator");
@@ -423,7 +564,7 @@ public class MyFrame1 extends JFrame {
 		panel_16.setBackground(new Color(204, 204, 255));
 		panel_16.setBorder(new LineBorder(new Color(0, 102, 0)));
 		panel_16.setBounds(273, 312, 197, 50);
-		panel_5.add(panel_16);
+		gpa_jpanel.add(panel_16);
 		panel_16.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblYourGpa = new JLabel("   Your GPA:");
@@ -441,60 +582,72 @@ public class MyFrame1 extends JFrame {
 				if(source == btnBack)
 				{
 					panel.removeAll();
-					panel.add(panel_4);
+					panel.add(main_jpanel);
 					panel.repaint();
 					panel.revalidate();
 				}
 			}
 		});
-		
+		btnForgotPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object source = e.getSource();
+				if(source == btnForgotPassword)
+				{
+					panel.removeAll();
+					panel.add(reset_password_jpanel);
+					panel.repaint();
+					panel.revalidate();
+				}
+				
+			}
+		});
 		btnBack.setBorder(new LineBorder(new Color(0, 102, 0)));
 		btnBack.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnBack.setBounds(273, 414, 197, 50);
-		panel_5.add(btnBack);
+		gpa_jpanel.add(btnBack);
 		
 		JButton btnCalculate = new JButton("Calculate");
 		btnCalculate.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnCalculate.setBorder(new LineBorder(new Color(0, 102, 0)));
 		btnCalculate.setBounds(273, 203, 197, 50);
-		panel_5.add(btnCalculate);
+		gpa_jpanel.add(btnCalculate);
 		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel.add(panel_6, "name_615163967191000");
-		panel_6.setLayout(null);
+		JPanel input_class_jpanel = new JPanel();
+		input_class_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel.add(input_class_jpanel, "name_615163967191000");
+		input_class_jpanel.setLayout(null);
 		
 		JComboBox comboBoxCourses = new JComboBox();				
 		comboBoxCourses.setBounds(66, 298, 400, 20);
-		panel_6.add(comboBoxCourses);
+		input_class_jpanel.add(comboBoxCourses);
 		
 		JLabel lblCourseWarning = new JLabel("Choose the classes which you have taken");
 		lblCourseWarning.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCourseWarning.setBounds(66, 258, 398, 14);
-		panel_6.add(lblCourseWarning);		
+		input_class_jpanel.add(lblCourseWarning);		
 		
 		JButton btnCourseAdd = new JButton("Add");
 		btnCourseAdd.setToolTipText("Add your taken classes to database");
 		btnCourseAdd.setBounds(596, 297, 89, 23);
-		panel_6.add(btnCourseAdd);
+		input_class_jpanel.add(btnCourseAdd);
 		
 		JLabel lblCourseAdd = new JLabel("Grade");
 		lblCourseAdd.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCourseAdd.setBounds(502, 258, 62, 14);
-		panel_6.add(lblCourseAdd);
+		input_class_jpanel.add(lblCourseAdd);
 		
 		String[] listGrades = {"","A+","A","A-","B+","B","B-","C+","C","C-","D","F"};
 		JComboBox comboBoxGrade = new JComboBox(listGrades);
 		comboBoxGrade.setToolTipText("Input the grade that you got for the selected class");
 		comboBoxGrade.setBounds(502, 298, 62, 20);
 		//JComboBoxDecorator.decorate(comboBoxGrade, true); 
-		panel_6.add(comboBoxGrade);
+		input_class_jpanel.add(comboBoxGrade);
 		
 		JPanel panel_18 = new JPanel();
 		panel_18.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_18.setBackground(new Color(255, 204, 0));
 		panel_18.setBounds(0, 0, 734, 135);
-		panel_6.add(panel_18);
+		input_class_jpanel.add(panel_18);
 		panel_18.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblClassPlanner_1 = new JLabel("Input Your Classes");
@@ -506,30 +659,30 @@ public class MyFrame1 extends JFrame {
 		JLabel lblAddClass = new JLabel("Add Class");
 		lblAddClass.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAddClass.setBounds(596, 258, 89, 14);
-		panel_6.add(lblAddClass);
+		input_class_jpanel.add(lblAddClass);
 		//==========================================================================Here Plan			
 		JButton btnBack_2 = new JButton("Back");
 		btnBack_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					panel.removeAll();
-					panel.add(panel_4);
+					panel.add(main_jpanel);
 					panel.repaint();
 					panel.revalidate();					
 			}
 		});
 		btnBack_2.setBounds(596, 382, 89, 23);
-		panel_6.add(btnBack_2);
+		input_class_jpanel.add(btnBack_2);
 		
-		JPanel panel_17 = new JPanel();
-		panel_17.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel.add(panel_17, "name_1830898570700");
-		panel_17.setLayout(null);
+		JPanel total_units_jpanel = new JPanel();
+		total_units_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel.add(total_units_jpanel, "name_1830898570700");
+		total_units_jpanel.setLayout(null);
 		
 		JPanel panel_19 = new JPanel();
 		panel_19.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_19.setBackground(new Color(255, 204, 0));
 		panel_19.setBounds(0, 0, 734, 135);
-		panel_17.add(panel_19);
+		total_units_jpanel.add(panel_19);
 		panel_19.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_6 = new JLabel("Total Units");
@@ -538,16 +691,16 @@ public class MyFrame1 extends JFrame {
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_19.add(lblNewLabel_6, BorderLayout.CENTER);
 		
-		JPanel panel_24 = new JPanel();
-		panel_24.setLayout(null);
-		panel_24.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel.add(panel_24, "name_274757212246000");
+		JPanel class_planner_jpanel = new JPanel();
+		class_planner_jpanel.setLayout(null);
+		class_planner_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel.add(class_planner_jpanel, "name_274757212246000");
 		
 		txtThisTabBy = new JTextField();
 		txtThisTabBy.setHorizontalAlignment(SwingConstants.CENTER);
 		txtThisTabBy.setText("This tab, by clicking the button it will tell you how any unit that you have taken");
 		txtThisTabBy.setBounds(59, 171, 607, 192);
-		panel_17.add(txtThisTabBy);
+		total_units_jpanel.add(txtThisTabBy);
 		txtThisTabBy.setColumns(10);
 		
 		btnGo_3.addActionListener(new ActionListener() {
@@ -556,7 +709,7 @@ public class MyFrame1 extends JFrame {
 				if(source == btnGo_3)
 				{
 					panel.removeAll();
-					panel.add(panel_17);
+					panel.add(total_units_jpanel);
 					panel.repaint();
 					panel.revalidate();
 				}
@@ -584,31 +737,70 @@ public class MyFrame1 extends JFrame {
 			}
 		});
 		btnGetTotalUnits.setBounds(164, 387, 124, 23);
-		panel_17.add(btnGetTotalUnits);
+		total_units_jpanel.add(btnGetTotalUnits);
 		
 		JButton btnBack_1 = new JButton("Back");
 		btnBack_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					panel.removeAll();
-					panel.add(panel_4);
+					panel.add(main_jpanel);
 					panel.repaint();
 					panel.revalidate();				
 			}
 		});
-
-		btnBack_1.setBounds(498, 387, 89, 23);
-		panel_17.add(btnBack_1);
+		btnGoToLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				panel.removeAll();
+				panel.add(login_jpanel);
+				panel.repaint();
+				panel.revalidate();
+				
+			}
+		});	
 		
-		JPanel panel_20 = new JPanel();
-		panel_20.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-		panel.add(panel_20, "name_3158997082800");
-		panel_20.setLayout(null);
+		btnBack_1.setBounds(498, 387, 89, 23);
+		total_units_jpanel.add(btnBack_1);
+		
+		JPanel graduation_date_jpanel = new JPanel();
+		graduation_date_jpanel.setLayout(null);
+		graduation_date_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel.add(graduation_date_jpanel, "name_3874032161200");
+		
+		JPanel panel_28 = new JPanel();
+		panel_28.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel_28.setBackground(new Color(255, 204, 0));
+		panel_28.setBounds(0, 0, 734, 135);
+		graduation_date_jpanel.add(panel_28);
+		panel_28.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel_8 = new JLabel("Graduation Date");
+		lblNewLabel_8.setForeground(new Color(204, 0, 0));
+		lblNewLabel_8.setFont(new Font("Vivaldi", Font.BOLD, 52));
+		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_28.add(lblNewLabel_8, BorderLayout.CENTER);
+		
+		txtThisWillDisplay = new JTextField();
+		txtThisWillDisplay.setText("THis will display the graduation date");
+		txtThisWillDisplay.setHorizontalAlignment(SwingConstants.CENTER);
+		txtThisWillDisplay.setColumns(10);
+		txtThisWillDisplay.setBounds(59, 171, 607, 192);
+		graduation_date_jpanel.add(txtThisWillDisplay);
+		
+		JButton button_1 = new JButton("Back");
+		
+		button_1.setBounds(321, 394, 89, 23);
+		graduation_date_jpanel.add(button_1);
+		
+		JPanel result_plan_jpanel = new JPanel();
+		result_plan_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
+		panel.add(result_plan_jpanel, "name_3158997082800");
+		result_plan_jpanel.setLayout(null);
 		
 		JPanel panel_21 = new JPanel();
 		panel_21.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_21.setBackground(new Color(255, 204, 0));
 		panel_21.setBounds(0, 0, 734, 135);
-		panel_20.add(panel_21);
+		result_plan_jpanel.add(panel_21);
 		panel_21.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblYourPlan = new JLabel("Your Plan");
@@ -621,25 +813,33 @@ public class MyFrame1 extends JFrame {
 		btnBack_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					panel.removeAll();
-					panel.add(panel_4);
+					panel.add(main_jpanel);
 					panel.repaint();
 					panel.revalidate();			
 			}
 		});
-		btnBack_3.setBounds(595, 505, 89, 23);
-		panel_20.add(btnBack_3);
+		btnBack_3.setBounds(595, 499, 89, 29);
+		result_plan_jpanel.add(btnBack_3);
 		
-		JButton btnForward = new JButton("Forward");
-		btnForward.setBounds(366, 505, 89, 23);
-		panel_20.add(btnForward);
+		JButton btnForward = new JButton("");
+		btnForward.setToolTipText("View the next year plan");
+		btnForward.setIcon(forward_icon);
+		btnForward.setBounds(366, 499, 89, 29);
+		result_plan_jpanel.add(btnForward);
 		
-		JButton btnBackward = new JButton("Backward");
-		btnBackward.setBounds(262, 505, 89, 23);
-		panel_20.add(btnBackward);
+		JButton btnBackward = new JButton("");
+		btnBackward.setToolTipText("View the previous year plan");
+		btnBackward.setIcon(backward_icon);
+		btnBackward.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBackward.setBounds(263, 499, 89, 29);
+		result_plan_jpanel.add(btnBackward);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(30, 158, 672, 336);
-		panel_20.add(scrollPane);
+		result_plan_jpanel.add(scrollPane);
 ///////////////////////////////////////////////////////////////////		/////////////////
 /*
 		for(int i = 0; i < number_of_years; i++)
@@ -658,13 +858,13 @@ public class MyFrame1 extends JFrame {
 		JLabel lblSemester = new JLabel("Semester");
 		lblSemester.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSemester.setBounds(456, 391, 89, 23);
-		panel_24.add(lblSemester);
+		class_planner_jpanel.add(lblSemester);
 		
 		JPanel panel_25 = new JPanel();
 		panel_25.setBorder(new LineBorder(new Color(0, 102, 0), 2));
 		panel_25.setBackground(new Color(255, 204, 0));
 		panel_25.setBounds(0, 0, 734, 135);
-		panel_24.add(panel_25);
+		class_planner_jpanel.add(panel_25);
 		panel_25.setLayout(new BorderLayout(0, 0));
 		
 				
@@ -685,14 +885,18 @@ public class MyFrame1 extends JFrame {
 		button_2.setBounds(585, 239, 89, 23);
 =======
 		button_2.setBounds(307, 493, 89, 23);
+<<<<<<< HEAD
 >>>>>>> hoanh_gui
 		panel_24.add(button_2);
+=======
+		class_planner_jpanel.add(button_2);
+>>>>>>> hoanh_gui
 		
 		JButton button_4 = new JButton("Back");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {								
 					panel.removeAll();
-					panel.add(panel_4);
+					panel.add(main_jpanel);
 					panel.repaint();
 					panel.revalidate();								
 			}
@@ -701,14 +905,18 @@ public class MyFrame1 extends JFrame {
 		button_4.setBounds(470, 493, 89, 23);
 =======
 		button_4.setBounds(63, 493, 89, 23);
+<<<<<<< HEAD
 >>>>>>> hoanh_gui
 		panel_24.add(button_4);
+=======
+		class_planner_jpanel.add(button_4);
+>>>>>>> hoanh_gui
 		
 		JButton button_5 = new JButton("Here Your Plan");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
-				panel.add(panel_20);
+				panel.add(result_plan_jpanel);
 				panel.repaint();
 				panel.revalidate();	
 				
@@ -718,21 +926,29 @@ public class MyFrame1 extends JFrame {
 		button_5.setBounds(172, 493, 147, 23);
 =======
 		button_5.setBounds(527, 493, 147, 23);
+<<<<<<< HEAD
 >>>>>>> hoanh_gui
 		panel_24.add(button_5);
+=======
+		class_planner_jpanel.add(button_5);
+>>>>>>> hoanh_gui
 		
 		JLabel lblYear = new JLabel("Year");
 		lblYear.setHorizontalAlignment(SwingConstants.CENTER);
 		lblYear.setBounds(585, 391, 89, 23);
-		panel_24.add(lblYear);
+		class_planner_jpanel.add(lblYear);
 		
 		JComboBox comboBoxNewCourses = new JComboBox();				
 <<<<<<< HEAD
 		comboBoxNewCourses.setBounds(63, 209, 373, 20);
 =======
 		comboBoxNewCourses.setBounds(63, 425, 373, 20);
+<<<<<<< HEAD
 >>>>>>> hoanh_gui
 		panel_24.add(comboBoxNewCourses);
+=======
+		class_planner_jpanel.add(comboBoxNewCourses);
+>>>>>>> hoanh_gui
 		
 
 		String[] listSemesters = {"","Spring","Summer","Fall","Winter"};
@@ -743,7 +959,7 @@ public class MyFrame1 extends JFrame {
 		comboBoxSemester.setBounds(456, 425, 89, 20);
 >>>>>>> hoanh_gui
 		//JComboBoxDecorator.decorate(comboBoxSemester, true); 
-		panel_24.add(comboBoxSemester);		
+		class_planner_jpanel.add(comboBoxSemester);		
 		
 		String[] listYears = {"","2020","2021","2022","2023","2024"};
 		JComboBox comboBoxYear = new JComboBox(listYears);		
@@ -753,7 +969,7 @@ public class MyFrame1 extends JFrame {
 		comboBoxYear.setBounds(585, 425, 90, 20);
 >>>>>>> hoanh_gui
 		//JComboBoxDecorator.decorate(comboBoxYear, true); 
-		panel_24.add(comboBoxYear);			
+		class_planner_jpanel.add(comboBoxYear);			
 		
 	
 		JLabel lblPrerequisiteCourses = new JLabel("This course has no prerequisites!");
@@ -762,22 +978,30 @@ public class MyFrame1 extends JFrame {
 		lblPrerequisiteCourses.setBounds(63, 240, 373, 20);
 =======
 		lblPrerequisiteCourses.setBounds(63, 456, 373, 20);
+<<<<<<< HEAD
 >>>>>>> hoanh_gui
 		panel_24.add(lblPrerequisiteCourses);		
+=======
+		class_planner_jpanel.add(lblPrerequisiteCourses);		
+>>>>>>> hoanh_gui
 		
 		
 		JLabel lblClassesThatYou = new JLabel("Classes that you want to take");
 		lblClassesThatYou.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClassesThatYou.setBounds(63, 391, 373, 23);
-		panel_24.add(lblClassesThatYou);
+		class_planner_jpanel.add(lblClassesThatYou);
 		
 		JScrollPane scrollPanelNewCourses = new JScrollPane();
 <<<<<<< HEAD
 		scrollPanelNewCourses.setBounds(63, 273, 611, 216);
 =======
 		scrollPanelNewCourses.setBounds(63, 157, 611, 223);
+<<<<<<< HEAD
 >>>>>>> hoanh_gui
 		panel_24.add(scrollPanelNewCourses);
+=======
+		class_planner_jpanel.add(scrollPanelNewCourses);
+>>>>>>> hoanh_gui
 		
 		table = new JTable();
 		scrollPanelNewCourses.setViewportView(table);
@@ -823,11 +1047,39 @@ public class MyFrame1 extends JFrame {
 				if(source == btnGo_1)
 				{
 					panel.removeAll();
-					panel.add(panel_5);
+					panel.add(gpa_jpanel);
 					panel.repaint();
 					panel.revalidate();
 				}
 				
+			}
+		});
+		btnGo_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object source = e.getSource();
+				if(source == btnGo_2)
+				{
+					panel.removeAll();
+					panel.add(graduation_date_jpanel);
+					panel.repaint();
+					panel.revalidate();
+				}
+			}
+		});
+		btnGoToRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				panel.add(register_jpanel);
+				panel.repaint();
+				panel.revalidate();				
+			}
+		});	
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				panel.add(main_jpanel);
+				panel.repaint();
+				panel.revalidate();	
 			}
 		});
 		btnCalculate.addActionListener(new ActionListener() {
@@ -884,7 +1136,7 @@ public class MyFrame1 extends JFrame {
 				if(source == btnGo_4)
 				{
 					panel.removeAll();
-					panel.add(panel_24);
+					panel.add(class_planner_jpanel);
 					
 					// create the DAO
 					try {
@@ -999,7 +1251,7 @@ public class MyFrame1 extends JFrame {
 		btnGo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				panel.removeAll();
-				panel.add(panel_6);
+				panel.add(input_class_jpanel);
 //abc1							
 				//CourseDAO aCourseDAO = null;
 				// create the DAO
@@ -1109,25 +1361,6 @@ public class MyFrame1 extends JFrame {
 				
 			}
 		});		
-		
-	
-	btnGoToLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				panel.removeAll();
-				panel.add(panel_2);
-				panel.repaint();
-				panel.revalidate();
-				
-			}
-		});	
-		btnGoToRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel.removeAll();
-				panel.add(panel_3);
-				panel.repaint();
-				panel.revalidate();				
-			}
-		});	
 		btnLogin.addActionListener(new ActionListener() {
 		
 		
@@ -1147,7 +1380,7 @@ public class MyFrame1 extends JFrame {
 						}
 						else {
 							panel.removeAll();
-							panel.add(panel_4);
+							panel.add(main_jpanel);
 							lblWelcome.setText("Welcome " + users.get(0).getFirstName() + "!");
 							userId = users.get(0).getID();
 // ADD YOUR NEW CODE HERE (panel_4)							
