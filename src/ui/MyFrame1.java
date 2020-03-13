@@ -52,6 +52,7 @@ import java.awt.GridLayout;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 
 public class MyFrame1 extends JFrame {	
 	private JTextField usernameTextField;
@@ -91,6 +92,7 @@ public class MyFrame1 extends JFrame {
     private JPasswordField passwordField;
     private JPasswordField passwordField_1;
     private JTextField txtThisWillDisplay;
+    private JTable table;
     
     
     /**
@@ -834,12 +836,53 @@ public class MyFrame1 extends JFrame {
 		btnBackward.setBounds(263, 499, 89, 29);
 		result_plan_jpanel.add(btnBackward);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 158, 672, 336);
-		result_plan_jpanel.add(scrollPane);
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(10, 146, 714, 346);
+		result_plan_jpanel.add(panel_2);
+		panel_2.setLayout(null);
 		
-		JTextArea textAreaShowPlan = new JTextArea();
-		scrollPane.setViewportView(textAreaShowPlan);
+		JLabel lblNewLabel_9 = new JLabel("Year (int)");
+		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_9.setBounds(311, 0, 92, 24);
+		panel_2.add(lblNewLabel_9);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 28, 714, 318);
+		panel_2.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"Spring", "Summer", "Fall", "Winter"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, String.class, String.class, Object.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		table.getColumnModel().getColumn(0).setPreferredWidth(160);
+		table.getColumnModel().getColumn(1).setPreferredWidth(182);
+		table.getColumnModel().getColumn(2).setPreferredWidth(173);
+		table.getColumnModel().getColumn(3).setPreferredWidth(169);
+		scrollPane.setViewportView(table);
+		
+		
+		JTextArea textAreaShowPlan = new JTextArea();						//text from Kiet
+	//	scrollPane.setViewportView(textAreaShowPlan);
 ///////////////////////////////////////////////////////////////////		/////////////////
 /*
 		for(int i = 0; i < number_of_years; i++)
@@ -1060,13 +1103,20 @@ public class MyFrame1 extends JFrame {
 		mntmHome.setHorizontalAlignment(SwingConstants.LEFT);
 		mnSelect.add(mntmHome);
 		
-		//===============actionPerformed=============each panel has 1 Actionperformed=====================
+		//===============actionPerformed=============each panel has 1 Actionperformed===================== result panel........................
 		//abc102
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel.removeAll();
-				panel.add(result_plan_jpanel);
+			
+				//table setting
 				
+				
+			//	DefaultTableModel table_model = (DefaultTableModel)table.getModel();
+		//		table_model.addColumn(columnName, columnData);
+	
+				
+				/*			
 				 JTextArea jTextArea1 = new javax.swing.JTextArea();
 				 jTextArea1.setColumns(4);
 			     jTextArea1.setRows(5);
@@ -1087,9 +1137,10 @@ public class MyFrame1 extends JFrame {
 				jTextArea1.setText(result);
 	
 				
-			    scrollPane.setViewportView(jTextArea1);
+			    scrollPane.setViewportView(jTextArea1);							/////////////////////////////////set textview to Scrollpane........................
 				//scrollPane.add(jTextArea1);
-
+*/
+				panel.add(result_plan_jpanel);
 				panel.repaint();
 				panel.revalidate();	
 				
