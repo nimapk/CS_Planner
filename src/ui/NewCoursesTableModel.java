@@ -3,21 +3,21 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import core.Course;
+import core.UpcomingCourse;
 
 public class NewCoursesTableModel extends AbstractTableModel {
 
 	//private static final int CNO = 0;
-	private static final int CTITLE = 0;
-	private static final int UNITS = 1;
-	private static final int DEPT_NAME = 2;
+	private static final int CCOURSE = 0;
+	private static final int SEMESTER = 1;
+	private static final int YEAR = 2;
 
-	private String[] columnNames = {"TITLE", "SEMESTER",
+	private String[] columnNames = {"COURSE", "SEMESTER",
 			"YEAR" };
-	private List<Course> courses;	//change later
+	private List<UpcomingCourse> upcourses;	//change later
 
-	public NewCoursesTableModel(List<Course> theCourses) {
-		courses = theCourses;
+	public NewCoursesTableModel(List<UpcomingCourse> theCourses) {
+		upcourses = theCourses;
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class NewCoursesTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return courses.size();
+		return upcourses.size();
 	}
 
 	@Override
@@ -38,19 +38,19 @@ public class NewCoursesTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int col) {
 
-		Course tempCourse = courses.get(row);
+		UpcomingCourse tempCourse = upcourses.get(row);
 
 		switch (col) {
 //		case CNO:
 //			return tempCourse.getCno();
-		case CTITLE:
-			return tempCourse.getCtitle();
-		case UNITS:
-			return tempCourse.getUnits();
-		case DEPT_NAME:
-			return tempCourse.getDept_name();
+		case CCOURSE:			
+			return tempCourse.getaCno();
+		case SEMESTER:
+			return tempCourse.getaSemester();
+		case YEAR:
+			return tempCourse.getaYear();
 		default:
-			return tempCourse.getCno();
+			return tempCourse.getaCno();
 		}
 	}
 
@@ -59,3 +59,5 @@ public class NewCoursesTableModel extends AbstractTableModel {
 		return getValueAt(0, c).getClass();
 	}
 }
+
+//abc10 : all of them

@@ -21,6 +21,7 @@ import dao.UserDAO;
 import core.Course;
 import dao.CourseDAO;
 import core.JComboBoxDecorator;
+import core.UpcomingCourse;//abc10
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,6 +41,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
+import javax.swing.table.TableColumnModel;
 import javax.swing.JScrollPane;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseWheelListener;
@@ -49,6 +51,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.GridLayout;
 import javax.swing.JList;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 
 public class MyFrame1 extends JFrame {	
 	private JTextField usernameTextField;
@@ -65,11 +68,12 @@ public class MyFrame1 extends JFrame {
 	private UserDAO userDAO;	
 	private int userId;
 	private CourseDAO aCourseDAO = null;
-	private List<Course> courses = null;		
+	private List<Course> courses = null;
+	private List<UpcomingCourse> upcourses = null;//abc10
 	private JTextField txtThisTabBy;
 
     private Map<String, Course> courses_map = null;
-    private JTable table;
+    private JTable tableNewCourses;
     /////////////////////////////////====================================================================For the Display class plan===========
     int number_of_years = 3;			// this should be store the number of years 
     private Vector<JScrollPane>scrollpanelVec = new Vector<JScrollPane>();		//this vector size == number of years , each element will display all planing classes for each year	
@@ -833,6 +837,9 @@ public class MyFrame1 extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(30, 158, 672, 336);
 		result_plan_jpanel.add(scrollPane);
+		
+		JTextArea textAreaShowPlan = new JTextArea();
+		scrollPane.setViewportView(textAreaShowPlan);
 ///////////////////////////////////////////////////////////////////		/////////////////
 /*
 		for(int i = 0; i < number_of_years; i++)
@@ -868,14 +875,10 @@ public class MyFrame1 extends JFrame {
 		lblClassPlanner_2.setFont(new Font("Vivaldi", Font.BOLD, 52));
 		panel_25.add(lblClassPlanner_2, BorderLayout.CENTER);
 		
-		JButton button_2 = new JButton("Add");
-		button_2.setToolTipText("Add your untaken class to database.");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button_2.setBounds(307, 493, 89, 23);
-		class_planner_jpanel.add(button_2);
+		JButton btnUpCourseAdd = new JButton("Add");
+		btnUpCourseAdd.setToolTipText("Add your untaken class to database.");
+		btnUpCourseAdd.setBounds(307, 493, 89, 23);
+		class_planner_jpanel.add(btnUpCourseAdd);
 		
 		JButton button_4 = new JButton("Back");
 		button_4.addActionListener(new ActionListener() {
@@ -890,15 +893,6 @@ public class MyFrame1 extends JFrame {
 		class_planner_jpanel.add(button_4);
 		
 		JButton button_5 = new JButton("Here Your Plan");
-		button_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panel.removeAll();
-				panel.add(result_plan_jpanel);
-				panel.repaint();
-				panel.revalidate();	
-				
-			}
-		});
 		button_5.setBounds(527, 493, 147, 23);
 		class_planner_jpanel.add(button_5);
 		
@@ -940,8 +934,9 @@ public class MyFrame1 extends JFrame {
 		scrollPanelNewCourses.setBounds(63, 157, 611, 223);
 		class_planner_jpanel.add(scrollPanelNewCourses);
 		
-		table = new JTable();
-		scrollPanelNewCourses.setViewportView(table);
+		//abc2
+		tableNewCourses = new JTable();
+		scrollPanelNewCourses.setViewportView(tableNewCourses);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -1066,6 +1061,135 @@ public class MyFrame1 extends JFrame {
 		mnSelect.add(mntmHome);
 		
 		//===============actionPerformed=============each panel has 1 Actionperformed=====================
+		//abc102
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.removeAll();
+				panel.add(result_plan_jpanel);
+				
+				 JTextArea jTextArea1 = new javax.swing.JTextArea();
+				 jTextArea1.setColumns(4);
+			     jTextArea1.setRows(5);
+				
+				List<String> addedUpcomingCourses = null;		
+				String tSemester = "Spring";
+				int tYear = 2020;
+				String result = "";
+				try
+				{
+					addedUpcomingCourses = aCourseDAO.searchCoursesInSemester(userId, tSemester, tYear);
+                } catch (Exception exc) {
+                    JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+                }				
+				for (String tempString : addedUpcomingCourses) {
+					result += tempString + "\n";					
+				}
+				jTextArea1.setText(result);
+	
+				
+			    scrollPane.setViewportView(jTextArea1);
+				//scrollPane.add(jTextArea1);
+
+				panel.repaint();
+				panel.revalidate();	
+				
+			}
+		});
+		//abc10
+		btnUpCourseAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//abc101
+				String sCurrentItem = comboBoxNewCourses.getSelectedItem().toString();
+				String sSemester = comboBoxSemester.getSelectedItem().toString();
+				String sYear = comboBoxYear.getSelectedItem().toString();
+				
+				///String[] aCnum = sCurrentItem.split(" - ");
+				int currentIndex = comboBoxNewCourses .getSelectedIndex();
+				lblPrerequisiteCourses.setText(""); //do later	
+				if (sCurrentItem == "" || sSemester == "" || sYear == "") {
+					JOptionPane.showMessageDialog(MyFrame1.this,  "Course, Semester, or Year cannot be blank!", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {					
+					try {
+						
+						aCourseDAO.addUpcomingCourseToUser(userId, sCurrentItem, sSemester, Integer.parseInt(sYear)); 			
+						// show success message
+						JOptionPane.showMessageDialog(MyFrame1.this,
+								"Course added succesfully.",
+								"Course Added",
+								JOptionPane.INFORMATION_MESSAGE);
+						
+						//Refresh courses
+//						comboBoxNewCourses.removeAllItems();
+//						List<String> passedCourses = null;
+//						passedCourses = userDAO.searchCoursesUserPassed(userId);					
+//						comboBoxNewCourses.addItem("");
+//						for (Course tempCourse : courses) {
+//							if (passedCourses.contains(tempCourse.getCno())) {
+//								comboBoxNewCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");
+//								
+//							}
+//							else
+//							{
+//								comboBoxNewCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle());
+//							}
+//						}						
+						if (courses == null)	//Don't load any course into the list so far
+							courses = aCourseDAO.getAllCourses();					
+						List<String> passedCourses = null;
+						List<String> addedUpcomingCourses = null;
+						passedCourses = userDAO.searchCoursesUserPassed(userId);
+						addedUpcomingCourses = aCourseDAO.searchCoursesUserAdded(userId);
+						comboBoxNewCourses.removeAllItems();
+						comboBoxNewCourses.addItem("");
+						for (Course tempCourse : courses) {
+							if (passedCourses.contains(tempCourse.getCno())|| addedUpcomingCourses.contains(tempCourse.getCno())) {
+								// dont' do any thing or add with notice "passed"
+								//comboBoxNewCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");								
+							}
+							else
+							{
+								comboBoxNewCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle());
+							}
+						}
+						
+						//RELOAD TABLE
+						try {
+							upcourses = aCourseDAO.getAllUpcomingCourses(userId);
+						} catch (Exception exc) {					
+							JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+						}					
+						NewCoursesTableModel newCoursesModel = new NewCoursesTableModel(upcourses);
+						tableNewCourses.setModel(newCoursesModel);
+						// set columns widths
+						TableColumnModel tcm = tableNewCourses.getColumnModel();
+					      tcm.getColumn(0).setPreferredWidth(400);  
+					      tcm.getColumn(1).setPreferredWidth(30);  
+					      tcm.getColumn(2).setPreferredWidth(30);  
+						
+						//SET DEFAULT comboBoxes						
+						comboBoxNewCourses.setSelectedIndex(0);
+						comboBoxSemester.setSelectedIndex(0);
+						comboBoxYear.setSelectedIndex(0);
+						//JComboBoxDecorator.decorate(comboBoxCourses, true); //update list 
+						
+						
+						
+						//comboBoxCourses.removeItemAt(currentIndex);
+						//comboBoxCourses.insertItemAt(sCurrentItem + " >> (Passed)", currentIndex);
+
+						
+						panel.repaint();
+						panel.revalidate();
+						
+					}
+					catch (Exception exc) {
+						JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}				
+			}
+		});		
+
 		
 		btnGo_4.addActionListener(new ActionListener() {		/////////////////////////////=======================
 			public void actionPerformed(ActionEvent e) {//abc2
@@ -1086,11 +1210,14 @@ public class MyFrame1 extends JFrame {
 						if (courses == null)	//Don't load any course into the list so far
 							courses = aCourseDAO.getAllCourses();					
 						List<String> passedCourses = null;
+						List<String> addedUpcomingCourses = null;	//abc10
+						addedUpcomingCourses = aCourseDAO.searchCoursesUserAdded(userId);//abc10
+						
 						passedCourses = userDAO.searchCoursesUserPassed(userId);
 						comboBoxNewCourses.removeAllItems();
 						comboBoxNewCourses.addItem("");
 						for (Course tempCourse : courses) {
-							if (passedCourses.contains(tempCourse.getCno())) {
+							if (passedCourses.contains(tempCourse.getCno()) || addedUpcomingCourses.contains(tempCourse.getCno())) {	//abc10
 								// dont' do any thing or add with notice "passed"
 								//comboBoxNewCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");								
 							}
@@ -1107,8 +1234,21 @@ public class MyFrame1 extends JFrame {
 					//JComboBoxDecorator.decorate(comboBoxNewCourses, true); 					
 						
 					//create the model and update the "table" => change to NewCourses table later
-					NewCoursesTableModel model = new NewCoursesTableModel(courses);
-					table.setModel(model);
+					
+					//abc10					
+					try {
+						upcourses = aCourseDAO.getAllUpcomingCourses(userId);
+					} catch (Exception exc) {					
+						JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+					}					
+					NewCoursesTableModel newCoursesModel = new NewCoursesTableModel(upcourses);
+					tableNewCourses.setModel(newCoursesModel);
+					//abc10 set columns widths
+					TableColumnModel tcm = tableNewCourses.getColumnModel();
+				      tcm.getColumn(0).setPreferredWidth(400);  
+				      tcm.getColumn(1).setPreferredWidth(30);  
+				      tcm.getColumn(2).setPreferredWidth(30);  
+  
 					
 					panel.repaint();
 					panel.revalidate();
@@ -1118,7 +1258,7 @@ public class MyFrame1 extends JFrame {
 		
 		btnCourseAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//abc3
+				
 				String sCurrentItem = comboBoxCourses.getSelectedItem().toString();
 				String[] aCnum = sCurrentItem.split(" - ");
 				int currentIndex = comboBoxCourses.getSelectedIndex();
