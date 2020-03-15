@@ -14,12 +14,12 @@ import java.util.Map;
 import java.util.Properties;
 
 import core.Course;
-import core.UpcomingCourse;//abc10
+import core.UpcomingCourse;
 
 public class CourseDAO {
 
-	private Connection myConn;
-	
+    private Connection myConn;
+
 	public CourseDAO() throws Exception {
 		ConnectionDB();//abc10		
 	}
@@ -38,29 +38,28 @@ public class CourseDAO {
 		// connect to database
 		myConn = DriverManager.getConnection(dburl, user, password);
 	}
-	
-	public List<Course> getAllCourses() throws Exception {
-		List<Course> list = new ArrayList<>();
-		
-		Statement myStmt = null;
-		ResultSet myRs = null;
-		
-		try {
-			myStmt = myConn.createStatement();
-			myRs = myStmt.executeQuery("select * from COURSES");
-			
-			while (myRs.next()) {
-				Course tempCourse = convertRowToCourse(myRs);
-				list.add(tempCourse);
-			}
 
-			return list;		
-		}
-		finally {
-			close(myStmt, myRs);
-		}
-	}	
-	
+    public List<Course> getAllCourses() throws Exception {
+        List<Course> list = new ArrayList<>();
+
+        Statement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            myStmt = myConn.createStatement();
+            myRs = myStmt.executeQuery("select * from COURSES");
+
+            while (myRs.next()) {
+                Course tempCourse = convertRowToCourse(myRs);
+                list.add(tempCourse);
+            }
+
+            return list;
+        } finally {
+            close(myStmt, myRs);
+        }
+    }
+
 	//abc10
 	public List<UpcomingCourse> getAllUpcomingCourses(int userid) throws Exception {
 		List<UpcomingCourse> list = new ArrayList<>();
@@ -88,8 +87,8 @@ public class CourseDAO {
 		finally {
 			close(myStmt, myRs);
 		}
-	}
-	
+	}    
+
 	//abc10
 	public void addUpcomingCourseToUser(int aID, String aCNO, String aSemester, int aYear) throws Exception {
 		if (!CheckConnection())
@@ -167,11 +166,9 @@ public class CourseDAO {
 			close(myStmt, myRs);
 		}
 		
-	}	
-
-	
-
-	public Map<String, Course> getAllCoursesAsMap() throws Exception {
+	}		
+    
+    public Map<String, Course> getAllCoursesAsMap() throws Exception {
         Map<String, Course> list = new HashMap<String, Course>();
 
         Statement myStmt = null;
@@ -191,18 +188,18 @@ public class CourseDAO {
             close(myStmt, myRs);
         }
     }
-    
-	private Course convertRowToCourse(ResultSet myRs) throws SQLException {		
-		String cno = myRs.getString("cno");
-		String ctitle = myRs.getString("ctitle");		
-		int units = myRs.getInt("units");
-		String dept_name = myRs.getString("dept_name");	
-				
-		Course tempCourse = new Course(cno, ctitle, units, dept_name);
-		
-		return tempCourse;
-	}	
-	
+
+    private Course convertRowToCourse(ResultSet myRs) throws SQLException {
+        String cno = myRs.getString("cno");
+        String ctitle = myRs.getString("ctitle");
+        int units = myRs.getInt("units");
+        String dept_name = myRs.getString("dept_name");
+
+        Course tempCourse = new Course(cno, ctitle, units, dept_name);
+
+        return tempCourse;
+    }
+
 	//abc10
 	private UpcomingCourse convertRowToUpcomingCourse(ResultSet myRs) throws SQLException {		
 		int aID = myRs.getInt("aID");	
@@ -229,32 +226,30 @@ public class CourseDAO {
 		{
 			return false;
 		}
-	}
-	
-	private static void close(Connection myConn, Statement myStmt, ResultSet myRs)
-			throws SQLException {
+	}    
 
-		if (myRs != null) {
-			myRs.close();
-		}
+    private static void close(Connection myConn, Statement myStmt, ResultSet myRs)
+            throws SQLException {
 
-		if (myStmt != null) {
-			
-		}
-		
-		if (myConn != null) {
-			myConn.close();
-		}
-	}
-	
-	private void close(Statement myStmt, ResultSet myRs) throws SQLException {
-		close(null, myStmt, myRs);		
-	}
+        if (myRs != null) {
+            myRs.close();
+        }
 
-	private void close(Statement myStmt) throws SQLException {
-		close(null, myStmt, null);		
-	}
-	
-	
-	
+        if (myStmt != null) {
+
+        }
+
+        if (myConn != null) {
+            myConn.close();
+        }
+    }
+
+    private void close(Statement myStmt, ResultSet myRs) throws SQLException {
+        close(null, myStmt, myRs);
+    }
+
+    private void close(Statement myStmt) throws SQLException {
+        close(null, myStmt, null);
+    }
+
 }
