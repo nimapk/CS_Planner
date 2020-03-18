@@ -87,7 +87,9 @@ public class CourseDAO {
 		finally {
 			close(myStmt, myRs);
 		}
-	}    
+	}   
+	
+	
 
 	//abc10
 	public void addUpcomingCourseToUser(int aID, String aCNO, String aSemester, int aYear) throws Exception {
@@ -141,23 +143,22 @@ public class CourseDAO {
 		
 	}	
 	
-	//abc10
-	public List<String> searchCoursesInSemester(int userid, String tSemester, int tYear) throws Exception{ 
+	//abc11
+	public List<String> searchCoursesInSemester(int userid, int tYear) throws Exception{ 
 		List<String> list = new ArrayList<>();		
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
 		
 		try {
 			//prepare statement
-			myStmt = myConn.prepareStatement("select aCNO from ADDED_COURSES where aID like ? AND aSemester like ? AND aYear like ?");
+			myStmt = myConn.prepareStatement("select * from ADDED_COURSES where aID like ? AND aYear like ?");
 			myStmt.setString(1, Integer.toString(userid));
-			myStmt.setString(2, tSemester);
-			myStmt.setString(3, Integer.toString(tYear));
+			myStmt.setString(2, Integer.toString(tYear));
 			
 			myRs = myStmt.executeQuery();
 			while (myRs.next()) {
 				String[] aCnum = myRs.getString("aCNO").split(" - ");
-				list.add(aCnum[0]);
+				list.add(aCnum[0] + " - " + myRs.getString("aSemester"));
 			}	
 			
 			return list;
