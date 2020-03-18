@@ -591,15 +591,17 @@ public class MyFrame1 extends JFrame {
         JPanel panel_16 = new JPanel();
         panel_16.setBackground(new Color(204, 204, 255));
         panel_16.setBorder(new LineBorder(new Color(0, 102, 0)));
-        panel_16.setBounds(273, 312, 197, 50);
+        panel_16.setBounds(222, 229, 293, 95);
         gpa_jpanel.add(panel_16);
         panel_16.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblYourGpa = new JLabel("   Your GPA:");
+        JLabel lblYourGpa = new JLabel("   Your Current GPA:");
+        lblYourGpa.setHorizontalAlignment(SwingConstants.CENTER);
         panel_16.add(lblYourGpa, BorderLayout.CENTER);
         lblYourGpa.setFont(new Font("Tahoma", Font.BOLD, 20));
 
         JLabel label = new JLabel(" 0.0   ");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         panel_16.add(label, BorderLayout.EAST);
         label.setFont(new Font("Tahoma", Font.BOLD, 20));
 
@@ -620,12 +622,6 @@ public class MyFrame1 extends JFrame {
         btnBack.setFont(new Font("Tahoma", Font.BOLD, 20));
         btnBack.setBounds(273, 414, 197, 50);
         gpa_jpanel.add(btnBack);
-
-        JButton btnCalculate = new JButton("Calculate");
-        btnCalculate.setFont(new Font("Tahoma", Font.BOLD, 20));
-        btnCalculate.setBorder(new LineBorder(new Color(0, 102, 0)));
-        btnCalculate.setBounds(273, 203, 197, 50);
-        gpa_jpanel.add(btnCalculate);
 
         JPanel input_class_jpanel = new JPanel();
         input_class_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
@@ -714,27 +710,13 @@ public class MyFrame1 extends JFrame {
         txtThisTabBy = new JTextField();
         txtThisTabBy.setHorizontalAlignment(SwingConstants.CENTER);
         txtThisTabBy.setText("This tab, by clicking the button it will tell you how any unit that you have taken");
-        txtThisTabBy.setBounds(59, 171, 607, 192);
+        txtThisTabBy.setBounds(59, 244, 607, 159);
         total_units_jpanel.add(txtThisTabBy);
         txtThisTabBy.setColumns(10);
 
         btnGo_3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Object source = e.getSource();
-                if (source == btnGo_3) {
-                    panel.removeAll();
-                    panel.add(total_units_jpanel);
-                    panel.repaint();
-                    panel.revalidate();
-                }
-
-            }
-        });
-
-        JButton btnGetTotalUnits = new JButton("Get Total Units");
-        btnGetTotalUnits.setToolTipText("Get your total units that you earned so far.");
-        btnGetTotalUnits.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
                 try {
                     int aTotalUnits;
 
@@ -747,10 +729,18 @@ public class MyFrame1 extends JFrame {
                 } catch (Exception exc) {
                     JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
                 }
+                
+                
+                //display panel
+                if (source == btnGo_3) {
+                    panel.removeAll();
+                    panel.add(total_units_jpanel);
+                    panel.repaint();
+                    panel.revalidate();
+                }
+
             }
         });
-        btnGetTotalUnits.setBounds(164, 387, 124, 23);
-        total_units_jpanel.add(btnGetTotalUnits);
 
         JButton btnBack_1 = new JButton("Back");
         btnBack_1.addActionListener(new ActionListener() {
@@ -771,8 +761,14 @@ public class MyFrame1 extends JFrame {
             }
         });
 
-        btnBack_1.setBounds(498, 387, 89, 23);
+        btnBack_1.setBounds(318, 450, 89, 23);
         total_units_jpanel.add(btnBack_1);
+        
+        JLabel lblNewLabel_9 = new JLabel("The total units that you have earned so far");
+        lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel_9.setBounds(59, 200, 607, 33);
+        total_units_jpanel.add(lblNewLabel_9);
 
         JPanel graduation_date_jpanel = new JPanel();
         graduation_date_jpanel.setLayout(null);
@@ -997,46 +993,8 @@ public class MyFrame1 extends JFrame {
         btnGo_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Object source = e.getSource();
+                
                 if (source == btnGo_1) {
-                    panel.removeAll();
-                    panel.add(gpa_jpanel);
-                    panel.repaint();
-                    panel.revalidate();
-                }
-
-            }
-        });
-        btnGo_2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Object source = e.getSource();
-                if (source == btnGo_2) {
-                    panel.removeAll();
-                    panel.add(graduation_date_jpanel);
-                    panel.repaint();
-                    panel.revalidate();
-                }
-            }
-        });
-        btnGoToRegister.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.removeAll();
-                panel.add(register_jpanel);
-                panel.repaint();
-                panel.revalidate();
-            }
-        });
-        button_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.removeAll();
-                panel.add(main_jpanel);
-                panel.repaint();
-                panel.revalidate();
-            }
-        });
-        btnCalculate.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Object source = e.getSource();
-                if (source == btnCalculate) {
                     try {
                         aCourseDAO = new CourseDAO();
                     } catch (Exception exc) {
@@ -1075,7 +1033,42 @@ public class MyFrame1 extends JFrame {
                         JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                
+                //display gpa_jpanel
+                if (source == btnGo_1) {
+                    panel.removeAll();
+                    panel.add(gpa_jpanel);
+                    panel.repaint();
+                    panel.revalidate();
+                }
 
+            }
+        });
+        btnGo_2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Object source = e.getSource();
+                if (source == btnGo_2) {
+                    panel.removeAll();
+                    panel.add(graduation_date_jpanel);
+                    panel.repaint();
+                    panel.revalidate();
+                }
+            }
+        });
+        btnGoToRegister.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                panel.removeAll();
+                panel.add(register_jpanel);
+                panel.repaint();
+                panel.revalidate();
+            }
+        });
+        button_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                panel.removeAll();
+                panel.add(main_jpanel);
+                panel.repaint();
+                panel.revalidate();
             }
         });
         mntmHome.setHorizontalAlignment(SwingConstants.LEFT);
@@ -1273,7 +1266,7 @@ public class MyFrame1 extends JFrame {
   						} 
   											
   					}  					  					
-      				String tSemester[] = new String[] {"Spring", "Summer", "Fall", "Winter"};
+      				String tSemester[] = new String[] {"Spring", "Summer", "Fall", "Winter"};    			
       				table = new JTable();
       				table.setModel(new DefaultTableModel(tTable,tSemester) 
       					{
