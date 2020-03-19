@@ -1102,7 +1102,7 @@ public class MyFrame1 extends JFrame {
   	                    JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
   	                }				
   					for (String tempString : addedUpcomingCourses) {
-  						String[] cells = tempString.split(" - ");	//cells[0] : course's name, cells[1]: semester
+  						String[] cells = tempString.split(" = ");	//cells[0] : course's name, cells[1]: semester
   						if (cells[1].compareTo("Spring")==0)
   						{
   							tTable[coorX[0]][0] = cells[0];
@@ -1172,7 +1172,7 @@ public class MyFrame1 extends JFrame {
   	                    JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
   	                }				
   					for (String tempString : addedUpcomingCourses) {
-  						String[] cells = tempString.split(" - ");	//cells[0] : course's name, cells[1]: semester
+  						String[] cells = tempString.split(" = ");	//cells[0] : course's name, cells[1]: semester
   						if (cells[1].compareTo("Spring")==0)
   						{
   							tTable[coorX[0]][0] = cells[0];
@@ -1243,7 +1243,7 @@ public class MyFrame1 extends JFrame {
   	                    JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
   	                }				
   					for (String tempString : addedUpcomingCourses) {
-  						String[] cells = tempString.split(" - ");	//cells[0] : course's name, cells[1]: semester
+  						String[] cells = tempString.split(" = ");	//cells[0] : course's name, cells[1]: semester
   						if (cells[1].compareTo("Spring")==0)
   						{
   							tTable[coorX[0]][0] = cells[0];
@@ -1536,7 +1536,7 @@ public class MyFrame1 extends JFrame {
                     }
 
                 } catch (Exception exc) {
-                    JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MyFrame1.this, "Error2: " + exc, "Error2", JOptionPane.ERROR_MESSAGE);
                 }
                 //JComboBoxDecorator.decorate(comboBoxCourses, true); 
                 panel.repaint();

@@ -16,11 +16,17 @@ public class QuestionDao {
     private Connection myConn;
 
     public QuestionDao() throws Exception {
+		if (!CheckConnection())
+		{
+			ConnectionDB();
+		}
+        //ConnectionDB();
+    }
 
+    public void ConnectionDB() throws Exception {
         // get db properties
         Properties props = new Properties();
-        props.load(getClass()
-                .getClassLoader().getResourceAsStream("anydb.properties"));
+        props.load(getClass().getClassLoader().getResourceAsStream("anydb.properties"));
 
         String user = props.getProperty("user");
         String password = props.getProperty("password");
@@ -31,8 +37,20 @@ public class QuestionDao {
 
         //System.out.println("DB connection successful to: " + dburl);
     }
-
+    public boolean CheckConnection() throws Exception {
+        try {
+            Statement myStmt = myConn.createStatement();
+            myStmt.executeQuery("select 1 from user");
+            close(myStmt);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }    
     public List<Question> getAllQuestions() throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        } 
         List<Question> list = new ArrayList<>();
 
         Statement myStmt = null;

@@ -21,7 +21,11 @@ public class CourseDAO {
     private Connection myConn;
 
 	public CourseDAO() throws Exception {
-		ConnectionDB();//abc10		
+		if (!CheckConnection())
+		{
+			ConnectionDB();
+		}
+		//ConnectionDB();//abc10		
 	}
 	
 	//abc10
@@ -40,6 +44,9 @@ public class CourseDAO {
 	}
 
     public List<Course> getAllCourses() throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        } 
         List<Course> list = new ArrayList<>();
 
         Statement myStmt = null;
@@ -62,6 +69,9 @@ public class CourseDAO {
 
 	//abc10
 	public List<UpcomingCourse> getAllUpcomingCourses(int userid) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        } 
 		List<UpcomingCourse> list = new ArrayList<>();
 		
 		//Statement myStmt = null;
@@ -121,6 +131,9 @@ public class CourseDAO {
 	
 	//abc10
 	public List<String> searchCoursesUserAdded(int userid) throws Exception{ //cut a part of aCNO
+        if (!CheckConnection()) {
+            ConnectionDB();
+        } 
 		List<String> list = new ArrayList<>();		
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
@@ -145,6 +158,9 @@ public class CourseDAO {
 	
 	//abc11
 	public List<String> searchCoursesInSemester(int userid, int tYear) throws Exception{ 
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }		
 		List<String> list = new ArrayList<>();		
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
@@ -157,8 +173,10 @@ public class CourseDAO {
 			
 			myRs = myStmt.executeQuery();
 			while (myRs.next()) {
-				String[] aCnum = myRs.getString("aCNO").split(" - ");
-				list.add(aCnum[0] + " - " + myRs.getString("aSemester"));
+				//String[] aCnum = myRs.getString("aCNO").split(" - ");
+				//list.add(aCnum[0] + " - " + myRs.getString("aSemester"));
+				String aCnum = myRs.getString("aCNO");
+				list.add(aCnum + " = " + myRs.getString("aSemester"));
 			}	
 			
 			return list;
@@ -170,6 +188,9 @@ public class CourseDAO {
 	}		
     
     public Map<String, Course> getAllCoursesAsMap() throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }     	
         Map<String, Course> list = new HashMap<String, Course>();
 
         Statement myStmt = null;

@@ -17,7 +17,11 @@ public class UserDAO {
     private Connection myConn;
 
     public UserDAO() throws Exception {
-        ConnectionDB();
+		if (!CheckConnection())
+		{
+			ConnectionDB();
+		}
+        //ConnectionDB();
     }
 
     public void ConnectionDB() throws Exception {
@@ -47,6 +51,9 @@ public class UserDAO {
     }
 
     public List<User> searchUsers(String username) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }    	
         List<User> list = new ArrayList<>();
 
         PreparedStatement myStmt = null;
@@ -72,6 +79,9 @@ public class UserDAO {
     }
 
     public void addUser(User theUser) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }     	
         PreparedStatement myStmt = null;
 
         try {
@@ -125,6 +135,9 @@ public class UserDAO {
     // calculate total units for a user
 
     public int calculateTotalUnits(int user_id) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }    	
         int total_units = 0;
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
@@ -145,6 +158,9 @@ public class UserDAO {
 
     // find a list of courses a user passed
     public List<String> searchCoursesUserPassed(int userid) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }     	
         List<String> list = new ArrayList<>();
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
@@ -166,6 +182,9 @@ public class UserDAO {
     }
 
     public List<String> searchGradeUserPassed(int userid) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        } 
         List<String> list = new ArrayList<>();
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
