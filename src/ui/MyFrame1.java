@@ -1580,6 +1580,27 @@ public class MyFrame1 extends JFrame {
                 }
 
                 //check email
+                users = null;
+                if (email != null && email.trim().length() > 0) {
+                    try {
+                        users = userDAO.searchEmails(email);
+                        if (!email.isEmpty()) {
+                            JOptionPane.showMessageDialog(MyFrame1.this, "This email was used.", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+
+                    } catch (Exception e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(MyFrame1.this, "Please input email", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+           
+                
+                
+                
                 //check password				
                 if (password == null || !password.equals(repassword)) {
                     JOptionPane.showMessageDialog(MyFrame1.this, "The two passwords didn't match or empty", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1590,7 +1611,7 @@ public class MyFrame1 extends JFrame {
                             return;
                         }
                     }
-                    User tempUser = new User(firstname, lastname, major, email, username, password, questionID, answer);
+                    User tempUser = new User(firstname, lastname, email, major, username, password, questionID, answer);
 
                     try {
                         // save to the database

@@ -77,6 +77,33 @@ public class UserDAO {
             close(myStmt, myRs);
         }
     }
+    
+    public List<User> searchEmails(String email) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }    	
+        List<User> list = new ArrayList<>();
+
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+
+        try {            
+            myStmt = myConn.prepareStatement("select * from user where email like ?");
+
+            myStmt.setString(1, email);
+
+            myRs = myStmt.executeQuery();
+
+            while (myRs.next()) {
+                User tempUser = convertRowToUser(myRs);
+                list.add(tempUser);
+            }
+
+            return list;
+        } finally {
+            close(myStmt, myRs);
+        }
+    }    
 
     public void addUser(User theUser) throws Exception {
         if (!CheckConnection()) {
