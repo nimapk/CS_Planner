@@ -93,16 +93,10 @@ public class MyFrame1 extends JFrame {
     private BufferedImage topCover;
     private ImageIcon backward_icon = new ImageIcon("images/leftbutton.png");
     private ImageIcon forward_icon = new ImageIcon("images/rightbutton.png");
-
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
-    private JTextField textField_4;
-    private JPasswordField passwordField;
-    private JPasswordField passwordField_1;
     private JTextField txtThisWillDisplay;
     private JTable table;//abc10
+    private JTable table_1;
+    private JTable table_2;
     
 
     /**
@@ -245,101 +239,6 @@ public class MyFrame1 extends JFrame {
         lblNewLabel_4.setFont(new Font("Vivaldi", Font.BOLD, 52));
         lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
         login_panel.add(lblNewLabel_4, BorderLayout.CENTER);
-
-        JPanel reset_password_jpanel = new JPanel();
-        panel.add(reset_password_jpanel, "name_3377635213700");
-        reset_password_jpanel.setLayout(null);
-        reset_password_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-
-        JLabel label_1 = new JLabel("First Name:");
-        label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-        label_1.setBounds(152, 173, 80, 26);
-        reset_password_jpanel.add(label_1);
-
-        textField = new JTextField();
-        textField.setColumns(10);
-        textField.setBounds(273, 176, 278, 20);
-        reset_password_jpanel.add(textField);
-
-        JLabel label_2 = new JLabel("Last Name:");
-        label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-        label_2.setBounds(152, 204, 64, 26);
-        reset_password_jpanel.add(label_2);
-
-        textField_1 = new JTextField();
-        textField_1.setColumns(10);
-        textField_1.setBounds(273, 207, 278, 20);
-        reset_password_jpanel.add(textField_1);
-
-        JLabel label_3 = new JLabel("Major:");
-        label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-        label_3.setBounds(152, 235, 64, 26);
-        reset_password_jpanel.add(label_3);
-
-        textField_2 = new JTextField();
-        textField_2.setColumns(10);
-        textField_2.setBounds(273, 238, 278, 20);
-        reset_password_jpanel.add(textField_2);
-
-        JLabel label_4 = new JLabel("Email");
-        label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
-        label_4.setBounds(152, 266, 64, 26);
-        reset_password_jpanel.add(label_4);
-
-        textField_3 = new JTextField();
-        textField_3.setColumns(10);
-        textField_3.setBounds(273, 269, 278, 20);
-        reset_password_jpanel.add(textField_3);
-
-        JLabel label_5 = new JLabel("Username:");
-        label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
-        label_5.setBounds(152, 299, 64, 26);
-        reset_password_jpanel.add(label_5);
-
-        textField_4 = new JTextField();
-        textField_4.setColumns(10);
-        textField_4.setBounds(273, 302, 278, 20);
-        reset_password_jpanel.add(textField_4);
-
-        JLabel label_6 = new JLabel("Password:");
-        label_6.setFont(new Font("Tahoma", Font.BOLD, 11));
-        label_6.setBounds(152, 330, 64, 26);
-        reset_password_jpanel.add(label_6);
-
-        passwordField = new JPasswordField();
-        passwordField.setColumns(10);
-        passwordField.setBounds(273, 333, 278, 20);
-        reset_password_jpanel.add(passwordField);
-
-        passwordField_1 = new JPasswordField();
-        passwordField_1.setColumns(10);
-        passwordField_1.setBounds(273, 364, 278, 20);
-        reset_password_jpanel.add(passwordField_1);
-
-        JLabel label_7 = new JLabel("Confirm Password:");
-        label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
-        label_7.setBounds(152, 361, 111, 26);
-        reset_password_jpanel.add(label_7);
-
-        JButton btnReset = new JButton("Reset");
-        btnReset.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btnReset.setBackground(new Color(0, 204, 0));
-        btnReset.setBounds(462, 395, 89, 23);
-        reset_password_jpanel.add(btnReset);
-
-        JPanel panel_26 = new JPanel();
-        panel_26.setForeground(Color.WHITE);
-        panel_26.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-        panel_26.setBackground(new Color(255, 204, 0));
-        panel_26.setBounds(0, 0, 734, 151);
-        reset_password_jpanel.add(panel_26);
-        panel_26.setLayout(new BorderLayout(0, 0));
-
-        JLabel lblResetPassword = new JLabel("Reset Password");
-        lblResetPassword.setForeground(new Color(204, 0, 0));
-        lblResetPassword.setFont(new Font("Vivaldi", Font.BOLD, 52));
-        lblResetPassword.setHorizontalAlignment(SwingConstants.CENTER);
-        panel_26.add(lblResetPassword, BorderLayout.CENTER);
 
         JPanel register_jpanel = new JPanel();
         register_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
@@ -855,8 +754,62 @@ public class MyFrame1 extends JFrame {
 		panel_2.add(lblPlanYear);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 28, 714, 318);
+		scrollPane.setBounds(0, 26, 714, 158);
 		panel_2.add(scrollPane);
+		
+		table_1 = new JTable();
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+			},
+			new String[] {
+				"   SPRING", "   FALL"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		scrollPane.setViewportView(table_1);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(0, 180, 714, 166);
+		panel_2.add(scrollPane_1);
+		
+		table_2 = new JTable();
+		table_2.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+			},
+			new String[] {
+				"   SUMMER", "   WINTER"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		scrollPane_1.setViewportView(table_2);
 		
 		//abc104 deleted
 		
