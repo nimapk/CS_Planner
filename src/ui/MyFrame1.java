@@ -31,6 +31,7 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Label;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.util.Map;
@@ -94,9 +95,8 @@ public class MyFrame1 extends JFrame {
     private ImageIcon backward_icon = new ImageIcon("images/leftbutton.png");
     private ImageIcon forward_icon = new ImageIcon("images/rightbutton.png");
     private JTextField txtThisWillDisplay;
-    private JTable table;//abc10
-    private JTable table_1;
-    private JTable table_2;
+    private JTable table;//abc10    
+    private JTable table_2;//abc12
     
 
     /**
@@ -757,59 +757,13 @@ public class MyFrame1 extends JFrame {
 		scrollPane.setBounds(0, 26, 714, 158);
 		panel_2.add(scrollPane);
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"   SPRING", "   FALL"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		scrollPane.setViewportView(table_1);
+
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(0, 180, 714, 166);
 		panel_2.add(scrollPane_1);
 		
-		table_2 = new JTable();
-		table_2.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"   SUMMER", "   WINTER"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		scrollPane_1.setViewportView(table_2);
+
 		
 		//abc104 deleted
 		
@@ -850,7 +804,7 @@ public class MyFrame1 extends JFrame {
 		//abc10
 		JButton btnUpCourseAdd = new JButton("Add");
 		btnUpCourseAdd.setToolTipText("Add your untaken class to database.");
-		btnUpCourseAdd.setBounds(307, 493, 89, 23);
+		btnUpCourseAdd.setBounds(347, 493, 89, 23);
 		class_planner_jpanel.add(btnUpCourseAdd);
 
         JButton button_4 = new JButton("Back");
@@ -908,6 +862,11 @@ public class MyFrame1 extends JFrame {
         //abc10
         tableNewCourses = new JTable();
         scrollPanelNewCourses.setViewportView(tableNewCourses);
+        
+        JButton btnUpcourseRemove = new JButton("Remove");
+        btnUpcourseRemove.setToolTipText("Add your untaken class to database.");
+        btnUpcourseRemove.setBounds(179, 493, 89, 23);
+        class_planner_jpanel.add(btnUpcourseRemove);
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -949,7 +908,8 @@ public class MyFrame1 extends JFrame {
                 
                 if (source == btnGo_1) {
                     try {
-                        aCourseDAO = new CourseDAO();
+                    	if (aCourseDAO == null)
+                    		aCourseDAO = new CourseDAO();
                     } catch (Exception exc) {
                         JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -1035,19 +995,20 @@ public class MyFrame1 extends JFrame {
       				panel.removeAll();
       				panel.add(result_plan_jpanel);
       				
-    				//table setting
-      				Object tTable[][] = new Object[][] {
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null}
+    				Object tTable[][] = new Object[][] {
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null}
   					};  					
   					//push data
   					List<String> addedUpcomingCourses = null;	  					  						
   					lblPlanYear.setText(Integer.toString(mYear));
-  					int[] coorX= {0,0,0,0};
+  					int[] coorX= {0,0};
   					try
   					{
   						addedUpcomingCourses = aCourseDAO.searchCoursesInSemester(userId, mYear);
@@ -1060,25 +1021,14 @@ public class MyFrame1 extends JFrame {
   						{
   							tTable[coorX[0]][0] = cells[0];
   							coorX[0]++;
-  						}
-  						if (cells[1].compareTo("Summer")==0)
-  						{
-  							tTable[coorX[1]][1] = cells[0];
-  							coorX[1]++;
   						}  						
   						if (cells[1].compareTo("Fall")==0)
   						{
-  							tTable[coorX[2]][2] = cells[0];
-  							coorX[2]++;
-  						} 
-  						if (cells[1].compareTo("Winter")==0)
-  						{
-  							tTable[coorX[3]][3] = cells[0];
-  							coorX[3]++;
-  						} 
-  											
-  					}  					  					
-      				String tSemester[] = new String[] {"Spring", "Summer", "Fall", "Winter"};
+  							tTable[coorX[1]][1] = cells[0];
+  							coorX[1]++;
+  						}   											
+  					}  					  					      				
+  					String tSemester[] = new String[] {"   SPRING", "   FALL"};
       				table = new JTable();
       				table.setModel(new DefaultTableModel(tTable,tSemester) 
       					{
@@ -1089,11 +1039,45 @@ public class MyFrame1 extends JFrame {
           						return columnTypes[columnIndex];
           					}
           				});      			
-      				table.getColumnModel().getColumn(0).setPreferredWidth(160);
-      				table.getColumnModel().getColumn(1).setPreferredWidth(182);
-      				table.getColumnModel().getColumn(2).setPreferredWidth(173);
-      				table.getColumnModel().getColumn(3).setPreferredWidth(169);
-      				scrollPane.setViewportView(table);    				    				
+      				scrollPane.setViewportView(table);    	
+      				
+
+      				int[] coorX2= {0,0};
+      				Object tTable2[][] = new Object[][] {
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null}
+  					};  									
+  					for (String tempString : addedUpcomingCourses) {
+  						String[] cells = tempString.split(" = ");	//cells[0] : course's name, cells[1]: semester
+  						if (cells[1].compareTo("Summer")==0)
+  						{
+  							tTable2[coorX2[0]][0] = cells[0];
+  							coorX2[0]++;
+  						}  						
+  						if (cells[1].compareTo("Winter")==0)
+  						{
+  							tTable2[coorX2[1]][1] = cells[0];
+  							coorX2[1]++;
+  						}   											
+  					}  					  					      				
+  					String tSemester2[] = new String[] {"   SUMMER", "   WINTER"};
+      				table_2 = new JTable();
+      				table_2.setModel(new DefaultTableModel(tTable2,tSemester2) 
+      					{
+          					Class[] columnTypes = new Class[] {
+          						Object.class, String.class, String.class, Object.class
+          					};
+          					public Class getColumnClass(int columnIndex) {
+          						return columnTypes[columnIndex];
+          					}
+          				});      			
+      				scrollPane_1.setViewportView(table_2);    				    				
 
       				panel.repaint();
       				panel.revalidate();		            	
@@ -1105,19 +1089,20 @@ public class MyFrame1 extends JFrame {
       				panel.removeAll();
       				panel.add(result_plan_jpanel);
       				
-    				//table setting
-      				Object tTable[][] = new Object[][] {
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null}
+    				Object tTable[][] = new Object[][] {
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null}
   					};  					
   					//push data
   					List<String> addedUpcomingCourses = null;	  					  						
   					lblPlanYear.setText(Integer.toString(mYear));
-  					int[] coorX= {0,0,0,0};
+  					int[] coorX= {0,0};
   					try
   					{
   						addedUpcomingCourses = aCourseDAO.searchCoursesInSemester(userId, mYear);
@@ -1130,25 +1115,14 @@ public class MyFrame1 extends JFrame {
   						{
   							tTable[coorX[0]][0] = cells[0];
   							coorX[0]++;
-  						}
-  						if (cells[1].compareTo("Summer")==0)
-  						{
-  							tTable[coorX[1]][1] = cells[0];
-  							coorX[1]++;
   						}  						
   						if (cells[1].compareTo("Fall")==0)
   						{
-  							tTable[coorX[2]][2] = cells[0];
-  							coorX[2]++;
-  						} 
-  						if (cells[1].compareTo("Winter")==0)
-  						{
-  							tTable[coorX[3]][3] = cells[0];
-  							coorX[3]++;
-  						} 
-  											
-  					}  					  					
-      				String tSemester[] = new String[] {"Spring", "Summer", "Fall", "Winter"};
+  							tTable[coorX[1]][1] = cells[0];
+  							coorX[1]++;
+  						}   											
+  					}  					  					      				
+  					String tSemester[] = new String[] {"   SPRING", "   FALL"};
       				table = new JTable();
       				table.setModel(new DefaultTableModel(tTable,tSemester) 
       					{
@@ -1159,36 +1133,71 @@ public class MyFrame1 extends JFrame {
           						return columnTypes[columnIndex];
           					}
           				});      			
-      				table.getColumnModel().getColumn(0).setPreferredWidth(160);
-      				table.getColumnModel().getColumn(1).setPreferredWidth(182);
-      				table.getColumnModel().getColumn(2).setPreferredWidth(173);
-      				table.getColumnModel().getColumn(3).setPreferredWidth(169);
-      				scrollPane.setViewportView(table);    				    				
+      				scrollPane.setViewportView(table);    	
+      				
+
+      				int[] coorX2= {0,0};
+      				Object tTable2[][] = new Object[][] {
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null}
+  					};  									
+  					for (String tempString : addedUpcomingCourses) {
+  						String[] cells = tempString.split(" = ");	//cells[0] : course's name, cells[1]: semester
+  						if (cells[1].compareTo("Summer")==0)
+  						{
+  							tTable2[coorX2[0]][0] = cells[0];
+  							coorX2[0]++;
+  						}  						
+  						if (cells[1].compareTo("Winter")==0)
+  						{
+  							tTable2[coorX2[1]][1] = cells[0];
+  							coorX2[1]++;
+  						}   											
+  					}  					  					      				
+  					String tSemester2[] = new String[] {"   SUMMER", "   WINTER"};
+      				table_2 = new JTable();
+      				table_2.setModel(new DefaultTableModel(tTable2,tSemester2) 
+      					{
+          					Class[] columnTypes = new Class[] {
+          						Object.class, String.class, String.class, Object.class
+          					};
+          					public Class getColumnClass(int columnIndex) {
+          						return columnTypes[columnIndex];
+          					}
+          				});      			
+      				scrollPane_1.setViewportView(table_2);   				    				
 
       				panel.repaint();
       				panel.revalidate();		        		
 	        	}
 	        });	        
         
-      		//abc11
+      		//abc12
       		button_5.addActionListener(new ActionListener() {
       			public void actionPerformed(ActionEvent e) {      				      			
       				panel.removeAll();
       				panel.add(result_plan_jpanel);
-      				
-    				//table setting
+      				  
       				Object tTable[][] = new Object[][] {
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null},
-  						{null, null, null, null}
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null}
   					};  					
   					//push data
   					List<String> addedUpcomingCourses = null;	  					  						
   					lblPlanYear.setText(Integer.toString(mYear));
-  					int[] coorX= {0,0,0,0};
+  					int[] coorX= {0,0};
   					try
   					{
   						addedUpcomingCourses = aCourseDAO.searchCoursesInSemester(userId, mYear);
@@ -1201,25 +1210,14 @@ public class MyFrame1 extends JFrame {
   						{
   							tTable[coorX[0]][0] = cells[0];
   							coorX[0]++;
-  						}
-  						if (cells[1].compareTo("Summer")==0)
-  						{
-  							tTable[coorX[1]][1] = cells[0];
-  							coorX[1]++;
   						}  						
   						if (cells[1].compareTo("Fall")==0)
   						{
-  							tTable[coorX[2]][2] = cells[0];
-  							coorX[2]++;
-  						} 
-  						if (cells[1].compareTo("Winter")==0)
-  						{
-  							tTable[coorX[3]][3] = cells[0];
-  							coorX[3]++;
-  						} 
-  											
-  					}  					  					
-      				String tSemester[] = new String[] {"Spring", "Summer", "Fall", "Winter"};    			
+  							tTable[coorX[1]][1] = cells[0];
+  							coorX[1]++;
+  						}   											
+  					}  					  					      				
+  					String tSemester[] = new String[] {"   SPRING", "   FALL"};
       				table = new JTable();
       				table.setModel(new DefaultTableModel(tTable,tSemester) 
       					{
@@ -1230,11 +1228,47 @@ public class MyFrame1 extends JFrame {
           						return columnTypes[columnIndex];
           					}
           				});      			
-      				table.getColumnModel().getColumn(0).setPreferredWidth(160);
-      				table.getColumnModel().getColumn(1).setPreferredWidth(182);
-      				table.getColumnModel().getColumn(2).setPreferredWidth(173);
-      				table.getColumnModel().getColumn(3).setPreferredWidth(169);
-      				scrollPane.setViewportView(table);    				    				
+      				scrollPane.setViewportView(table);    	
+      				
+
+      				int[] coorX2= {0,0};
+      				Object tTable2[][] = new Object[][] {
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null},
+  						{null, null}
+  					};  									
+  					for (String tempString : addedUpcomingCourses) {
+  						String[] cells = tempString.split(" = ");	//cells[0] : course's name, cells[1]: semester
+  						if (cells[1].compareTo("Summer")==0)
+  						{
+  							tTable2[coorX2[0]][0] = cells[0];
+  							coorX2[0]++;
+  						}  						
+  						if (cells[1].compareTo("Winter")==0)
+  						{
+  							tTable2[coorX2[1]][1] = cells[0];
+  							coorX2[1]++;
+  						}   											
+  					}  					  					      				
+  					String tSemester2[] = new String[] {"   SUMMER", "   WINTER"};
+      				table_2 = new JTable();
+      				table_2.setModel(new DefaultTableModel(tTable2,tSemester2) 
+      					{
+          					Class[] columnTypes = new Class[] {
+          						Object.class, String.class, String.class, Object.class
+          					};
+          					public Class getColumnClass(int columnIndex) {
+          						return columnTypes[columnIndex];
+          					}
+          				});      			
+      				scrollPane_1.setViewportView(table_2);       				
+      				
+      				
 
       				panel.repaint();
       				panel.revalidate();	
@@ -1242,6 +1276,12 @@ public class MyFrame1 extends JFrame {
       				
       			}
       		});
+      		///abc12
+            btnUpcourseRemove.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent arg0) {
+            	}
+            });
+      		
       		//abc10
       		btnUpCourseAdd.addActionListener(new ActionListener() {
       			public void actionPerformed(ActionEvent e) {
@@ -1602,7 +1642,7 @@ public class MyFrame1 extends JFrame {
         btnLogin.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-
+            	
                 String username = usernameTextField.getText();
                 String password = passwordTextField.getText();
                 List<User> users = null;
@@ -1628,7 +1668,31 @@ public class MyFrame1 extends JFrame {
                             panel.add(main_jpanel);
                             lblWelcome.setText("Welcome " + users.get(0).getFirstName() + "!");
                             userId = users.get(0).getID();
-                            // ADD YOUR NEW CODE HERE (panel_4)							
+                            // ADD YOUR NEW CODE HERE (panel_4)		
+                            //abc12                            
+                            
+
+                       		aCourseDAO = new CourseDAO();                                                       
+      						courses = aCourseDAO.getAllCourses();					      						
+      						List<String> addedUpcomingCourses = null;      						
+      						addedUpcomingCourses = aCourseDAO.searchCoursesUserAdded(userId);
+      						List<String> allCourses = new ArrayList<>();	
+      						for (Course tempCourse : courses) {
+      							allCourses.add(tempCourse.getCno());							      							
+      						}
+      						
+      						int tParentCheck = 1; 
+      						for (String tUpcomingCourses:addedUpcomingCourses)
+      						{
+      							int tCheck = 0; //check if Upcoming course exists in list of courses
+      							if (!allCourses.contains(tUpcomingCourses)) {
+      								txtpnKeepUpWith.setText("Some of your upcoming courses were deleted or changed the course number (CNO)");
+      								tParentCheck = 0;
+      								break;								
+      							}      								      						
+      						}
+                            if (tParentCheck == 1)
+                            	txtpnKeepUpWith.setText("Keep up with your plan. Your school classes have not changed.");
 
                             panel.repaint();
                             panel.revalidate();
