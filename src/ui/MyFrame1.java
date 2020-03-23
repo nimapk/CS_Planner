@@ -92,8 +92,11 @@ public class MyFrame1 extends JFrame {
 
     //============================Images============================
     private BufferedImage topCover;
+    private BufferedImage behide_title;		//panel 1 title
+    private BufferedImage openbook_img;	//main menu
     private ImageIcon backward_icon = new ImageIcon("images/leftbutton.png");
     private ImageIcon forward_icon = new ImageIcon("images/rightbutton.png");
+
     private JTextField txtThisWillDisplay;
     private JTable table;//abc10    
     private JTable table_2;//abc12
@@ -126,10 +129,11 @@ public class MyFrame1 extends JFrame {
         //==================set images for covers ===========
         try {
             topCover = ImageIO.read(new File("images/p1cover.jpg"));
-
+            behide_title = ImageIO.read(new File("images/title_panel1.png"));
+            openbook_img = ImageIO.read(new File("images/bground.jpg"));
         } catch (Exception e) {
         }
-
+       
         // create the DAO
         try {
             userDAO = new UserDAO();
@@ -155,16 +159,15 @@ public class MyFrame1 extends JFrame {
 
         JPanel panel_7 = new JPanel();
         panel_7.setBorder(new LineBorder(new Color(0, 102, 0), 2));
-        panel_7.setBackground(new Color(255, 204, 0));
+        panel_7.setBackground(new Color(255, 255, 255));
         panel_7.setBounds(0, 0, 734, 152);
         panel_1.add(panel_7);
-        panel_7.setLayout(new BorderLayout(0, 0));
-
-        JLabel lblNewLabel_3 = new JLabel("Welcome to Student Tool");
-        lblNewLabel_3.setForeground(new Color(204, 0, 0));
-        lblNewLabel_3.setFont(new Font("Vivaldi", Font.BOLD, 52));
-        lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-        panel_7.add(lblNewLabel_3, BorderLayout.CENTER);
+        panel_7.setLayout(null);
+        
+        JLabel lblNewLabel_3 = new JLabel(new ImageIcon(behide_title));
+        lblNewLabel_3.setBounds(10, 11, 714, 130);
+        panel_7.add(lblNewLabel_3);
+           
 
         JButton btnGoToRegister = new JButton("Register");
         btnGoToRegister.setBounds(394, 295, 190, 57);
@@ -386,7 +389,8 @@ public class MyFrame1 extends JFrame {
         panel_10.setBounds(126, 160, 484, 37);
         main_jpanel.add(panel_10);
         panel_10.setLayout(new BorderLayout(0, 0));
-
+        
+        
         JLabel lblClassPlanner = new JLabel(" \u2666 Input Your Classes");
         lblClassPlanner.setToolTipText("");
         lblClassPlanner.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -459,6 +463,7 @@ public class MyFrame1 extends JFrame {
         main_jpanel.add(panel_23);
         panel_23.setLayout(new BorderLayout(0, 0));
 
+        
         JLabel lblGraduationDate_1 = new JLabel(" \u2666 Class Planner");
         lblGraduationDate_1.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel_23.add(lblGraduationDate_1, BorderLayout.WEST);
@@ -580,8 +585,12 @@ public class MyFrame1 extends JFrame {
                 panel.revalidate();
             }
         });
-        btnBack_2.setBounds(596, 382, 89, 23);
+        btnBack_2.setBounds(325, 493, 89, 23);
         input_class_jpanel.add(btnBack_2);
+        
+        JLabel lblNewLabel_11 = new JLabel(new ImageIcon(openbook_img));
+        lblNewLabel_11.setBounds(10, 146, 714, 382);
+        input_class_jpanel.add(lblNewLabel_11);
 
         JPanel total_units_jpanel = new JPanel();
         total_units_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
