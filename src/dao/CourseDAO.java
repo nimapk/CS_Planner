@@ -130,7 +130,8 @@ public class CourseDAO {
 	}	
 	
 	//abc10
-	public List<String> searchCoursesUserAdded(int userid) throws Exception{ //cut a part of aCNO
+	//public List<String> searchCoursesUserAdded(int userid) throws Exception{ //cut a part of aCNO
+	public List<String> searchUpcomingCoursesOfUser(int userid) throws Exception{ //cut a part of aCNO
         if (!CheckConnection()) {
             ConnectionDB();
         } 
@@ -157,7 +158,7 @@ public class CourseDAO {
 	}	
 	
 	//abc11
-	public List<String> searchCoursesInSemester(int userid, int tYear) throws Exception{ 
+	public List<String> searchUpcomingCoursesInYear(int userid, int tYear) throws Exception{ 
         if (!CheckConnection()) {
             ConnectionDB();
         }		
@@ -186,6 +187,176 @@ public class CourseDAO {
 		}
 		
 	}		
+    
+    // add to ENROLLMENT table
+    public void addPassedCourseToUser(int userid, String cnum, String grade) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }
+        PreparedStatement myStmt = null;
+
+        try {
+            // prepare statement			
+            myStmt = myConn.prepareStatement("insert into ENROLLMENT"
+                    + " (userID, C_num, Grade)"
+                    + " values (?, ?, ?)");;
+
+            // set params		
+            myStmt.setInt(1, userid);
+            myStmt.setString(2, cnum);
+            myStmt.setString(3, grade);
+
+            // execute SQL
+            myStmt.executeUpdate();
+        } finally {
+            close(myStmt);
+        }
+    }	
+    
+    // calculate total units of upcoming courses for a user
+//    public int calculateTotalUnitsOfUpcomingCourse(int user_id) throws Exception {
+//        if (!CheckConnection()) {
+//            ConnectionDB();
+//        }    	
+//        int total_units = 0;
+//        PreparedStatement myStmt = null;
+//        ResultSet myRs = null;
+//
+//        try {
+//            myStmt = myConn.prepareStatement("SELECT SUM(Units) as userTotalUnits FROM ENROLLMENT, COURSES, user WHERE C_num = CNO AND userID = id AND id = ?");
+//            myStmt.setString(1, Integer.toString(user_id));
+//            myRs = myStmt.executeQuery();
+//
+//            while (myRs.next()) {
+//                total_units = myRs.getInt("userTotalUnits");
+//            }
+//            return total_units;
+//        } finally {
+//            close(myStmt, myRs);
+//        }
+//    }    
+    
+	
+    // calculate total units for a user
+    public int calculateTotalUnitsOfUser(int user_id) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }    	
+        int total_units = 0;
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            myStmt = myConn.prepareStatement("SELECT SUM(Units) as userTotalUnits FROM ENROLLMENT, COURSES, user WHERE C_num = CNO AND userID = id AND id = ?");
+            myStmt.setString(1, Integer.toString(user_id));
+            myRs = myStmt.executeQuery();
+
+            while (myRs.next()) {
+                total_units = myRs.getInt("userTotalUnits");
+            }
+            return total_units;
+        } finally {
+            close(myStmt, myRs);
+        }
+    }    
+
+    // find a list of courses a user passed
+    public List<String> searchPassedCourseOfUser(int userid) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }     	
+        List<String> list = new ArrayList<>();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            //prepare statement
+            myStmt = myConn.prepareStatement("select C_num from ENROLLMENT where userID like ?");
+            myStmt.setString(1, Integer.toString(userid));
+            myRs = myStmt.executeQuery();
+            while (myRs.next()) {
+                list.add(myRs.getString("C_num"));
+            }
+
+            return list;
+        } finally {
+            close(myStmt, myRs);
+        }
+
+    }
+
+    public List<String> searchGradeUserPassed(int userid) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        } 
+        List<String> list = new ArrayList<>();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+
+        try {
+            //prepare statement
+            myStmt = myConn.prepareStatement("select Grade from ENROLLMENT where userID like ?");
+            myStmt.setString(1, Integer.toString(userid));
+            myRs = myStmt.executeQuery();
+            while (myRs.next()) {
+                list.add(myRs.getString("Grade"));
+            }
+
+            return list;
+        } finally {
+            close(myStmt, myRs);
+        }
+
+    }
+
+    public double getScoreFromGrade(String grade) {
+        double scale = 0.0;
+        switch (grade) {
+            case "A+":
+                scale = 4.0;
+                break;
+            case "A":
+                scale = 4.0;
+                break;
+            case "A-":
+                scale = 3.7;
+                break;
+            case "B+":
+                scale = 3.3;
+                break;
+            case "B":
+                scale = 3.0;
+                break;
+            case "B-":
+                scale = 2.7;
+                break;
+            case "C+":
+                scale = 2.3;
+                break;
+            case "C":
+                scale = 2.0;
+                break;
+            case "C-":
+                scale = 1.7;
+                break;
+            case "D+":
+                scale = 1.3;
+                break;
+            case "D":
+                scale = 1.0;
+                break;
+            case "D-":
+                scale = 0.7;
+                break;
+            case "F":
+                scale = 0.0;
+                break;
+            default:
+                scale = 4.0;
+                break;
+        }
+        return scale;
+    }
     
     public Map<String, Course> getAllCoursesAsMap() throws Exception {
         if (!CheckConnection()) {

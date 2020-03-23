@@ -628,7 +628,7 @@ public class MyFrame1 extends JFrame {
                 try {
                     int aTotalUnits;
 
-                    aTotalUnits = userDAO.calculateTotalUnits(userId);
+                    aTotalUnits = aCourseDAO.calculateTotalUnitsOfUser(userId);
 
                     txtThisTabBy.setText(Integer.toString(aTotalUnits));
 
@@ -926,8 +926,8 @@ public class MyFrame1 extends JFrame {
                         courses_map = aCourseDAO.getAllCoursesAsMap();
                         List<String> passedCourses = null;
                         List<String> passedGrades = null;
-                        passedCourses = userDAO.searchCoursesUserPassed(userId);
-                        passedGrades = userDAO.searchGradeUserPassed(userId);
+                        passedCourses = aCourseDAO.searchPassedCourseOfUser(userId);
+                        passedGrades = aCourseDAO.searchGradeUserPassed(userId);
 
                         double total_units = 0;
                         double total_score = 0;
@@ -941,7 +941,7 @@ public class MyFrame1 extends JFrame {
                             }
                             int units = course_item.getUnits();
                             total_units += units;
-                            total_score += units * userDAO.getScoreFromGrade(grade);
+                            total_score += units * aCourseDAO.getScoreFromGrade(grade);
                         }
                         double GPA = 0.0;
                         if (total_units == 0 || total_score == 0) {
@@ -972,6 +972,67 @@ public class MyFrame1 extends JFrame {
                 if (source == btnGo_2) {
                     panel.removeAll();
                     panel.add(graduation_date_jpanel);
+                    
+                    //abc13
+                    try {
+                        int totalPassedUnits;	//of passed courses
+
+                        totalPassedUnits = aCourseDAO.calculateTotalUnitsOfUser(userId);                        
+                        String latestSemester = "Spring"; //Spring : 0, SUmmer: 1, Fall : 2, Winter : 3
+                        int intLatestSemester = 0;
+                        int latestYear = 2020;
+                        int graduateDate = latestYear * 10; //Spring: 0 
+                        int tempDate = graduateDate;
+                        
+  						upcourses = aCourseDAO.getAllUpcomingCourses(userId);
+  						 
+  						for (UpcomingCourse tUpCourse : upcourses) {
+  							totalPassedUnits += 3;
+  							tempDate = tUpCourse.getaYear() * 10 + tUpCourse.getIntOfAsmester();
+  							if (tempDate > graduateDate)
+  							{
+  								graduateDate = tempDate;
+  								latestYear =  tUpCourse.getaYear();
+  								latestSemester = tUpCourse.getaSemester();
+  								intLatestSemester = tUpCourse.getIntOfAsmester();
+  							}
+  						}
+  						if (totalPassedUnits >= 60)
+  						{
+  							txtThisWillDisplay.setText(latestSemester + " " + latestYear);
+  							txtThisWillDisplay.setFont(new Font("Tahoma", Font.BOLD, 45));
+  						}
+  						else
+  						{
+  							int remainingUnits = 60 - totalPassedUnits;	
+  							//we assume that: a student gets 2 semesters in a year. Spring is 15 units and Fall is 15 units.
+  							int addYear = remainingUnits / 30;
+  							latestYear += addYear;
+  							int modulo = remainingUnits % 30;
+  							if (modulo > 15)
+  								latestYear += 1;
+  							else
+  							{
+  								if (intLatestSemester > 1) //Fall or Winter	
+  								{
+  									latestSemester = "Spring";
+  									latestYear +=1;
+  								}
+  								else
+  								{
+  									latestSemester = "Fall";
+  								}
+  							}
+							txtThisWillDisplay.setText(latestSemester + " " + latestYear);
+  							txtThisWillDisplay.setFont(new Font("Tahoma", Font.BOLD, 45));  							  							
+  						}
+  						
+                    } catch (Exception exc) {
+                        JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                    
+                    
                     panel.repaint();
                     panel.revalidate();
                 }
@@ -1020,7 +1081,7 @@ public class MyFrame1 extends JFrame {
   					int[] coorX= {0,0};
   					try
   					{
-  						addedUpcomingCourses = aCourseDAO.searchCoursesInSemester(userId, mYear);
+  						addedUpcomingCourses = aCourseDAO.searchUpcomingCoursesInYear(userId, mYear);
   	                } catch (Exception exc) {
   	                    JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
   	                }				
@@ -1114,7 +1175,7 @@ public class MyFrame1 extends JFrame {
   					int[] coorX= {0,0};
   					try
   					{
-  						addedUpcomingCourses = aCourseDAO.searchCoursesInSemester(userId, mYear);
+  						addedUpcomingCourses = aCourseDAO.searchUpcomingCoursesInYear(userId, mYear);
   	                } catch (Exception exc) {
   	                    JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
   	                }				
@@ -1209,7 +1270,7 @@ public class MyFrame1 extends JFrame {
   					int[] coorX= {0,0};
   					try
   					{
-  						addedUpcomingCourses = aCourseDAO.searchCoursesInSemester(userId, mYear);
+  						addedUpcomingCourses = aCourseDAO.searchUpcomingCoursesInYear(userId, mYear);
   	                } catch (Exception exc) {
   	                    JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
   	                }				
@@ -1318,7 +1379,7 @@ public class MyFrame1 extends JFrame {
       						//Refresh courses
 //      						comboBoxNewCourses.removeAllItems();
 //      						List<String> passedCourses = null;
-//      						passedCourses = userDAO.searchCoursesUserPassed(userId);					
+//      						passedCourses = aCourseDAO.searchPassedCourseOfUser(userId);					
 //      						comboBoxNewCourses.addItem("");
 //      						for (Course tempCourse : courses) {
 //      							if (passedCourses.contains(tempCourse.getCno())) {
@@ -1334,8 +1395,8 @@ public class MyFrame1 extends JFrame {
       							courses = aCourseDAO.getAllCourses();					
       						List<String> passedCourses = null;
       						List<String> addedUpcomingCourses = null;
-      						passedCourses = userDAO.searchCoursesUserPassed(userId);
-      						addedUpcomingCourses = aCourseDAO.searchCoursesUserAdded(userId);
+      						passedCourses = aCourseDAO.searchPassedCourseOfUser(userId);
+      						addedUpcomingCourses = aCourseDAO.searchUpcomingCoursesOfUser(userId);
       						comboBoxNewCourses.removeAllItems();
       						comboBoxNewCourses.addItem("");
       						for (Course tempCourse : courses) {
@@ -1409,9 +1470,9 @@ public class MyFrame1 extends JFrame {
                         }
                         List<String> passedCourses = null;
 						List<String> addedUpcomingCourses = null;	//abc10
-						addedUpcomingCourses = aCourseDAO.searchCoursesUserAdded(userId);//abc10
+						addedUpcomingCourses = aCourseDAO.searchUpcomingCoursesOfUser(userId);//abc10
 						
-                        passedCourses = userDAO.searchCoursesUserPassed(userId);
+                        passedCourses = aCourseDAO.searchPassedCourseOfUser(userId);
                         comboBoxNewCourses.removeAllItems();
                         comboBoxNewCourses.addItem("");
                         for (Course tempCourse : courses) {
@@ -1462,7 +1523,7 @@ public class MyFrame1 extends JFrame {
                 } else {
                     try {
 
-                        userDAO.addCourseToUser(userId, aCnum[0], comboBoxGrade.getSelectedItem().toString());
+                        aCourseDAO.addPassedCourseToUser(userId, aCnum[0], comboBoxGrade.getSelectedItem().toString());
                         // show success message
                         JOptionPane.showMessageDialog(MyFrame1.this,
                                 "Course added succesfully.",
@@ -1474,7 +1535,7 @@ public class MyFrame1 extends JFrame {
                         //List<Course> courses = null;
                         //courses = aCourseDAO.getAllCourses();
                         List<String> passedCourses = null;
-                        passedCourses = userDAO.searchCoursesUserPassed(userId);
+                        passedCourses = aCourseDAO.searchPassedCourseOfUser(userId);
                         comboBoxCourses.addItem("");
                         for (Course tempCourse : courses) {
                             if (passedCourses.contains(tempCourse.getCno())) {
@@ -1525,7 +1586,7 @@ public class MyFrame1 extends JFrame {
                         courses = aCourseDAO.getAllCourses();
                     }
                     List<String> passedCourses = null;
-                    passedCourses = userDAO.searchCoursesUserPassed(userId);
+                    passedCourses = aCourseDAO.searchPassedCourseOfUser(userId);
                     comboBoxCourses.removeAllItems();
                     comboBoxCourses.addItem("");
                     for (Course tempCourse : courses) {
@@ -1684,7 +1745,7 @@ public class MyFrame1 extends JFrame {
                        		aCourseDAO = new CourseDAO();                                                       
       						courses = aCourseDAO.getAllCourses();					      						
       						List<String> addedUpcomingCourses = null;      						
-      						addedUpcomingCourses = aCourseDAO.searchCoursesUserAdded(userId);
+      						addedUpcomingCourses = aCourseDAO.searchUpcomingCoursesOfUser(userId);
       						List<String> allCourses = new ArrayList<>();	
       						for (Course tempCourse : courses) {
       							allCourses.add(tempCourse.getCno());							      							

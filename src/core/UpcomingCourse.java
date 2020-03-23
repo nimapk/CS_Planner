@@ -25,6 +25,16 @@ public class UpcomingCourse {
 	public int getaYear() {
 		return aYear;
 	}
+	public int getIntOfAsmester(){//Spring: 0, Summer: 1, Fall: 2, Winter: 3
+		if (aSemester.equals("Spring"))
+			return 0;
+		else if (aSemester.equals("Summer"))
+			return 1;
+		else if (aSemester.equals("Fall"))
+			return 2;
+		else
+			return 3;
+	}
 	@Override
 	public String toString() {
 		return String
