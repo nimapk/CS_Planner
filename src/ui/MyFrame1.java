@@ -52,6 +52,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.event.MouseWheelEvent;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -130,10 +132,11 @@ public class MyFrame1 extends JFrame {
         try {
             topCover = ImageIO.read(new File("images/p1cover.jpg"));
             behide_title = ImageIO.read(new File("images/title_panel1.png"));
-            openbook_img = ImageIO.read(new File("images/bground.jpg"));
+            openbook_img = ImageIO.read(new File("images/open_book.jpg"));
         } catch (Exception e) {
         }
        
+  
         // create the DAO
         try {
             userDAO = new UserDAO();
@@ -453,7 +456,7 @@ public class MyFrame1 extends JFrame {
 
         JTextPane txtpnKeepUpWith = new JTextPane();
         txtpnKeepUpWith.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        txtpnKeepUpWith.setText("Keep up with your plan. Your school classes have not changed. ");
+        txtpnKeepUpWith.setText("Keep up with your plan. Your school courses have not changed. ");
         panel_14.add(txtpnKeepUpWith, BorderLayout.CENTER);
 
         JPanel panel_23 = new JPanel();
@@ -472,6 +475,10 @@ public class MyFrame1 extends JFrame {
 
         btnGo_4.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel_23.add(btnGo_4, BorderLayout.EAST);
+        
+        JLabel lblNewLabel_10 = new JLabel(new ImageIcon(openbook_img));
+        lblNewLabel_10.setBounds(10, 142, 714, 386);
+        main_jpanel.add(lblNewLabel_10);
 
         JPanel gpa_jpanel = new JPanel();
         gpa_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
@@ -493,21 +500,23 @@ public class MyFrame1 extends JFrame {
         panel_15.add(lblGpaCalculator_1, BorderLayout.CENTER);
 
         JPanel panel_16 = new JPanel();
-        panel_16.setBackground(new Color(204, 204, 255));
+        panel_16.setBackground(Color.WHITE);
         panel_16.setBorder(new LineBorder(new Color(0, 102, 0)));
-        panel_16.setBounds(222, 229, 293, 95);
+        panel_16.setBounds(107, 204, 497, 212);
         gpa_jpanel.add(panel_16);
-        panel_16.setLayout(new BorderLayout(0, 0));
+        panel_16.setLayout(null);
 
         JLabel lblYourGpa = new JLabel("   Your Current GPA:");
-        lblYourGpa.setHorizontalAlignment(SwingConstants.CENTER);
-        panel_16.add(lblYourGpa, BorderLayout.CENTER);
-        lblYourGpa.setFont(new Font("Tahoma", Font.BOLD, 20));
-
-        JLabel label = new JLabel(" 0.0   ");
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        panel_16.add(label, BorderLayout.EAST);
-        label.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblYourGpa.setBounds(1, 1, 305, 210);
+        lblYourGpa.setHorizontalAlignment(SwingConstants.RIGHT);
+        panel_16.add(lblYourGpa);
+        lblYourGpa.setFont(new Font("Tahoma", Font.BOLD, 28));
+        
+                JLabel label = new JLabel(" 0.0   ");
+                label.setBounds(331, 1, 165, 210);
+                label.setHorizontalAlignment(SwingConstants.LEFT);
+                panel_16.add(label);
+                label.setFont(new Font("Tahoma", Font.BOLD, 28));
 
         JButton btnBack = new JButton("Back");
         btnBack.addActionListener(new ActionListener() {
@@ -523,9 +532,13 @@ public class MyFrame1 extends JFrame {
         });
 
         btnBack.setBorder(new LineBorder(new Color(0, 102, 0)));
-        btnBack.setFont(new Font("Tahoma", Font.BOLD, 20));
-        btnBack.setBounds(273, 414, 197, 50);
+        btnBack.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        btnBack.setBounds(324, 445, 88, 27);
         gpa_jpanel.add(btnBack);
+        
+        JLabel lblNewLabel_12 = new JLabel(new ImageIcon(openbook_img));
+        lblNewLabel_12.setBounds(10, 144, 714, 384);
+        gpa_jpanel.add(lblNewLabel_12);
 
         JPanel input_class_jpanel = new JPanel();
         input_class_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
@@ -677,6 +690,10 @@ public class MyFrame1 extends JFrame {
         lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel_9.setBounds(59, 200, 607, 33);
         total_units_jpanel.add(lblNewLabel_9);
+        
+        JLabel lblNewLabel_13 = new JLabel(new ImageIcon(openbook_img));
+        lblNewLabel_13.setBounds(10, 146, 714, 382);
+        total_units_jpanel.add(lblNewLabel_13);
 
         JPanel graduation_date_jpanel = new JPanel();
         graduation_date_jpanel.setLayout(null);
@@ -700,13 +717,17 @@ public class MyFrame1 extends JFrame {
         txtThisWillDisplay.setText("THis will display the graduation date");
         txtThisWillDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         txtThisWillDisplay.setColumns(10);
-        txtThisWillDisplay.setBounds(59, 171, 607, 192);
+        txtThisWillDisplay.setBounds(61, 230, 607, 192);
         graduation_date_jpanel.add(txtThisWillDisplay);
 
         JButton button_1 = new JButton("Back");
 
-        button_1.setBounds(321, 394, 89, 23);
+        button_1.setBounds(320, 463, 89, 23);
         graduation_date_jpanel.add(button_1);
+        
+        JLabel lblNewLabel_15 = new JLabel(new ImageIcon(openbook_img));
+        lblNewLabel_15.setBounds(10, 146, 714, 382);
+        graduation_date_jpanel.add(lblNewLabel_15);
 
         JPanel result_plan_jpanel = new JPanel();
         result_plan_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
@@ -752,25 +773,29 @@ public class MyFrame1 extends JFrame {
         
 		//abc10
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 146, 714, 346);
+		panel_2.setBounds(46, 169, 638, 303);
 		result_plan_jpanel.add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel lblPlanYear = new JLabel("Year (int)");
 		lblPlanYear.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblPlanYear.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPlanYear.setBounds(311, 0, 92, 24);
+		lblPlanYear.setBounds(269, 0, 92, 24);
 		panel_2.add(lblPlanYear);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 26, 714, 158);
+		scrollPane.setBounds(0, 26, 638, 158);
 		panel_2.add(scrollPane);
 		
 
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(0, 180, 714, 166);
+		scrollPane_1.setBounds(0, 180, 638, 166);
 		panel_2.add(scrollPane_1);
+		
+		JLabel lblNewLabel_16 = new JLabel(new ImageIcon(openbook_img));
+		lblNewLabel_16.setBounds(10, 146, 714, 382);
+		result_plan_jpanel.add(lblNewLabel_16);
 		
 
 		
@@ -876,6 +901,10 @@ public class MyFrame1 extends JFrame {
         btnUpcourseRemove.setToolTipText("Add your untaken class to database.");
         btnUpcourseRemove.setBounds(179, 493, 89, 23);
         class_planner_jpanel.add(btnUpcourseRemove);
+        
+        JLabel lblNewLabel_14 = new JLabel(new ImageIcon(openbook_img));
+        lblNewLabel_14.setBounds(10, 146, 714, 382);
+        class_planner_jpanel.add(lblNewLabel_14);
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -1756,13 +1785,13 @@ public class MyFrame1 extends JFrame {
       						{
       							int tCheck = 0; //check if Upcoming course exists in list of courses
       							if (!allCourses.contains(tUpcomingCourses)) {
-      								txtpnKeepUpWith.setText("Some of your upcoming courses were deleted or changed the course number (CNO)");
+      								txtpnKeepUpWith.setText("Your selected courses are no longer available. Please re-do your plan!");
       								tParentCheck = 0;
       								break;								
       							}      								      						
       						}
                             if (tParentCheck == 1)
-                            	txtpnKeepUpWith.setText("Keep up with your plan. Your school classes have not changed.");
+                            	txtpnKeepUpWith.setText("Keep up with your plan. Your school courses have not changed.");
 
                             panel.repaint();
                             panel.revalidate();
