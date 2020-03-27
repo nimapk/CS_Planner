@@ -58,6 +58,7 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.UIManager;
 
 
 public class MyFrame1 extends JFrame {
@@ -234,6 +235,7 @@ public class MyFrame1 extends JFrame {
         login_jpanel.add(btnForgotPassword);
 
         JPanel login_panel = new JPanel();
+        login_panel.setForeground(new Color(0, 0, 255));
         login_panel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
         login_panel.setBackground(new Color(255, 204, 0));
         login_panel.setBounds(0, 0, 734, 146);
@@ -241,8 +243,9 @@ public class MyFrame1 extends JFrame {
         login_panel.setLayout(new BorderLayout(0, 0));
 
         JLabel lblNewLabel_4 = new JLabel("Login");
+        lblNewLabel_4.setBackground(new Color(204, 0, 0));
         lblNewLabel_4.setForeground(new Color(204, 0, 0));
-        lblNewLabel_4.setFont(new Font("Vivaldi", Font.BOLD, 52));
+        lblNewLabel_4.setFont(new Font("Cambria", Font.BOLD, 52));
         lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
         login_panel.add(lblNewLabel_4, BorderLayout.CENTER);
 
@@ -362,8 +365,9 @@ public class MyFrame1 extends JFrame {
         panel_8.setLayout(new BorderLayout(0, 0));
 
         JLabel lblRegister = new JLabel("Register");
+        lblRegister.setBackground(new Color(204, 0, 0));
         lblRegister.setForeground(new Color(204, 0, 0));
-        lblRegister.setFont(new Font("Vivaldi", Font.BOLD, 52));
+        lblRegister.setFont(new Font("Cambria", Font.BOLD, 52));
         lblRegister.setHorizontalAlignment(SwingConstants.CENTER);
         panel_8.add(lblRegister, BorderLayout.CENTER);
 
@@ -382,7 +386,7 @@ public class MyFrame1 extends JFrame {
 
         JLabel lblWelcome = new JLabel("Welcome, name of the user");
         lblWelcome.setForeground(new Color(204, 0, 0));
-        lblWelcome.setFont(new Font("Vivaldi", Font.BOLD, 52));
+        lblWelcome.setFont(new Font("Cambria", Font.BOLD, 52));
         panel_9.add(lblWelcome, BorderLayout.CENTER);
         lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -394,7 +398,7 @@ public class MyFrame1 extends JFrame {
         panel_10.setLayout(new BorderLayout(0, 0));
         
         
-        JLabel lblClassPlanner = new JLabel(" \u2666 Input Your Classes");
+        JLabel lblClassPlanner = new JLabel(" \u2666 Input Your Courses");
         lblClassPlanner.setToolTipText("");
         lblClassPlanner.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel_10.add(lblClassPlanner, BorderLayout.WEST);
@@ -496,7 +500,7 @@ public class MyFrame1 extends JFrame {
         JLabel lblGpaCalculator_1 = new JLabel("GPA Calculator");
         lblGpaCalculator_1.setForeground(new Color(204, 0, 0));
         lblGpaCalculator_1.setHorizontalAlignment(SwingConstants.CENTER);
-        lblGpaCalculator_1.setFont(new Font("Vivaldi", Font.BOLD, 52));
+        lblGpaCalculator_1.setFont(new Font("Cambria", Font.BOLD, 52));
         panel_15.add(lblGpaCalculator_1, BorderLayout.CENTER);
 
         JPanel panel_16 = new JPanel();
@@ -549,7 +553,7 @@ public class MyFrame1 extends JFrame {
         comboBoxCourses.setBounds(66, 298, 400, 20);
         input_class_jpanel.add(comboBoxCourses);
 
-        JLabel lblCourseWarning = new JLabel("Choose the classes which you have taken");
+        JLabel lblCourseWarning = new JLabel("Choose the courses which you have taken");
         lblCourseWarning.setHorizontalAlignment(SwingConstants.CENTER);
         lblCourseWarning.setBounds(66, 258, 398, 14);
         input_class_jpanel.add(lblCourseWarning);
@@ -578,13 +582,14 @@ public class MyFrame1 extends JFrame {
         input_class_jpanel.add(panel_18);
         panel_18.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblClassPlanner_1 = new JLabel("Input Your Classes");
+        JLabel lblClassPlanner_1 = new JLabel("Input Your Courses");
+        lblClassPlanner_1.setBackground(new Color(255, 255, 255));
         lblClassPlanner_1.setForeground(new Color(204, 0, 0));
-        lblClassPlanner_1.setFont(new Font("Vivaldi", Font.BOLD, 52));
+        lblClassPlanner_1.setFont(new Font("Cambria", Font.BOLD, 52));
         lblClassPlanner_1.setHorizontalAlignment(SwingConstants.CENTER);
         panel_18.add(lblClassPlanner_1, BorderLayout.CENTER);
 
-        JLabel lblAddClass = new JLabel("Add Class");
+        JLabel lblAddClass = new JLabel("Add Course");
         lblAddClass.setHorizontalAlignment(SwingConstants.CENTER);
         lblAddClass.setBounds(596, 258, 89, 14);
         input_class_jpanel.add(lblAddClass);
@@ -619,7 +624,7 @@ public class MyFrame1 extends JFrame {
 
         JLabel lblNewLabel_6 = new JLabel("Total Units");
         lblNewLabel_6.setForeground(new Color(204, 0, 0));
-        lblNewLabel_6.setFont(new Font("Vivaldi", Font.BOLD, 52));
+        lblNewLabel_6.setFont(new Font("Cambria", Font.BOLD, 52));
         lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
         panel_19.add(lblNewLabel_6, BorderLayout.CENTER);
 
@@ -709,7 +714,7 @@ public class MyFrame1 extends JFrame {
 
         JLabel lblNewLabel_8 = new JLabel("Graduation Date");
         lblNewLabel_8.setForeground(new Color(204, 0, 0));
-        lblNewLabel_8.setFont(new Font("Vivaldi", Font.BOLD, 52));
+        lblNewLabel_8.setFont(new Font("Cambria", Font.BOLD, 52));
         lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
         panel_28.add(lblNewLabel_8, BorderLayout.CENTER);
 
@@ -743,7 +748,7 @@ public class MyFrame1 extends JFrame {
 
         JLabel lblYourPlan = new JLabel("Your Plan");
         lblYourPlan.setForeground(new Color(204, 0, 0));
-        lblYourPlan.setFont(new Font("Vivaldi", Font.BOLD, 52));
+        lblYourPlan.setFont(new Font("Cambria", Font.BOLD, 52));
         lblYourPlan.setHorizontalAlignment(SwingConstants.CENTER);
         panel_21.add(lblYourPlan, BorderLayout.CENTER);
 
@@ -832,7 +837,7 @@ public class MyFrame1 extends JFrame {
         JLabel lblClassPlanner_2 = new JLabel("Class Planner");
         lblClassPlanner_2.setHorizontalAlignment(SwingConstants.CENTER);
         lblClassPlanner_2.setForeground(new Color(204, 0, 0));
-        lblClassPlanner_2.setFont(new Font("Vivaldi", Font.BOLD, 52));
+        lblClassPlanner_2.setFont(new Font("Cambria", Font.BOLD, 52));
         panel_25.add(lblClassPlanner_2, BorderLayout.CENTER);
 
 		//abc10
@@ -884,7 +889,7 @@ public class MyFrame1 extends JFrame {
         lblPrerequisiteCourses.setBounds(63, 456, 373, 20);
         class_planner_jpanel.add(lblPrerequisiteCourses);
 
-        JLabel lblClassesThatYou = new JLabel("Classes that you want to take");
+        JLabel lblClassesThatYou = new JLabel("Courses that you want to take");
         lblClassesThatYou.setHorizontalAlignment(SwingConstants.CENTER);
         lblClassesThatYou.setBounds(63, 391, 373, 23);
         class_planner_jpanel.add(lblClassesThatYou);
