@@ -1681,7 +1681,7 @@ public class MyFrame1 extends JFrame {
                 if (email != null && email.trim().length() > 0) {
                     try {
                         users = userDAO.searchEmails(email);
-                        if (!email.isEmpty()) {
+                        if (!users.isEmpty()) {
                             JOptionPane.showMessageDialog(MyFrame1.this, "This email was used.", "Error", JOptionPane.ERROR_MESSAGE);
                             return;
                         }
