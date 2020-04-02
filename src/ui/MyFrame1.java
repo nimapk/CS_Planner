@@ -398,7 +398,7 @@ public class MyFrame1 extends JFrame {
         panel_10.setLayout(new BorderLayout(0, 0));
         
         
-        JLabel lblClassPlanner = new JLabel(" \u2666 Input Your Courses");
+        JLabel lblClassPlanner = new JLabel(" \u2666 Input Your Completed Courses");
         lblClassPlanner.setToolTipText("");
         lblClassPlanner.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel_10.add(lblClassPlanner, BorderLayout.WEST);
@@ -429,7 +429,7 @@ public class MyFrame1 extends JFrame {
         main_jpanel.add(panel_12);
         panel_12.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblGraduationDate = new JLabel(" \u2666 Graduation Date");
+        JLabel lblGraduationDate = new JLabel(" \u2666 Expected Graduation Date");
         lblGraduationDate.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel_12.add(lblGraduationDate, BorderLayout.WEST);
 
@@ -444,7 +444,7 @@ public class MyFrame1 extends JFrame {
         main_jpanel.add(panel_13);
         panel_13.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblTotalUnits = new JLabel(" \u2666 Total Units");
+        JLabel lblTotalUnits = new JLabel(" \u2666 Completed Units");
         lblTotalUnits.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel_13.add(lblTotalUnits, BorderLayout.WEST);
 
@@ -471,7 +471,7 @@ public class MyFrame1 extends JFrame {
         panel_23.setLayout(new BorderLayout(0, 0));
 
         
-        JLabel lblGraduationDate_1 = new JLabel(" \u2666 Class Planner");
+        JLabel lblGraduationDate_1 = new JLabel(" \u2666 Course Planner");
         lblGraduationDate_1.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel_23.add(lblGraduationDate_1, BorderLayout.WEST);
 
@@ -582,7 +582,7 @@ public class MyFrame1 extends JFrame {
         input_class_jpanel.add(panel_18);
         panel_18.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblClassPlanner_1 = new JLabel("Input Your Courses");
+        JLabel lblClassPlanner_1 = new JLabel("Input Your Completed Courses");
         lblClassPlanner_1.setBackground(new Color(255, 255, 255));
         lblClassPlanner_1.setForeground(new Color(204, 0, 0));
         lblClassPlanner_1.setFont(new Font("Cambria", Font.BOLD, 52));
@@ -622,7 +622,7 @@ public class MyFrame1 extends JFrame {
         total_units_jpanel.add(panel_19);
         panel_19.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblNewLabel_6 = new JLabel("Total Units");
+        JLabel lblNewLabel_6 = new JLabel("Completed Units");
         lblNewLabel_6.setForeground(new Color(204, 0, 0));
         lblNewLabel_6.setFont(new Font("Cambria", Font.BOLD, 52));
         lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
@@ -712,7 +712,7 @@ public class MyFrame1 extends JFrame {
         graduation_date_jpanel.add(panel_28);
         panel_28.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblNewLabel_8 = new JLabel("Graduation Date");
+        JLabel lblNewLabel_8 = new JLabel("Expected Graduation Date");
         lblNewLabel_8.setForeground(new Color(204, 0, 0));
         lblNewLabel_8.setFont(new Font("Cambria", Font.BOLD, 52));
         lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
@@ -746,7 +746,7 @@ public class MyFrame1 extends JFrame {
         result_plan_jpanel.add(panel_21);
         panel_21.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblYourPlan = new JLabel("Your Plan");
+        JLabel lblYourPlan = new JLabel("Your Study Plan");
         lblYourPlan.setForeground(new Color(204, 0, 0));
         lblYourPlan.setFont(new Font("Cambria", Font.BOLD, 52));
         lblYourPlan.setHorizontalAlignment(SwingConstants.CENTER);
@@ -834,7 +834,7 @@ public class MyFrame1 extends JFrame {
         class_planner_jpanel.add(panel_25);
         panel_25.setLayout(new BorderLayout(0, 0));
 
-        JLabel lblClassPlanner_2 = new JLabel("Class Planner");
+        JLabel lblClassPlanner_2 = new JLabel("Course Planner");
         lblClassPlanner_2.setHorizontalAlignment(SwingConstants.CENTER);
         lblClassPlanner_2.setForeground(new Color(204, 0, 0));
         lblClassPlanner_2.setFont(new Font("Cambria", Font.BOLD, 52));
