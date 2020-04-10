@@ -4,6 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>CS_Planner</groupId>
 	<artifactId>CS_Planner</artifactId>
+	<packaging>jar</packaging>
 	<version>1.0.0</version>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -16,8 +17,29 @@
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+		        <artifactId>build-helper-maven-plugin</artifactId>
+		        <version>3.1.0</version>
+		        <executions>
+		          <execution>
+		            <id>add-resource</id>
+		            <phase>generate-resources</phase>
+		            <goals>
+		              <goal>add-resource</goal>
+		            </goals>
+		            <configuration>
+		              <resources>
+		                <resource>
+		                  <directory>src/images</directory>
+		                  <targetPath>../src/images</targetPath>
+		                </resource>
+		              </resources>
+		            </configuration>
+		          </execution>
+		        </executions>
+     		</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
@@ -30,14 +52,14 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
 					<archive>
 						<manifest>
 							<mainClass>ui.MyFrame1</mainClass>
 						</manifest>
 					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 				</configuration>
 				<executions>
 					<execution>

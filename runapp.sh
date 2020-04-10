@@ -5,4 +5,4 @@
 # ./runapp.sh   or sh runapp.sh  == run the script
 
 echo "Run the app"
-java -jar CS_Planner-1.0.0-jar-with-dependencies.jar
+java -jar target/CS_Planner-1.0.0-jar-with-dependencies.jar
