@@ -605,15 +605,19 @@ public class MyFrame1 extends JFrame {
         });
         btnBack_2.setBounds(325, 493, 89, 23);
         input_class_jpanel.add(btnBack_2);
+        JLabel lblNewLabel_17 = new JLabel("Remove Course");
+        lblNewLabel_17.setBounds(596, 332, 107, 28);
+        input_class_jpanel.add(lblNewLabel_17);
         
-        JLabel lblNewLabel_11 = new JLabel(new ImageIcon(openbook_img));
-        lblNewLabel_11.setBounds(10, 146, 714, 382);
-        input_class_jpanel.add(lblNewLabel_11);
-
+        JButton btnRemovePCourse = new JButton("Remove");
+        btnRemovePCourse.setBounds(596, 372, 89, 29);
+        input_class_jpanel.add(btnRemovePCourse);
+        
         JPanel total_units_jpanel = new JPanel();
         total_units_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
         panel.add(total_units_jpanel, "name_1830898570700");
         total_units_jpanel.setLayout(null);
+     
 
         JPanel panel_19 = new JPanel();
         panel_19.setBorder(new LineBorder(new Color(0, 102, 0), 2));
@@ -1584,6 +1588,50 @@ public class MyFrame1 extends JFrame {
 
                         //comboBoxCourses.removeItemAt(currentIndex);
                         //comboBoxCourses.insertItemAt(sCurrentItem + " >> (Passed)", currentIndex);
+                    } catch (Exception exc) {
+                        JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+            }
+        });
+        
+        btnRemovePCourse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                //abc3
+                String sCurrentItem = comboBoxCourses.getSelectedItem().toString();
+                String[] aCnum = sCurrentItem.split(" - ");
+                int currentIndex = comboBoxCourses.getSelectedIndex();
+                //lblCourseWarning.setText("You chose course: " + aCnum[0]);	
+                if (aCnum[0] == "") {
+                    JOptionPane.showMessageDialog(MyFrame1.this, "Course cannot be blank!", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    try {
+
+                        aCourseDAO.removePassedCourseFromUser(userId, aCnum[0]);
+                        // show success message
+                        JOptionPane.showMessageDialog(MyFrame1.this,
+                                "Course removed succesfully.",
+                                "Course removed",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                        //Refresh courses
+                        comboBoxCourses.removeAllItems();
+                        //List<Course> courses = null;
+                        //courses = aCourseDAO.getAllCourses();
+                        List<String> passedCourses = null;
+                        passedCourses = aCourseDAO.searchPassedCourseOfUser(userId);
+                        comboBoxCourses.addItem("");
+                        for (Course tempCourse : courses) {
+                        	   if (passedCourses.contains(tempCourse.getCno())) {
+                                   comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");
+
+                               } else {
+                                   comboBoxCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle());
+                               }
+                        }
+                        comboBoxGrade.setSelectedIndex(0);
+                       
                     } catch (Exception exc) {
                         JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
                     }

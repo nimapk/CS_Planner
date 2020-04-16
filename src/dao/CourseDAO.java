@@ -213,6 +213,31 @@ public class CourseDAO {
         }
     }	
     
+   public void removePassedCourseFromUser(int userid, String cnum) throws Exception {
+	   
+	   if (!CheckConnection()) {
+           ConnectionDB();
+       }
+       PreparedStatement myStmt = null;
+
+       try {
+           // prepare statement			
+           myStmt = myConn.prepareStatement("DELETE FROM ENROLLMENT WHERE userID = ? AND C_num = ?;");
+                   
+           // set params		
+           myStmt.setInt(1, userid);
+           myStmt.setString(2, cnum);
+
+           // execute SQL
+           myStmt.executeUpdate();
+       } finally {
+           close(myStmt);
+       }
+	   
+	   
+	   
+   }
+    
     // calculate total units of upcoming courses for a user
 //    public int calculateTotalUnitsOfUpcomingCourse(int user_id) throws Exception {
 //        if (!CheckConnection()) {
