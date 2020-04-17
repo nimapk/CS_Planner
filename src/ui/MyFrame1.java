@@ -550,28 +550,28 @@ public class MyFrame1 extends JFrame {
         input_class_jpanel.setLayout(null);
 
         JComboBox comboBoxCourses = new JComboBox();
-        comboBoxCourses.setBounds(66, 298, 400, 20);
+        comboBoxCourses.setBounds(51, 298, 400, 20);
         input_class_jpanel.add(comboBoxCourses);
 
         JLabel lblCourseWarning = new JLabel("Choose the courses which you have taken");
         lblCourseWarning.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCourseWarning.setBounds(66, 258, 398, 14);
+        lblCourseWarning.setBounds(51, 273, 398, 14);
         input_class_jpanel.add(lblCourseWarning);
 
         JButton btnCourseAdd = new JButton("Add");
         btnCourseAdd.setToolTipText("Add your taken classes to database");
-        btnCourseAdd.setBounds(596, 297, 89, 23);
+        btnCourseAdd.setBounds(595, 297, 89, 23);
         input_class_jpanel.add(btnCourseAdd);
 
         JLabel lblCourseAdd = new JLabel("Grade");
         lblCourseAdd.setHorizontalAlignment(SwingConstants.CENTER);
-        lblCourseAdd.setBounds(502, 258, 62, 14);
+        lblCourseAdd.setBounds(490, 273, 62, 14);
         input_class_jpanel.add(lblCourseAdd);
 
         String[] listGrades = {"", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"};
         JComboBox comboBoxGrade = new JComboBox(listGrades);
         comboBoxGrade.setToolTipText("Input the grade that you got for the selected class");
-        comboBoxGrade.setBounds(502, 298, 62, 20);
+        comboBoxGrade.setBounds(490, 298, 62, 20);
         //JComboBoxDecorator.decorate(comboBoxGrade, true); 
         input_class_jpanel.add(comboBoxGrade);
 
@@ -585,13 +585,13 @@ public class MyFrame1 extends JFrame {
         JLabel lblClassPlanner_1 = new JLabel("Input Your Completed Courses");
         lblClassPlanner_1.setBackground(new Color(255, 255, 255));
         lblClassPlanner_1.setForeground(new Color(204, 0, 0));
-        lblClassPlanner_1.setFont(new Font("Cambria", Font.BOLD, 52));
+        lblClassPlanner_1.setFont(new Font("Cambria", Font.BOLD, 50));
         lblClassPlanner_1.setHorizontalAlignment(SwingConstants.CENTER);
         panel_18.add(lblClassPlanner_1, BorderLayout.CENTER);
 
         JLabel lblAddClass = new JLabel("Add Course");
         lblAddClass.setHorizontalAlignment(SwingConstants.CENTER);
-        lblAddClass.setBounds(596, 258, 89, 14);
+        lblAddClass.setBounds(595, 272, 89, 14);
         input_class_jpanel.add(lblAddClass);
         //==========================================================================Here Plan			
         JButton btnBack_2 = new JButton("Back");
@@ -603,15 +603,24 @@ public class MyFrame1 extends JFrame {
                 panel.revalidate();
             }
         });
-        btnBack_2.setBounds(325, 493, 89, 23);
+        btnBack_2.setBounds(595, 464, 89, 23);
         input_class_jpanel.add(btnBack_2);
         JLabel lblNewLabel_17 = new JLabel("Remove Course");
-        lblNewLabel_17.setBounds(596, 332, 107, 28);
+        lblNewLabel_17.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel_17.setBounds(596, 353, 88, 20);
         input_class_jpanel.add(lblNewLabel_17);
         
         JButton btnRemovePCourse = new JButton("Remove");
-        btnRemovePCourse.setBounds(596, 372, 89, 29);
+        btnRemovePCourse.setBounds(595, 384, 89, 23);
         input_class_jpanel.add(btnRemovePCourse);
+        
+        JLabel label_1 = new JLabel("New label");
+        label_1.setBounds(10, 514, 42, -2);
+        input_class_jpanel.add(label_1);
+        
+        JLabel lblNewLabel_11 = new JLabel(new ImageIcon(openbook_img));
+        lblNewLabel_11.setBounds(10, 146, 714, 382);
+        input_class_jpanel.add(lblNewLabel_11);
         
         JPanel total_units_jpanel = new JPanel();
         total_units_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
