@@ -97,8 +97,8 @@ public class MyFrame1 extends JFrame {
     private BufferedImage topCover;
     private BufferedImage behide_title;		//panel 1 title
     private BufferedImage openbook_img;	//main menu
-    private ImageIcon backward_icon = new ImageIcon("src/images/leftbutton.png");
-    private ImageIcon forward_icon = new ImageIcon("src/images/rightbutton.png");
+    private ImageIcon backward_icon = new ImageIcon("src/images/leftarr.png");
+    private ImageIcon forward_icon = new ImageIcon("src/images/rightarr.png");
 
     private JTextField txtThisWillDisplay;
     private JTable table;//abc10    
@@ -872,7 +872,7 @@ public class MyFrame1 extends JFrame {
         class_planner_jpanel.add(button_4);
 
         //abc10
-        JButton button_5 = new JButton("Here Your Plan");
+        JButton button_5 = new JButton("Here's Your Plan");
         button_5.setBounds(527, 493, 147, 23);
         class_planner_jpanel.add(button_5);
 
@@ -1395,8 +1395,71 @@ public class MyFrame1 extends JFrame {
       		});
       		///abc12
             btnUpcourseRemove.addActionListener(new ActionListener() {
-            	public void actionPerformed(ActionEvent arg0) {
+            	public void actionPerformed(ActionEvent e) {
+            		int curRowIndex = tableNewCourses.getSelectedRow();
+            		int curColIndex = tableNewCourses.getSelectedColumn();
+ 				
+      				if (curRowIndex < 0 || curColIndex < 0) {
+      					JOptionPane.showMessageDialog(MyFrame1.this,  "Please select a course to remove", "Error", JOptionPane.ERROR_MESSAGE);
+      				}
+      				else {
+      					try {
+      	            		String sCurrentItem = (String) tableNewCourses.getValueAt(curRowIndex, curColIndex);
+      						aCourseDAO.removeUpcomingCourseFromUser(userId, sCurrentItem);
+      						JOptionPane.showMessageDialog(MyFrame1.this,
+      								"Course removed succesfully.",
+      								"Course Removed",
+      								JOptionPane.INFORMATION_MESSAGE);
+      					
+      												
+      						if (courses == null)	//Don't load any course into the list so far
+      							courses = aCourseDAO.getAllCourses();					
+      						List<String> passedCourses = null;
+      						List<String> addedUpcomingCourses = null;
+      						passedCourses = aCourseDAO.searchPassedCourseOfUser(userId);
+      						addedUpcomingCourses = aCourseDAO.searchUpcomingCoursesOfUser(userId);
+      						comboBoxNewCourses.removeAllItems();
+      						comboBoxNewCourses.addItem("");
+      						for (Course tempCourse : courses) {
+      							if (passedCourses.contains(tempCourse.getCno())|| addedUpcomingCourses.contains(tempCourse.getCno())) {
+      								// dont' do any thing or add with notice "passed"
+      								//comboBoxNewCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle() + " >> (Passed)");								
+      							}
+      							else
+      							{
+      								comboBoxNewCourses.addItem(tempCourse.getCno() + " - " + tempCourse.getCtitle());
+      							}
+      						}
+      						
+      						//abc103
+      						//RELOAD TABLE
+      						try {
+      							upcourses = aCourseDAO.getAllUpcomingCourses(userId);
+      						} catch (Exception exc) {					
+      							JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+      						}					
+      						NewCoursesTableModel newCoursesModel = new NewCoursesTableModel(upcourses);
+      						tableNewCourses.setModel(newCoursesModel);
+      						// set columns widths
+      						TableColumnModel tcm = tableNewCourses.getColumnModel();
+      					      tcm.getColumn(0).setPreferredWidth(400);  
+      					      tcm.getColumn(1).setPreferredWidth(30);  
+      					      tcm.getColumn(2).setPreferredWidth(30);  
+      						
+      						//SET DEFAULT comboBoxes						
+      						comboBoxNewCourses.setSelectedIndex(0);
+      						comboBoxSemester.setSelectedIndex(0);
+      						comboBoxYear.setSelectedIndex(0);
+      						
+      						panel.repaint();
+      						panel.revalidate();
+      					}
+      					catch (Exception exc) {
+      						JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+      					}
+      				}
             	}
+            	
             });
       		
       		//abc10

@@ -129,6 +129,32 @@ public class CourseDAO {
 		}				
 	}	
 	
+	public void removeUpcomingCourseFromUser(int aID, String aCNO) throws Exception {
+		if (!CheckConnection())
+		{
+			ConnectionDB();
+		}
+		PreparedStatement myStmt = null;
+
+		try {
+			// prepare statement			
+			 myStmt = myConn.prepareStatement("DELETE FROM ADDED_COURSES WHERE aID = ? AND aCNO = ?");;
+             
+	           // set params		
+			
+			// set params					
+			myStmt.setInt(1, aID);
+			myStmt.setString(2, aCNO);
+	
+			
+			// execute SQL
+			myStmt.executeUpdate();			
+		}
+		finally {
+			close(myStmt);
+		}				
+	}	
+	
 	//abc10
 	//public List<String> searchCoursesUserAdded(int userid) throws Exception{ //cut a part of aCNO
 	public List<String> searchUpcomingCoursesOfUser(int userid) throws Exception{ //cut a part of aCNO
@@ -233,8 +259,7 @@ public class CourseDAO {
        } finally {
            close(myStmt);
        }
-	   
-	   
+	      
 	   
    }
     
