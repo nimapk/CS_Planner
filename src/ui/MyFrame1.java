@@ -1671,36 +1671,34 @@ public class MyFrame1 extends JFrame {
         btnRemovePCourse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 //abc3
+            	int currentIndex = comboBoxCourses.getSelectedIndex();
                 String sCurrentItem = comboBoxCourses.getSelectedItem().toString();
                 String[] aCnum = sCurrentItem.split(" - ");
-                
-                for (int i = 0; i < aCnum.length; i++ ) {
-                	System.out.println("The cnum is " + aCnum[i]);
+                String[] aStatus = {};
+                if (aCnum.length > 1) {
+                	aStatus = aCnum[1].split(" >> ");                    
                 }
                 
-                int currentIndex = comboBoxCourses.getSelectedIndex();
+                
                 //lblCourseWarning.setText("You chose course: " + aCnum[0]);	
                 if (currentIndex < 1) {
                     JOptionPane.showMessageDialog(MyFrame1.this, "Please select a Passed Course.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else  {
+                } 
+                else if (aStatus.length <= 1 ) {
+                	JOptionPane.showMessageDialog(MyFrame1.this, "Please remove only Passed Courses.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                else  {
                     try {
-                    	
-                    	if (aCnum[1].contains("<< Passed")) {
+                    	if (aStatus[1].contains("(Passed)")) {
+                    		System.out.println(aCnum[0]);
                     		aCourseDAO.removePassedCourseFromUser(userId, aCnum[0]);
                             // show success message
                             JOptionPane.showMessageDialog(MyFrame1.this,
                                     "Course removed succesfully.",
                                     "Course removed",
                                     JOptionPane.INFORMATION_MESSAGE);
-                    	}
-                    	
-                    	else {
-                    		JOptionPane.showMessageDialog(MyFrame1.this,
-                                    "Please only remove a Passed Course",
-                                    "Error",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                    	}
-                     
+                    	}      
 
                         //Refresh courses
                         comboBoxCourses.removeAllItems();
@@ -1718,6 +1716,7 @@ public class MyFrame1 extends JFrame {
                                }
                         }
                         comboBoxGrade.setSelectedIndex(0);
+                        comboBoxCourses.setSelectedIndex(0);
                        
                     } catch (Exception exc) {
                         JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
