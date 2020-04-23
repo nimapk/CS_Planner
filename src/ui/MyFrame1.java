@@ -607,7 +607,7 @@ public class MyFrame1 extends JFrame {
         input_class_jpanel.add(btnBack_2);
         JLabel lblNewLabel_17 = new JLabel("Remove Course");
         lblNewLabel_17.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_17.setBounds(596, 353, 88, 20);
+        lblNewLabel_17.setBounds(595, 353, 90, 20);
         input_class_jpanel.add(lblNewLabel_17);
         
         JButton btnRemovePCourse = new JButton("Remove");
@@ -1450,6 +1450,7 @@ public class MyFrame1 extends JFrame {
       						comboBoxNewCourses.setSelectedIndex(0);
       						comboBoxSemester.setSelectedIndex(0);
       						comboBoxYear.setSelectedIndex(0);
+      						JComboBoxDecorator.decorate(comboBoxNewCourses, true); //abc14
       						
       						panel.repaint();
       						panel.revalidate();
@@ -1539,7 +1540,7 @@ public class MyFrame1 extends JFrame {
       						comboBoxNewCourses.setSelectedIndex(0);
       						comboBoxSemester.setSelectedIndex(0);
       						comboBoxYear.setSelectedIndex(0);
-      						//JComboBoxDecorator.decorate(comboBoxCourses, true); //update list 
+      						JComboBoxDecorator.decorate(comboBoxNewCourses, true); //update list abc14 
       						
       						
       						
@@ -1614,7 +1615,8 @@ public class MyFrame1 extends JFrame {
 				      tcm.getColumn(0).setPreferredWidth(400);  
 				      tcm.getColumn(1).setPreferredWidth(30);  
 				      tcm.getColumn(2).setPreferredWidth(30);  
-
+				    
+				    JComboBoxDecorator.decorate(comboBoxNewCourses, true); //abc14
                     panel.repaint();
                     panel.revalidate();
                 }
@@ -1656,7 +1658,7 @@ public class MyFrame1 extends JFrame {
                             }
                         }
                         comboBoxGrade.setSelectedIndex(0);
-                        //JComboBoxDecorator.decorate(comboBoxCourses, true); //update list 
+                        JComboBoxDecorator.decorate(comboBoxCourses, true); //update list abc14
 
                         //comboBoxCourses.removeItemAt(currentIndex);
                         //comboBoxCourses.insertItemAt(sCurrentItem + " >> (Passed)", currentIndex);
@@ -1680,8 +1682,9 @@ public class MyFrame1 extends JFrame {
                 }
                 
                 
-                //lblCourseWarning.setText("You chose course: " + aCnum[0]);	
-                if (currentIndex < 1) {
+                	
+                //if (currentIndex < 1) {	//abc14
+                if (aCnum[0] == "") {	//abc14
                     JOptionPane.showMessageDialog(MyFrame1.this, "Please select a Passed Course.", "Error", JOptionPane.ERROR_MESSAGE);
                 } 
                 else if (aStatus.length <= 1 ) {
@@ -1717,6 +1720,7 @@ public class MyFrame1 extends JFrame {
                         }
                         comboBoxGrade.setSelectedIndex(0);
                         comboBoxCourses.setSelectedIndex(0);
+                        JComboBoxDecorator.decorate(comboBoxCourses, true); //update list abc14
                        
                     } catch (Exception exc) {
                         JOptionPane.showMessageDialog(MyFrame1.this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
@@ -1769,7 +1773,7 @@ public class MyFrame1 extends JFrame {
                 } catch (Exception exc) {
                     JOptionPane.showMessageDialog(MyFrame1.this, "Error2: " + exc, "Error2", JOptionPane.ERROR_MESSAGE);
                 }
-                //JComboBoxDecorator.decorate(comboBoxCourses, true); 
+                JComboBoxDecorator.decorate(comboBoxCourses, true); //abc14
                 panel.repaint();
                 panel.revalidate();
             }
