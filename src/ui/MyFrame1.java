@@ -1941,7 +1941,7 @@ public class MyFrame1 extends JFrame {
                         e1.printStackTrace();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(MyFrame1.this, "Please input usrename and password", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MyFrame1.this, "Please input username and password", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
