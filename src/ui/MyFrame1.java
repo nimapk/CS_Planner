@@ -1673,19 +1673,34 @@ public class MyFrame1 extends JFrame {
                 //abc3
                 String sCurrentItem = comboBoxCourses.getSelectedItem().toString();
                 String[] aCnum = sCurrentItem.split(" - ");
+                
+                for (int i = 0; i < aCnum.length; i++ ) {
+                	System.out.println("The cnum is " + aCnum[i]);
+                }
+                
                 int currentIndex = comboBoxCourses.getSelectedIndex();
                 //lblCourseWarning.setText("You chose course: " + aCnum[0]);	
-                if (aCnum[0] == "") {
-                    JOptionPane.showMessageDialog(MyFrame1.this, "Course cannot be blank!", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
+                if (currentIndex < 1) {
+                    JOptionPane.showMessageDialog(MyFrame1.this, "Please select a Passed Course.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else  {
                     try {
-
-                        aCourseDAO.removePassedCourseFromUser(userId, aCnum[0]);
-                        // show success message
-                        JOptionPane.showMessageDialog(MyFrame1.this,
-                                "Course removed succesfully.",
-                                "Course removed",
-                                JOptionPane.INFORMATION_MESSAGE);
+                    	
+                    	if (aCnum[1].contains("<< Passed")) {
+                    		aCourseDAO.removePassedCourseFromUser(userId, aCnum[0]);
+                            // show success message
+                            JOptionPane.showMessageDialog(MyFrame1.this,
+                                    "Course removed succesfully.",
+                                    "Course removed",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                    	}
+                    	
+                    	else {
+                    		JOptionPane.showMessageDialog(MyFrame1.this,
+                                    "Please only remove a Passed Course",
+                                    "Error",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                    	}
+                     
 
                         //Refresh courses
                         comboBoxCourses.removeAllItems();
