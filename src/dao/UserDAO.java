@@ -78,6 +78,8 @@ public class UserDAO {
         }
     }
     
+    
+    
     public List<User> searchEmails(String email) throws Exception {
         if (!CheckConnection()) {
             ConnectionDB();
@@ -97,6 +99,32 @@ public class UserDAO {
             while (myRs.next()) {
                 User tempUser = convertRowToUser(myRs);
                 list.add(tempUser);
+            }
+
+            return list;
+        } finally {
+            close(myStmt, myRs);
+        }
+    }    
+    
+    public int searchUni(String email) throws Exception {
+        if (!CheckConnection()) {
+            ConnectionDB();
+        }    	
+        int list = 0;
+
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+
+        try {            
+            myStmt = myConn.prepareStatement("select * from UNIVERSITY where uniName like ?");
+
+            myStmt.setString(1, email);
+
+            myRs = myStmt.executeQuery();
+
+            while (myRs.next()) {
+                list=list+1;
             }
 
             return list;

@@ -66,6 +66,7 @@ public class MyFrame1 extends JFrame {
     private JTextField usernameTextField;
     private JPasswordField passwordTextField;
 
+    private JTextField txtUniNameReg;
     private JTextField txtFirstNameReg;
     private JTextField txtLastNameReg;
     private JTextField txtMajorReg;
@@ -253,79 +254,104 @@ public class MyFrame1 extends JFrame {
         register_jpanel.setBorder(new LineBorder(new Color(0, 102, 0), 2));
         panel.add(register_jpanel, "name_25078018479884");
         register_jpanel.setLayout(null);
+        
+        //Added
+        JLabel lblNewLabel_22 = new JLabel("Enter Your University");
+        lblNewLabel_22.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblNewLabel_22.setBounds(152, 156, 125, 26);
+        register_jpanel.add(lblNewLabel_22);
+        
+        txtUniNameReg = new JTextField();
+        txtUniNameReg.setBounds(273, 159, 188, 20);
+        register_jpanel.add(txtUniNameReg);
+        txtUniNameReg.setColumns(10);
+        
+        JButton btnUni = new JButton("check");
+        btnUni.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnUni.setBackground(new Color(0, 204, 0));
+        btnUni.setBounds(481, 159, 70, 23);
+        register_jpanel.add(btnUni);
+        //
 
         JLabel lblNewLabel_2 = new JLabel("First Name:");
         lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblNewLabel_2.setBounds(152, 173, 80, 26);
+        lblNewLabel_2.setBounds(152, 189, 80, 26);
         register_jpanel.add(lblNewLabel_2);
 
         txtFirstNameReg = new JTextField();
-        txtFirstNameReg.setBounds(273, 176, 278, 20);
+        txtFirstNameReg.setBounds(273, 192, 278, 20);
         register_jpanel.add(txtFirstNameReg);
         txtFirstNameReg.setColumns(10);
+        txtFirstNameReg.setEditable(false);
 
         JLabel lblLastName = new JLabel("Last Name:");
         lblLastName.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblLastName.setBounds(152, 204, 64, 26);
+        lblLastName.setBounds(152, 222, 64, 26);
         register_jpanel.add(lblLastName);
 
         txtLastNameReg = new JTextField();
         txtLastNameReg.setColumns(10);
-        txtLastNameReg.setBounds(273, 207, 278, 20);
+        txtLastNameReg.setBounds(273, 225, 278, 20);
         register_jpanel.add(txtLastNameReg);
+        txtLastNameReg.setEditable(false);
 
         JLabel lblMajor = new JLabel("Major:");
         lblMajor.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblMajor.setBounds(152, 235, 64, 26);
+        lblMajor.setBounds(152, 255, 64, 26);
         register_jpanel.add(lblMajor);
 
         txtMajorReg = new JTextField();
         txtMajorReg.setColumns(10);
-        txtMajorReg.setBounds(273, 238, 278, 20);
+        txtMajorReg.setBounds(273, 258, 278, 20);
         register_jpanel.add(txtMajorReg);
+        txtMajorReg.setEditable(false);
 //////////////////		
         JLabel lblEmail = new JLabel("Email");
         lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblEmail.setBounds(152, 266, 64, 26);
+        lblEmail.setBounds(152, 286, 64, 26);
         register_jpanel.add(lblEmail);
 
         txtEmailReg = new JTextField();
         txtEmailReg.setColumns(10);
-        txtEmailReg.setBounds(273, 269, 278, 20);
+        txtEmailReg.setBounds(273, 289, 278, 20);
         register_jpanel.add(txtEmailReg);
+        txtEmailReg.setEditable(false);
 ////////		
         JLabel lblUsername = new JLabel("Username:");
         lblUsername.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblUsername.setBounds(152, 299, 64, 26);
+        lblUsername.setBounds(152, 319, 64, 26);
         register_jpanel.add(lblUsername);
 
         txtUsernameReg = new JTextField();
         txtUsernameReg.setColumns(10);
-        txtUsernameReg.setBounds(273, 302, 278, 20);
+        txtUsernameReg.setBounds(273, 322, 278, 20);
         register_jpanel.add(txtUsernameReg);
+        txtUsernameReg.setEditable(false);
 
         JLabel lblPassword = new JLabel("Password:");
         lblPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblPassword.setBounds(152, 330, 64, 26);
+        lblPassword.setBounds(152, 350, 64, 26);
         register_jpanel.add(lblPassword);
 
         txtPasswordReg = new JPasswordField();
         txtPasswordReg.setColumns(10);
-        txtPasswordReg.setBounds(273, 333, 278, 20);
+        txtPasswordReg.setBounds(273, 353, 278, 20);
         register_jpanel.add(txtPasswordReg);
+        txtPasswordReg.setEditable(false);
 
         txtConfirmPasswordReg = new JPasswordField();
         txtConfirmPasswordReg.setColumns(10);
-        txtConfirmPasswordReg.setBounds(273, 364, 278, 20);
+        txtConfirmPasswordReg.setBounds(273, 384, 278, 20);
         register_jpanel.add(txtConfirmPasswordReg);
+        txtConfirmPasswordReg.setEditable(false);
 
         JLabel lblConfirmPassword = new JLabel("Confirm Password:");
         lblConfirmPassword.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblConfirmPassword.setBounds(152, 361, 111, 26);
+        lblConfirmPassword.setBounds(152, 381, 111, 26);
         register_jpanel.add(lblConfirmPassword);
 
         comboBoxQuestions = new JComboBox();
-        comboBoxQuestions.setBounds(273, 395, 278, 20);
+        comboBoxQuestions.setBounds(273, 415, 278, 20);
         register_jpanel.add(comboBoxQuestions);
 
         //add questions
@@ -334,27 +360,31 @@ public class MyFrame1 extends JFrame {
                 comboBoxQuestions.addItem(item);
             }
         }
+        
+        comboBoxQuestions.setEnabled(false);
 
         JLabel lblQuestions = new JLabel("Questions:");
         lblQuestions.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblQuestions.setBounds(152, 395, 111, 26);
+        lblQuestions.setBounds(152, 415, 111, 26);
         register_jpanel.add(lblQuestions);
 
         userAnswer = new JTextField();
         userAnswer.setColumns(10);
-        userAnswer.setBounds(273, 426, 278, 20);
+        userAnswer.setBounds(273, 446, 278, 20);
         register_jpanel.add(userAnswer);
+        userAnswer.setEditable(false);
 
         JLabel lblAnswer = new JLabel("Answer:");
         lblAnswer.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblAnswer.setBounds(152, 426, 111, 26);
+        lblAnswer.setBounds(152, 446, 111, 26);
         register_jpanel.add(lblAnswer);
 
         JButton btnRegister = new JButton("Register");
         btnRegister.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnRegister.setBackground(new Color(0, 204, 0));
-        btnRegister.setBounds(462, 457, 89, 23);
+        btnRegister.setBounds(462, 477, 89, 23);
         register_jpanel.add(btnRegister);
+        btnRegister.setEnabled(false);
 
         JPanel panel_8 = new JPanel();
         panel_8.setBorder(new LineBorder(new Color(0, 102, 0), 2));
@@ -2003,6 +2033,48 @@ public class MyFrame1 extends JFrame {
                     }
                 } else {
                     JOptionPane.showMessageDialog(MyFrame1.this, "Please input usrename !", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        
+        btnUni.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+            	
+                String username = txtUniNameReg.getText();
+                int unif = 0;
+
+                if (username != null && username.trim().length() > 0) {
+                    try {
+                        unif = userDAO.searchUni(username);
+                        //if exists + same password, go to panel_4, else > wrong password or username does not exist
+                        if (unif == 0) {
+                           
+                                JOptionPane.showMessageDialog(MyFrame1.this, "University is not available", "Check Later", JOptionPane.INFORMATION_MESSAGE);
+                                return;
+                            
+
+                        } else {
+                        	JOptionPane.showMessageDialog(MyFrame1.this, "University saved.", "Proceed", JOptionPane.INFORMATION_MESSAGE);
+                        	txtFirstNameReg.setEditable(true);
+                        	txtLastNameReg.setEditable(true);
+                        	txtMajorReg.setEditable(true);
+                        	txtEmailReg.setEditable(true);
+                        	txtUsernameReg.setEditable(true);
+                        	txtPasswordReg.setEditable(true);
+                        	txtConfirmPasswordReg.setEditable(true);
+                        	userAnswer.setEditable(true);
+                        	comboBoxQuestions.setEnabled(true);
+                        	btnRegister.setEnabled(true);
+                            return;
+                        }
+
+                    } catch (Exception e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(MyFrame1.this, "Please input University Name", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
