@@ -59,6 +59,8 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.UIManager;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 
 public class MyFrame1 extends JFrame {
@@ -927,7 +929,8 @@ public class MyFrame1 extends JFrame {
         //JComboBoxDecorator.decorate(comboBoxYear, true); 
         class_planner_jpanel.add(comboBoxYear);
 
-        JLabel lblPrerequisiteCourses = new JLabel("This course has no prerequisites!");
+        JLabel lblPrerequisiteCourses = new JLabel("");
+        lblPrerequisiteCourses.setForeground(Color.BLACK);
         //lblPrerequisiteCourses.setHorizontalAlignment(SwingConstants.CENTER);
         lblPrerequisiteCourses.setBounds(63, 456, 373, 20);
         class_planner_jpanel.add(lblPrerequisiteCourses);
@@ -1135,7 +1138,52 @@ public class MyFrame1 extends JFrame {
         mnSelect.add(mntmHome);
         
       //===============actionPerformed=============each panel has 1 Actionperformed=====================
-	        //abc11
+        //abc15      
+        comboBoxNewCourses.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+
+        		int countComboxNewCourses = comboBoxNewCourses.getItemCount();
+        		if (countComboxNewCourses == 0)
+        				return;
+        		String sCurrentItem = comboBoxNewCourses.getSelectedItem().toString();
+        		String[] aCnum = sCurrentItem.split(" - ");
+        		if (sCurrentItem == "" || aCnum.length <2) {  
+        			lblPrerequisiteCourses.setText("");
+        			return;
+        		}
+        		try {
+	        		List<String> preCourses = null;
+	        		preCourses = aCourseDAO.searchPrerequisiteOfCourse(aCnum[0]);
+	        		if (preCourses.size() == 0) {
+	        			lblPrerequisiteCourses.setText("This course has no prerequisites!");
+	        			return;
+	        		}
+	        		String noticeListCourses = "";
+	        		
+	        		List<String> passedCourses = null;
+					List<String> addedUpcomingCourses = null;
+					passedCourses = aCourseDAO.searchPassedCourseOfUser(userId);
+					addedUpcomingCourses = aCourseDAO.searchUpcomingCoursesOfUser(userId);
+					for (String tempCourse : preCourses) {
+						if (passedCourses.contains(tempCourse)) {
+							noticeListCourses = noticeListCourses + tempCourse + "-Passed ";
+						}
+//						else if (addedUpcomingCourses.contains(tempCourse))
+//						{
+//							noticeListCourses = noticeListCourses + tempCourse + "-Needed ";
+//						}
+						else
+							noticeListCourses = noticeListCourses + tempCourse + "-Needed ";
+					}	
+	        		lblPrerequisiteCourses.setText("This course has prerequisites: " + noticeListCourses );
+        		}
+        		catch (Exception exc) {
+						JOptionPane.showMessageDialog(MyFrame1.this,  "comboBoxNewCourses addActionListener Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+					}
+        	}
+        });    
+        
+        //abc11
 	        btnBackward.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	            	mYear--;
@@ -1423,7 +1471,7 @@ public class MyFrame1 extends JFrame {
       				
       			}
       		});
-      		///abc12
+      		///abc15
             btnUpcourseRemove.addActionListener(new ActionListener() {
             	public void actionPerformed(ActionEvent e) {
             		int curRowIndex = tableNewCourses.getSelectedRow();
@@ -1466,7 +1514,7 @@ public class MyFrame1 extends JFrame {
       						try {
       							upcourses = aCourseDAO.getAllUpcomingCourses(userId);
       						} catch (Exception exc) {					
-      							JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+      							JOptionPane.showMessageDialog(MyFrame1.this,  "btnUpcourseRemove RELOAD TABLE Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
       						}					
       						NewCoursesTableModel newCoursesModel = new NewCoursesTableModel(upcourses);
       						tableNewCourses.setModel(newCoursesModel);
@@ -1486,14 +1534,14 @@ public class MyFrame1 extends JFrame {
       						panel.revalidate();
       					}
       					catch (Exception exc) {
-      						JOptionPane.showMessageDialog(MyFrame1.this,  "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+      						JOptionPane.showMessageDialog(MyFrame1.this,  " btnUpcourseRemove Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
       					}
       				}
             	}
             	
             });
       		
-      		//abc10
+      		//abc10 abc14
       		btnUpCourseAdd.addActionListener(new ActionListener() {
       			public void actionPerformed(ActionEvent e) {
       				//abc101

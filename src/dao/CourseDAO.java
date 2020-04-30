@@ -334,6 +334,30 @@ public class CourseDAO {
         }
 
     }
+    
+    //
+    public List<String> searchPrerequisiteOfCourse(String acourse) throws Exception{
+    	if (!CheckConnection()) {
+            ConnectionDB();
+        } 
+        List<String> list = new ArrayList<>();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;  
+        
+        try {
+            //prepare statement
+            myStmt = myConn.prepareStatement("select Prereq_courseNum from PREREQUISITE where courseNum like ?");
+            myStmt.setString(1, acourse);
+            myRs = myStmt.executeQuery();
+            while (myRs.next()) {
+                list.add(myRs.getString("Prereq_courseNum"));
+            }
+
+            return list;
+        } finally {
+            close(myStmt, myRs);
+        }        
+    }
 
     public List<String> searchGradeUserPassed(int userid) throws Exception {
         if (!CheckConnection()) {
