@@ -639,7 +639,7 @@ public class MyFrame1 extends JFrame {
         input_class_jpanel.add(btnBack_2);
         JLabel lblNewLabel_17 = new JLabel("Remove Course");
         lblNewLabel_17.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_17.setBounds(595, 353, 90, 20);
+        lblNewLabel_17.setBounds(586, 353, 111, 20);
         input_class_jpanel.add(lblNewLabel_17);
         
         JButton btnRemovePCourse = new JButton("Remove");
