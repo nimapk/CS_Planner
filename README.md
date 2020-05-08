@@ -1,4 +1,4 @@
-# Class Planner Application
+# Student Tool Application
 # Summary of Vision
 To create a program in Java and MySQL that helps students record and plan their classes. It will utilize a friendly, user interface and will maintain accounts to save data within an online database. 
 # What
